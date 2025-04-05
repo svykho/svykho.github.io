@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery - Alejandro Svyatkovskyy Kholyavka</title>
+  <title>Gallery</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -33,6 +33,11 @@
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
     }
+    .gallery div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .gallery img {
       width: 100%;
       border-radius: 8px;
@@ -40,6 +45,12 @@
     }
     .gallery img:hover {
       transform: scale(1.05);
+    }
+    .gallery p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #ccc;
+      font-style: italic;
     }
   </style>
 </head>
@@ -54,11 +65,26 @@
 
   <h1>Gallery</h1>
   <div class="gallery">
-    <img src="images/mallorca.jpeg" alt="">
-    <img src="images/calamajor.jpeg" alt="">
-    <img src="images/formentor.jpeg" alt="">
-    <img src="images/cielopalma.jpeg" alt="">
-    <img src="images/portsoller.jpg" alt="">
+    <div>
+      <img src="images/mallorca.jpeg" alt="Mallorca">
+      <p><em>Mallorca</em></p>
+    </div>
+    <div>
+      <img src="images/calamajor.jpeg" alt="Cala Major">
+      <p><em>Cala Major</em></p>
+    </div>
+    <div>
+      <img src="images/formentor.jpeg" alt="Cap de Formentor">
+      <p><em>Cap de Formentor</em></p>
+    </div>
+    <div>
+      <img src="images/cielopalma.jpeg" alt="Palma">
+      <p><em>Palma</em></p>
+    </div>
+    <div>
+      <img src="images/portsoller.jpg" alt="Port de Sóller">
+      <p><em>Port de Sóller</em></p>
+    </div>
   </div>
 </body>
 </html>
