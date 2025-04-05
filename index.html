@@ -1,0 +1,122 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alejandro Svyatkovskyy Kholyavka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    header {
+      width: 100%;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .branding {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+      font-weight: 400;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .center {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .socials {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      gap: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .socials a {
+      color: white;
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <header>
+    <div class="branding">Alejandro Svyatkovskyy Kholyavka — MSc student @ UIB</div>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="cv.html">CV</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+  </header>
+
+  <div class="center"></div>
+
+  <div class="socials">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="mailto:example@email.com">Email</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let w, h, t = 0;
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(80,120,255,0.2)';
+      ctx.lineWidth = 1;
+      for (let y = 0; y < h; y += 30) {
+        ctx.beginPath();
+        for (let x = 0; x < w; x += 10) {
+          const offset = Math.sin((x + t) * 0.01) * 20;
+          ctx.lineTo(x, y + offset);
+        }
+        ctx.stroke();
+      }
+      t += 1.5;
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  </script>
+</body>
+</html>

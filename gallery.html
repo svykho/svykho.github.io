@@ -1,0 +1,64 @@
+<!-- gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Alejandro Svyatkovskyy Kholyavka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+      margin-bottom: 40px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+
+  <h1>Gallery</h1>
+  <div class="gallery">
+    <!-- Replace with your actual images -->
+    <img src="images/example1.jpg" alt="Project 1">
+    <img src="images/example2.jpg" alt="Project 2">
+    <img src="images/example3.jpg" alt="Project 3">
+  </div>
+</body>
+</html>
