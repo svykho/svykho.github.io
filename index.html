@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alejandro Svyatkovskyy Kholyavka</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -65,8 +68,12 @@
 
     .socials a {
       color: white;
-      font-size: 1.4rem;
+      font-size: 1.8rem; /* Tamaño más grande para los iconos */
       text-decoration: none;
+    }
+
+    .socials a:hover {
+      color: #f39c12; /* Cambia el color al pasar el ratón */
     }
   </style>
 </head>
@@ -83,10 +90,11 @@
 
   <div class="center"></div>
 
+  <!-- Redes sociales con iconos -->
   <div class="socials">
-    <a href="#">GitHub</a>
-    <a href="#">LinkedIn</a>
-    <a href="mailto:example@email.com">Email</a>
+    <a href="https://github.com/svykho" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/asvyatkovskyyk" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:example@email.com" title="Email"><i class="fas fa-envelope"></i></a>
   </div>
 </body>
 </html>
