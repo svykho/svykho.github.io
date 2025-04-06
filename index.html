@@ -38,14 +38,18 @@
 
     nav {
       display: flex;
-      gap: 2rem;
-      font-weight: 400;
+      flex-direction: column; /* Cambiado de fila a columna */
+      align-items: center;    /* Centra los enlaces */
+      font-weight: 700;       /* Negrita */
+      font-size: 2rem;        /* Aumenta el tamaño */
+      gap: 1.5rem;            /* Espacio entre los enlaces */
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: inherit;      /* Hereda el tamaño y estilo del contenedor */
+      font-weight: inherit;    /* Hereda el peso (negrita) */
     }
 
     .center {
