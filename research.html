@@ -56,6 +56,8 @@
       flex: 1; /* Ocupa el espacio restante */
       display: flex;
       justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
 
     .image img {
@@ -79,6 +81,13 @@
     a:hover {
       text-decoration: underline;
     }
+
+    .caption {
+      margin-top: 10px;
+      font-style: italic;
+      color: #ccc;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -97,13 +106,14 @@
       <h1>Research</h1>
       <p><strong>Theses:</strong></p>
       <ul>
-        <li><em>achelor's Thesis:</em> I worked on simulating the diffuse emission of the galaxy as part of the LiteBIRD space mission. <a href="files/21944796_tfg_AlejandroSvyatkovskyyKholyavka-2.pdf" target="_blank">Take a look here (yes, it’s in Spanish... sorry!)</a></li>
+        <li><em>Bachelor's Thesis:</em> I worked on simulating the diffuse emission of the galaxy as part of the LiteBIRD space mission. <a href="files/21944796_tfg_AlejandroSvyatkovskyyKholyavka-2.pdf" target="_blank">Take a look here (yes, it’s in Spanish... sorry!)</a></li>
         <li><em>Master's Thesis:</em> I focused on the multimessenger signatures of particle acceleration by black holes. <a href="files/Svyatkovskyy_Kholyavka_Alejandro_TFM.pdf" target="_blank">Check it out here</a></li>
       </ul>
     </div>
     <!-- Imagen a la derecha (ahora renombrada como bg-blackhole2.png) -->
     <div class="image">
       <img src="images/bg-blackhole2.png" alt="Research Image">
+      <p class="caption">This is how the perturbation of black holes would probably look like... just a bit more dramatic!</p>
     </div>
   </div>
 
