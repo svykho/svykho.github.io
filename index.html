@@ -32,23 +32,35 @@
     }
 
     .branding {
-      font-size: 1.1rem;
+      display: flex;
+      flex-direction: column;
       font-weight: 400;
+      font-size: 1.1rem;
+    }
+
+    .branding .name {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .branding .subtitle {
+      font-style: italic;
+      font-size: 1rem;
     }
 
     nav {
       display: flex;
-      justify-content: flex-start; /* Cambiado de columna a fila */
+      justify-content: flex-start;
       gap: 2rem;
-      font-weight: 700; /* Negrita */
-      font-size: 2rem;  /* Aumenta el tamaño */
+      font-weight: 700;
+      font-size: 2rem;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-size: inherit;      /* Hereda el tamaño y estilo del contenedor */
-      font-weight: inherit;    /* Hereda el peso (negrita) */
+      font-size: inherit;
+      font-weight: inherit;
     }
 
     .center {
@@ -71,18 +83,21 @@
 
     .socials a {
       color: white;
-      font-size: 1.8rem; /* Tamaño más grande para los iconos */
+      font-size: 1.8rem;
       text-decoration: none;
     }
 
     .socials a:hover {
-      color: #f39c12; /* Cambia el color al pasar el ratón */
+      color: #f39c12;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="branding">.</div>
+    <div class="branding">
+      <div class="name">Alejandro Svyatkovskyy Kholyavka</div>
+      <div class="subtitle">MSc student @ UIB</div>
+    </div>
     <nav>
       <a href="about.html">About</a>
       <a href="research.html">Research</a>
@@ -93,7 +108,6 @@
 
   <div class="center"></div>
 
-  <!-- Redes sociales con iconos -->
   <div class="socials">
     <a href="https://github.com/svykho" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
     <a href="https://www.linkedin.com/in/asvyatkovskyyk" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
