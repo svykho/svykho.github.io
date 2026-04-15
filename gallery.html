@@ -10,50 +10,67 @@
       background-color: #0b0b0b;
       color: white;
       font-family: 'Inter', sans-serif;
-      padding: 40px;
+      padding: 40px 20px; /* 👈 ajustado */
       line-height: 1.6;
-      text-align: justify; /* Justifica el texto */
+      text-align: justify;
+      display: flex;
+      justify-content: center; /* 👈 centrado */
     }
+
+    /* ✅ CONTENEDOR IGUAL QUE EL RESTO */
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
     nav {
       display: flex;
       justify-content: flex-end;
       gap: 2rem;
       margin-bottom: 40px;
-      font-size: 2rem;            /* Tamaño de fuente */
-      font-weight: 700;           /* Negrita */
+      font-size: 2rem;
+      font-weight: 700;
     }
+
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: inherit;      /* Hereda la negrita */
-      font-size: inherit;        /* Hereda el tamaño de fuente */
+      font-weight: inherit;
+      font-size: inherit;
     }
+
     h1 {
       font-size: 2rem;
       margin-bottom: 20px;
-      font-weight: 700;           /* Negrita */
+      font-weight: 700;
     }
+
     p {
       font-size: 1.2rem;
     }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
     }
+
     .gallery div {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .gallery img {
       width: 100%;
       border-radius: 8px;
       transition: transform 0.3s ease;
     }
+
     .gallery img:hover {
       transform: scale(1.05);
     }
+
     .gallery p {
       margin-top: 8px;
       font-size: 0.9rem;
@@ -63,37 +80,44 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="research.html">Research</a>
-    <a href="cv.html">CV</a>
-    <a href="gallery.html">Gallery</a>
-  </nav>
 
-  <h1>Gallery</h1>
-  <p>Just to show you how beautiful Mallorca is :)</p>
-  <div class="gallery">
-    <div>
-      <img src="images/mallorca.jpeg" alt="Mallorca">
-      <p><em>Mallorca</em></p>
+  <div class="container">
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="cv.html">CV</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+
+    <h1>Gallery</h1>
+    <p>Just to show you how beautiful Mallorca is :)</p>
+
+    <div class="gallery">
+      <div>
+        <img src="images/mallorca.jpeg" alt="Mallorca">
+        <p><em>Mallorca</em></p>
+      </div>
+      <div>
+        <img src="images/calamajor.jpeg" alt="Cala Major">
+        <p><em>Cala Major</em></p>
+      </div>
+      <div>
+        <img src="images/formentor.jpeg" alt="Cap de Formentor">
+        <p><em>Cap de Formentor</em></p>
+      </div>
+      <div>
+        <img src="images/cielopalma.jpeg" alt="Palma">
+        <p><em>Palma</em></p>
+      </div>
+      <div>
+        <img src="images/portsoller.jpg" alt="Port de Sóller">
+        <p><em>Port de Sóller</em></p>
+      </div>
     </div>
-    <div>
-      <img src="images/calamajor.jpeg" alt="Cala Major">
-      <p><em>Cala Major</em></p>
-    </div>
-    <div>
-      <img src="images/formentor.jpeg" alt="Cap de Formentor">
-      <p><em>Cap de Formentor</em></p>
-    </div>
-    <div>
-      <img src="images/cielopalma.jpeg" alt="Palma">
-      <p><em>Palma</em></p>
-    </div>
-    <div>
-      <img src="images/portsoller.jpg" alt="Port de Sóller">
-      <p><em>Port de Sóller</em></p>
-    </div>
+
   </div>
+
 </body>
 </html>
