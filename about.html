@@ -4,37 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       background-color: #0b0b0b;
       color: white;
       font-family: 'Inter', sans-serif;
-      padding: 40px;
-      line-height: 1.6;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
     }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
     nav {
       display: flex;
-      justify-content: flex-end; /* Alinea los enlaces a la derecha */
+      justify-content: flex-end;
       gap: 2rem;
       margin-bottom: 40px;
-      font-size: 2rem;            /* Tamaño de fuente aumentado */
-      font-weight: 700;           /* Negrita */
+      font-size: 1.3rem;
+      font-weight: 700;
+      flex-wrap: wrap;
     }
+
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: inherit;      /* Hereda la negrita */
-      font-size: inherit;        /* Hereda el tamaño de fuente */
     }
+
+    nav a:hover {
+      color: #f39c12;
+    }
+
     h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      font-weight: 700;           /* Negrita */
+      font-size: 2.2rem;
+      margin-bottom: 10px;
     }
+
+    .subtitle {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .interests {
+      font-style: italic;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .personal {
+      color: #aaa;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    /* TIMELINE SIMPLE */
+    .timeline {
+      border-left: 2px solid #444;
+      padding-left: 20px;
+    }
+
+    .event {
+      margin-bottom: 25px;
+    }
+
+    .event-title {
+      font-weight: 700;
+    }
+
+    .event-date {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .event-desc {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav {
+        justify-content: center;
+        font-size: 1rem;
+      }
+    }
+
   </style>
 </head>
+
 <body>
+
+<div class="container">
+
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -43,15 +112,55 @@
     <a href="gallery.html">Gallery</a>
   </nav>
 
-  <h1>About Me</h1>
-  <p>
-    Hi there! I'm Alejandro, a master's student in Advanced Physics and Applied Mathematics at the Universitat de les Illes Balears — but more than that, I’m just a kid still trying to understand the secrets Einstein left behind.
-  </p>
-  <p>
-    I was born in Madrid, with roots in Ukraine, so I carry a bit of both cultures inside of me. However, it’s the natural world that truly inspires me. I’ve always been drawn to the sea, the mountains, and the quiet beauty of nature — these are the spaces where I find peace and wonder, sparking my curiosity about the Universe.
-  </p>
-  <p>
-    From a young age, I’ve been captivated by the vastness of space, the mysteries of black holes, and the nature of time itself. My research focuses on perturbation theory, numerical simulations, and the beauty of General Relativity, all in pursuit of understanding how the Universe behaves under extreme conditions. But ultimately, I’m chasing the same questions that have driven so many before me: What happens inside a black hole? How can we truly understand the fabric of the universe?
-  </p>
+  <h1>Alejandro Svyatkovskyy Kholyavka</h1>
+  <div class="subtitle">MSc student @ Universitat de les Illes Balears</div>
+
+  <div class="interests">
+    Black Holes · General Relativity · Quasi-Normal Modes · Gravitational Waves · Numerical Simulations
+  </div>
+
+  <div class="personal">
+    Sea, mountains, nature, curiosity about the Universe
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+
+    <div class="event">
+      <div class="event-title">MSc in Advanced Physics and Applied Mathematics — UIB</div>
+      <div class="event-date">2024 – present</div>
+      <div class="event-desc">
+        Focused on black hole perturbation theory and numerical simulations.
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-title">MSc in Theoretical Physics</div>
+      <div class="event-date">previous</div>
+      <div class="event-desc">
+        Specialized in astrophysics and particle acceleration around black holes.
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-title">BSc in Physics</div>
+      <div class="event-date">earlier</div>
+      <div class="event-desc">
+        Undergraduate studies with a focus on astrophysics.
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-title">Born in Madrid</div>
+      <div class="event-date"></div>
+      <div class="event-desc">
+        With Ukrainian roots and a strong connection to nature.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 </body>
 </html>
