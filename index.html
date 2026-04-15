@@ -4,12 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alejandro Svyatkovskyy Kholyavka</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN -->
+
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body, html {
       height: 100%;
@@ -17,16 +24,17 @@
       color: white;
       background: url("images/wormhole.jpg") no-repeat center center fixed;
       background-size: cover;
-      overflow: hidden;
+      overflow-x: hidden; /* ✅ FIX */
     }
 
+    /* HEADER */
     header {
       width: 100%;
-      padding: 30px;
+      padding: 30px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: absolute;
+      position: fixed; /* ✅ más robusto */
       top: 0;
       left: 0;
     }
@@ -34,8 +42,6 @@
     .branding {
       display: flex;
       flex-direction: column;
-      font-weight: 400;
-      font-size: 1.1rem;
     }
 
     .branding .name {
@@ -46,58 +52,106 @@
     .branding .subtitle {
       font-style: italic;
       font-size: 1rem;
+      font-weight: 400;
     }
 
     nav {
       display: flex;
-      justify-content: flex-start;
       gap: 2rem;
       font-weight: 700;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-size: inherit;
-      font-weight: inherit;
+      transition: color 0.3s;
     }
 
+    nav a:hover {
+      color: #f39c12;
+    }
+
+    /* CENTER (vacío pero preparado) */
     .center {
-      height: 100%;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
 
+    /* SOCIALS */
     .socials {
-      position: absolute;
+      position: fixed;
       bottom: 30px;
-      display: flex;
-      gap: 1.5rem;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      gap: 1.5rem;
     }
 
     .socials a {
       color: white;
       font-size: 1.8rem;
       text-decoration: none;
+      transition: color 0.3s;
     }
 
     .socials a:hover {
       color: #f39c12;
     }
+
+    /* 📱 RESPONSIVE */
+    @media (max-width: 768px) {
+
+      header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+      }
+
+      .branding {
+        align-items: center;
+        text-align: center;
+      }
+
+      .branding .name {
+        font-size: 1.2rem;
+      }
+
+      .branding .subtitle {
+        font-size: 0.9rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 1rem;
+      }
+
+      .socials {
+        bottom: 15px;
+        gap: 1rem;
+      }
+
+      .socials a {
+        font-size: 1.5rem;
+      }
+    }
+
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="branding">
       <div class="name">Alejandro Svyatkovskyy Kholyavka</div>
       <div class="subtitle">PhD student @ UIB</div>
     </div>
+
     <nav>
       <a href="about.html">About</a>
       <a href="research.html">Research</a>
@@ -106,12 +160,28 @@
     </nav>
   </header>
 
-  <div class="center"></div>
-
-  <div class="socials">
-    <a href="https://github.com/svykho" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/asvyatkovskyyk" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:alejandro.svyatkovskyy1@estudiant.uib.cat" title="Email"><i class="fas fa-envelope"></i></a>
+  <div class="center">
   </div>
+  <div class="socials">
+  <a href="https://github.com/svykho" target="_blank" title="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/asvyatkovskyyk" target="_blank" title="LinkedIn">
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <a href="mailto:alejandro.svyatkovskyy@uib.cat" title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+  <a href="https://orcid.org/0009-0004-1688-6018" target="_blank" title="ORCID">
+    <i class="fab fa-orcid"></i>
+  </a>
+  <a href="https://inspirehep.net/authors/3081611" target="_blank" title="INSPIRE">
+    <i class="fas fa-book"></i>
+  </a>
+  <a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" target="_blank" title="UIB Profile">
+    <i class="fas fa-university"></i>
+  </a>
+</div>
+
 </body>
 </html>
