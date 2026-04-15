@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       background-color: #0b0b0b;
       color: white;
       font-family: 'Inter', sans-serif;
-      padding: 40px 20px; 
-      line-height: 1.6;
-      text-align: justify;
+      margin: 0;
+      padding: 40px 20px;
       display: flex;
-      justify-content: center; 
+      justify-content: center;
     }
 
     .container {
@@ -22,35 +23,43 @@
       width: 100%;
     }
 
+    /* NAV IGUAL QUE EL RESTO */
     nav {
       display: flex;
       justify-content: flex-end;
       gap: 2rem;
       margin-bottom: 40px;
-      font-size: 2rem;
+      font-size: 1.3rem;
       font-weight: 700;
+      flex-wrap: wrap;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: inherit;
-      font-size: inherit;
+      transition: color 0.3s;
     }
 
+    nav a:hover {
+      color: #f39c12;
+    }
+
+    /* TITULOS */
     h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 30px;
     }
 
+    /* GALERIA */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
 
@@ -73,11 +82,22 @@
     .gallery p {
       margin-top: 8px;
       font-size: 0.9rem;
-      color: #ccc;
+      color: #aaa;
       font-style: italic;
+      text-align: center;
     }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav {
+        justify-content: center;
+        font-size: 1rem;
+      }
+    }
+
   </style>
 </head>
+
 <body>
 
   <div class="container">
@@ -96,19 +116,19 @@
     <div class="gallery">
       <div>
         <img src="images/mallorca.jpeg" alt="Mallorca">
-        <p><em>Mallorca</em></p>
+        <p>Mallorca</p>
       </div>
       <div>
         <img src="images/calamajor.jpeg" alt="Cala Major">
-        <p><em>Cala Major</em></p>
+        <p>Cala Major</p>
       </div>
       <div>
         <img src="images/formentor.jpeg" alt="Cap de Formentor">
-        <p><em>Cap de Formentor</em></p>
+        <p>Cap de Formentor</p>
       </div>
       <div>
         <img src="images/portsoller.jpg" alt="Port de Sóller">
-        <p><em>Port de Sóller</em></p>
+        <p>Port de Sóller</p>
       </div>
     </div>
 
