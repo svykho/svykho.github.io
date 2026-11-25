@@ -23,6 +23,7 @@ PARTS = [
     ("I", "Foundations"),
     ("II", "Ringing black holes"),
     ("III", "Beyond"),
+    ("IV", "Hands-on"),
 ]
 
 # slug, title, one-line description, part
@@ -39,6 +40,7 @@ LESSONS = [
     ("kerr", "Spinning black holes", "Kerr, the Teukolsky and Sasaki–Nakamura equations, mode labels and superradiance.", "III"),
     ("sources", "Sources and real ringdowns", "Falling particles, fitting real signals and choosing when the ringdown starts.", "III"),
     ("frontiers", "Frontiers", "Nonlinear modes, echoes, exotic compact objects and tests of gravity.", "III"),
+    ("compute", "Compute it yourself", "The short programs behind every number of the course, explained and ready to run as notebooks.", "IV"),
 ]
 
 LEDES = {
@@ -54,7 +56,14 @@ LEDES = {
     "kerr": "Real black holes spin. Spin shrinks the horizon, splits the spectrum by sense of rotation and lets waves steal energy from the hole.",
     "sources": "Where real perturbations come from, what a falling body radiates, and how to measure the ringing of a real signal without fooling yourself.",
     "frontiers": "Nonlinear modes, the fragile spectrum, echoes from objects without horizons and tests of gravity: where black-hole perturbation theory is heading.",
+    "compute": "Every number in this course came out of a short program. Here are the programs, explained, as notebooks you can open in your browser and change.",
 }
+
+# reference pages: slug, title, description, lede
+REFERENCE = [
+    ("notation", "Notation and glossary", "The conventions, symbols and terms of a short course on black-hole perturbation theory, each with the lesson that introduces it.",
+     "The conventions, symbols and words of the course in one place, each with the lesson where it first appears."),
+]
 
 FONTS = "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap"
 
@@ -165,7 +174,7 @@ def index_page():
         <a class="back" href="../../lab.html">← Black Hole Lab</a>
         <span class="label" data-float>Course</span>
         <h1 data-float>Black-hole perturbation theory</h1>
-        <p class="lede" data-float>From a leaky oscillator to the ringing of real black holes, in twelve short lessons.</p>
+        <p class="lede" data-float>From a leaky oscillator to the ringing of real black holes, in twelve short lessons, and a thirteenth to compute it all yourself.</p>
       </div>
     </div>
 
@@ -183,6 +192,15 @@ def index_page():
     </section>
 
 {chr(10).join(groups)}
+
+    <section class="row" data-float>
+      <h2 class="label">Reference</h2>
+      <div class="body">
+        <ol class="lessons">
+          {(chr(10) + "          ").join(f'<li><a href="{slug}.html"><span class="n">—</span><h3>{title}</h3><span class="tag">Open →</span><p>{desc}</p></a></li>' for slug, title, desc, _ in REFERENCE)}
+        </ol>
+      </div>
+    </section>
 """
     return page(
         "Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka",
@@ -213,7 +231,7 @@ def lesson_page(i):
     part_name = dict(PARTS)[part]
     body = f"""    <div class="head">
       <div>
-        <a class="back" href="./">← Course contents</a>
+        <div class="head-links"><a class="back" href="./">← Course contents</a><a class="back" href="notation.html">Notation and glossary</a></div>
         <span class="label" data-float>Lesson {num(i)} · Part {part} · {part_name}</span>
         <h1 data-float>{title}</h1>
         <p class="lede" data-float>{lede}</p>
@@ -238,10 +256,39 @@ def lesson_page(i):
     )
 
 
+def reference_page(slug, title, desc, lede):
+    fragment = (SRC / f"{slug}.html").read_text(encoding="utf-8").strip()
+    body = f"""    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Reference</span>
+        <h1 data-float>{title}</h1>
+        <p class="lede" data-float>{lede}</p>
+      </div>
+    </div>
+
+    <article class="lesson reference">
+{fragment}
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <span class="prev"></span>
+      <a class="all" href="./">All lessons</a>
+      <span class="next"></span>
+    </nav>"""
+    return page(
+        f"{title} · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka",
+        desc,
+        f"{SITE}/lab/course/{slug}.html",
+        body,
+        math=True,
+    )
+
+
 def main():
     if not SRC.is_dir():
         fail(f"no lesson sources in {SRC}")
-    known = {slug for slug, *_ in LESSONS}
+    known = {slug for slug, *_ in LESSONS} | {slug for slug, *_ in REFERENCE}
     for f in SRC.glob("*.html"):
         if f.stem not in known:
             fail(f"{f.name} is not in the list of lessons")
@@ -254,7 +301,9 @@ def main():
         if written(slug):
             (OUT / f"{slug}.html").write_text(lesson_page(i), encoding="utf-8")
             n += 1
-    print(f"course: index and {n} of {len(LESSONS)} lessons written to {OUT.relative_to(ROOT)}")
+    for slug, title, desc, lede in REFERENCE:
+        (OUT / f"{slug}.html").write_text(reference_page(slug, title, desc, lede), encoding="utf-8")
+    print(f"course: index, {n} of {len(LESSONS)} lessons and {len(REFERENCE)} reference page written to {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

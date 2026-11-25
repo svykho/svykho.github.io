@@ -3824,6 +3824,338 @@
     redraw(draw);
   };
 
+  /* ======================================================================
+     Lesson 12. Leaver's continued fraction as a landscape, and a convergence test
+     ====================================================================== */
+
+  /* Leaver's continued fraction for Schwarzschild gravitational perturbations
+     (s = 2), inverted n times, at w = 2M omega = wr + i wi (units 2M = 1).
+     Returns [Re f, Im f]. */
+  function leaverCF(wr, wi, l, n, depth) {
+    var pr = wi;
+    var pi = -wr; // rho = -i w
+    var p2r = pr * pr - pi * pi;
+    var p2i = 2 * pr * pi;
+    var L = l * (l + 1) - 3; // l(l+1) - eps, eps = s^2 - 1
+    function al(k) { return [k * k + (2 * pr + 2) * k + 2 * pr + 1, 2 * pi * k + 2 * pi]; }
+    function be(k) { return [-(2 * k * k + (8 * pr + 2) * k + 8 * p2r + 4 * pr + L), -((8 * k + 4) * pi + 8 * p2i)]; }
+    function ga(k) { return [k * k + 4 * pr * k + 4 * p2r - 4, 4 * pi * k + 4 * p2i]; }
+    var tr = 0;
+    var ti = 0;
+    for (var k = depth; k > n; k -= 1) {
+      // tail = al(k-1) ga(k) / (be(k) - tail), inlined for speed
+      var a1r = (k - 1) * (k - 1) + (2 * pr + 2) * (k - 1) + 2 * pr + 1;
+      var a1i = 2 * pi * k;
+      var g1r = k * k + 4 * pr * k + 4 * p2r - 4;
+      var g1i = 4 * pi * k + 4 * p2i;
+      var nr = a1r * g1r - a1i * g1i;
+      var ni = a1r * g1i + a1i * g1r;
+      var dr = -(2 * k * k + (8 * pr + 2) * k + 8 * p2r + 4 * pr + L) - tr;
+      var di = -((8 * k + 4) * pi + 8 * p2i) - ti;
+      var dd = dr * dr + di * di;
+      tr = (nr * dr + ni * di) / dd;
+      ti = (ni * dr - nr * di) / dd;
+    }
+    var hr = 0;
+    var hi = 0;
+    if (n > 0) {
+      var x = be(0);
+      for (var j = 1; j < n; j += 1) {
+        var q = cd(cm(al(j - 1), ga(j)), x);
+        var b = be(j);
+        x = [b[0] - q[0], b[1] - q[1]];
+      }
+      var h = cd(cm(al(n - 1), ga(n)), x);
+      hr = h[0];
+      hi = h[1];
+    }
+    var bn = be(n);
+    return [bn[0] - tr - hr, bn[1] - ti - hi];
+  }
+
+  W.cfmap = function (fig) {
+    var u = layout(fig);
+    var view = panel(u.stage, "w-h-xl", "Leaver's continued fraction in the complex frequency plane: bright wells are its zeros, the quasinormal modes; click to run a root finder from that point");
+    var s = { l: 2, n: 0, path: null, hx: null, hy: null };
+    var XR = [0, 1];
+    var YR = [-1.05, 0.05];
+    var GW = 200;
+    var GH = 180;
+    var DEPTH = 250;
+    var cache = {};
+    var F = null;
+    var busy = false;
+
+    seg(u.ctrl, { label: "Multipole ℓ", options: [[2, "2"], [3, "3"], [4, "4"]], value: 2, on: function (v) { s.l = v; s.path = null; queue(); } });
+    seg(u.ctrl, { label: "Inverted for overtone", options: [[0, "n = 0"], [1, "1"], [2, "2"], [3, "3"]], value: 0, on: function (v) { s.n = v; s.path = null; queue(); } });
+    button(u.ctrl, "Clear the path", function () { s.path = null; draw(); });
+    var read = readout(u.ctrl);
+
+    // 0 = deep zero (bright), 1 = large (dark); single hue, from the background to the accent
+    var LO = -1.7;
+    var HI = 0.9;
+    function shade(z) {
+      var t = Math.max(0, Math.min(1, (HI - z) / (HI - LO)));
+      var b = Math.pow(t, 1.9);
+      var band = ((z - LO) * 2.5) % 1;
+      if (band < 0) band += 1;
+      if (band < 0.07 && t > 0.08) b = Math.min(1, b + 0.05 + 0.06 * t);
+      var w = Math.max(0, (t - 0.86) / 0.14); // the bottom of a well turns almost white
+      return [
+        7 + (140 - 7) * b + (237 - 140) * w * b,
+        9 + (188 - 9) * b + (239 - 188) * w * b,
+        14 + (255 - 14) * b + (243 - 255) * w * b,
+      ];
+    }
+
+    function image(l, n) {
+      var key = l + ":" + n;
+      if (cache[key]) return cache[key];
+      var off = document.createElement("canvas");
+      off.width = GW;
+      off.height = GH;
+      var g = off.getContext("2d");
+      var img = g.createImageData(GW, GH);
+      for (var j = 0; j < GH; j += 1) {
+        var im = YR[1] - ((j + 0.5) / GH) * (YR[1] - YR[0]);
+        for (var i = 0; i < GW; i += 1) {
+          var re = XR[0] + ((i + 0.5) / GW) * (XR[1] - XR[0]);
+          var f = leaverCF(2 * re, 2 * im, l, n, DEPTH);
+          // divided by a smooth function that grows like the first term of the fraction
+          var z = Math.log10(Math.hypot(f[0], f[1]) + 1e-300) - Math.log10(32 * (re * re + im * im) + 6);
+          var c = shade(z);
+          var o = 4 * (j * GW + i);
+          img.data[o] = c[0];
+          img.data[o + 1] = c[1];
+          img.data[o + 2] = c[2];
+          img.data[o + 3] = 255;
+        }
+      }
+      g.putImageData(img, 0, 0);
+      cache[key] = off;
+      return off;
+    }
+
+    // secant method in w = 2M omega from a start point given in M omega
+    function seek(re, im) {
+      var l = s.l;
+      var n = s.n;
+      function f(w) { var v = leaverCF(w[0], w[1], l, n, 1000); return [v[0], v[1]]; }
+      var x0 = [2 * re, 2 * im];
+      var x1 = [2 * re * (1 + 1e-3) + 1e-4, 2 * im * (1 + 1e-3)];
+      var f0 = f(x0);
+      var f1 = f(x1);
+      var pts = [[re, im]];
+      for (var k = 0; k < 40; k += 1) {
+        var df = [f1[0] - f0[0], f1[1] - f0[1]];
+        var step = cd(cm(f1, [x1[0] - x0[0], x1[1] - x0[1]]), df);
+        var x2 = [x1[0] - step[0], x1[1] - step[1]];
+        if (!isFinite(x2[0]) || !isFinite(x2[1])) break;
+        pts.push([x2[0] / 2, x2[1] / 2]);
+        if (cabs(step) < 1e-11 * Math.max(1, cabs(x2))) return { pts: pts, ok: true, steps: k + 1 };
+        if (cabs(x2) > 20) break;
+        x0 = x1;
+        f0 = f1;
+        x1 = x2;
+        f1 = f(x2);
+      }
+      return { pts: pts, ok: false, steps: pts.length - 1 };
+    }
+
+    function describe() {
+      var txt = "";
+      if (!s.path) {
+        read.textContent = "Click or tap anywhere on the map:\nthe secant method starts there\nand walks to a zero.";
+        return;
+      }
+      var p = s.path.pts;
+      var end = p[p.length - 1];
+      txt = "Start  Mω = " + cplx(p[0][0], p[0][1], 3);
+      if (!s.path.ok) {
+        read.textContent = txt + "\nNo convergence in " + s.path.steps + " steps:\nthe walk left the map. Start closer.";
+        return;
+      }
+      txt += "\nAfter " + s.path.steps + " steps\n  Mω = " + cplx(end[0], end[1], 6);
+      var best = -1;
+      var dist = 1;
+      QNM[s.l].forEach(function (q, k) {
+        var d = Math.min(Math.hypot(end[0] - q[0], end[1] - q[1]), Math.hypot(end[0] + q[0], end[1] - q[1]));
+        if (d < dist) { dist = d; best = k; }
+      });
+      if (dist < 2e-6) txt += "\nThe overtone n = " + best + " of Lesson 6" + (end[0] < 0 ? ",\nturning the other way." : ".");
+      else txt += "\nA zero that is not in the table\nof Lesson 6.";
+      read.textContent = txt;
+    }
+
+    function draw() {
+      describe();
+      if (!view.fit()) return;
+      var ctx = view.ctx;
+      F = frame(view, [24, 14, 40, 46], XR, YR);
+      ctx.save();
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(image(s.l, s.n), F.x0, F.y0, F.x1 - F.x0, F.y1 - F.y0);
+      ctx.restore();
+      axes(ctx, F, { xt: [0, 0.2, 0.4, 0.6, 0.8, 1], yt: [-1, -0.8, -0.6, -0.4, -0.2, 0], fx: function (v) { return v.toFixed(1); }, fy: function (v) { return v.toFixed(1); }, xl: "Re Mω", yl: "Im Mω" });
+      ctx.save();
+      clip(ctx, F);
+      QNM[s.l].forEach(function (q, k) {
+        if (q[1] < YR[0]) return;
+        var x = F.X(q[0]);
+        var y = F.Y(q[1]);
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, TAU);
+        ctx.strokeStyle = "rgba(7, 9, 14, 0.85)"; // a dark edge keeps the ring visible inside a bright well
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.strokeStyle = k === s.n ? COL.pulse : "rgba(237, 239, 243, 0.85)";
+        ctx.lineWidth = k === s.n ? 1.8 : 1.2;
+        ctx.stroke();
+        tag(ctx, String(k), x + 11, y, "left", k === s.n ? COL.pulse : COL.ink2);
+      });
+      if (s.path) {
+        var pts = s.path.pts.map(function (p) { return [F.X(p[0]), F.Y(p[1])]; });
+        line(ctx, pts, COL.ink, 1.2, [3, 3]);
+        pts.forEach(function (p, k) { if (k) dot(ctx, p[0], p[1], 2, COL.ink); });
+        dot(ctx, pts[0][0], pts[0][1], 4, COL.pos, true);
+        if (s.path.ok) dot(ctx, pts[pts.length - 1][0], pts[pts.length - 1][1], 3.5, COL.ink, true);
+      }
+      ctx.restore();
+      tag(ctx, "rings: the modes of Lesson 6", F.x1 - 8, F.y0 + 12, "right", COL.ink2);
+      if (view.w >= 520) tag(ctx, "orange: the overtone the inversion is for", F.x1 - 8, F.y0 + 30, "right", COL.pulse);
+      if (s.hx != null && !busy) {
+        QNM[s.l].forEach(function (q, k) {
+          var x = F.X(q[0]);
+          var y = F.Y(q[1]);
+          if (q[1] >= YR[0] && Math.hypot(x - s.hx, y - s.hy) < 9) {
+            tooltip(ctx, view, x, y, [{ t: "ℓ = " + s.l + ", n = " + k, head: true }, { t: "Mω = " + cplx(q[0], q[1], 6) }]);
+          }
+        });
+      }
+    }
+
+    function queue() {
+      busy = true;
+      read.textContent = "Computing the map…";
+      window.setTimeout(function () { busy = false; draw(); }, 20);
+    }
+
+    view.c.addEventListener("click", function (e) {
+      if (!F) return;
+      var r = view.c.getBoundingClientRect();
+      var x = e.clientX - r.left;
+      var y = e.clientY - r.top;
+      if (x < F.x0 || x > F.x1 || y < F.y0 || y > F.y1) return;
+      s.path = seek(F.invX(x), F.invY(y));
+      draw();
+    });
+    view.c.style.cursor = "crosshair";
+    hover(view, function (x, y) { s.hx = x; s.hy = y; draw(); });
+    s.path = seek(0.56, -0.62);
+    redraw(draw);
+  };
+
+  W.converge = function (fig) {
+    var u = layout(fig);
+    var top = panel(u.stage, "w-h-md", "The same signal computed on three grids, each twice as fine as the last, on a logarithmic scale");
+    var bot = panel(u.stage, "w-h-md", "The change between the coarse and middle grids, and between the middle and fine grids multiplied by two to the power p");
+    var s = { h: 0.4, p: 2 };
+    var cache = {};
+    var EX = QNM[2][0];
+    seg(u.ctrl, { label: "Grids  Δx", options: [[0.8, "0.8 · 0.4 · 0.2"], [0.4, "0.4 · 0.2 · 0.1"]], value: 0.4, wide: true, on: function (v) { s.h = v; queue(); } });
+    seg(u.ctrl, { label: "Assumed order  p", options: [[1, "1"], [2, "2"], [3, "3"]], value: 2, on: function (v) { s.p = v; draw(); } });
+    var read = readout(u.ctrl);
+    var C = [COL.ink3, COL.acc, COL.ink];
+
+    function runs(h) {
+      if (cache[h]) return cache[h];
+      var out = [h, h / 2, h / 4].map(function (dx) {
+        return evolve({
+          x0: -150, x1: 260, dx: dx, T: 250, obs: 100,
+          V: function (x) { return POT.rw(rOf(x), 2); },
+          init: function (x) { var z = x - 50; return Math.exp((-z * z) / 72) * Math.cos(0.4 * z); },
+        });
+      });
+      // on the time grid of the coarsest run
+      var n = out[0].y.length;
+      var y = out.map(function (S, k) {
+        var e = 1 << k;
+        var a = new Float64Array(n);
+        for (var i = 0; i < n; i += 1) a[i] = S.y[i * e];
+        return a;
+      });
+      var d1 = new Float64Array(n);
+      var d2 = new Float64Array(n);
+      var s1 = 0;
+      var s2 = 0;
+      for (var i = 0; i < n; i += 1) {
+        d1[i] = y[0][i] - y[1][i];
+        d2[i] = y[1][i] - y[2][i];
+        s1 += d1[i] * d1[i];
+        s2 += d2[i] * d2[i];
+      }
+      var tp = out[2].tp;
+      var fits = out.map(function (S) {
+        var step = Math.round(0.4 / S.dt);
+        return prony(S.y, Math.round((tp + 50) / S.dt), Math.round((tp + 90) / S.dt), step, step * S.dt);
+      });
+      cache[h] = { dt: out[0].dt, y: y, d1: d1, d2: d2, p: Math.log2(Math.sqrt(s1 / s2)), fits: fits, tp: tp };
+      return cache[h];
+    }
+
+    function draw() {
+      var R = runs(s.h);
+      var hs = [s.h, s.h / 2, s.h / 4];
+      var f = R.fits;
+      var rich = [(4 * f[2][0] - f[1][0]) / 3, (4 * f[2][1] - f[1][1]) / 3];
+      var txt = "Measured order  p = " + R.p.toFixed(2) + "\nFrequency, fitted +50M to +90M\nafter the peak:\n";
+      hs.forEach(function (h, k) { txt += "  Δx = " + String(h).padEnd(5) + cplx(f[k][0], f[k][1], 6) + "\n"; });
+      txt += "Richardson    " + cplx(rich[0], rich[1], 6) + "\nLeaver        " + cplx(EX[0], EX[1], 6);
+      read.textContent = txt;
+      var n = R.y[0].length;
+      var dt = R.dt;
+      var every = Math.max(1, Math.round(0.4 / dt));
+      if (top.fit()) {
+        var ctx = top.ctx;
+        var G = frame(top, [24, 14, 40, 46], [0, 250], [-10, 0.3], true);
+        axes(ctx, G, { xt: [0, 50, 100, 150, 200, 250], yt: [-10, -8, -6, -4, -2, 0], fy: function (e) { return e === 0 ? "1" : "1e" + e; }, xl: "time  (M)", yl: "|ψ| at r* = 100M" });
+        ctx.save();
+        clip(ctx, G);
+        for (var k = 0; k < 3; k += 1) {
+          var pts = [];
+          for (var i = 0; i < n; i += every) pts.push([G.X(i * dt), G.clampY(G.Y(R.y[k][i]))]);
+          line(ctx, pts, C[k], k === 2 ? 1.1 : 1.6);
+        }
+        ctx.restore();
+        legend(ctx, G, hs.map(function (h, k) { return { name: "Δx = " + h, c: C[k] }; }));
+      }
+      if (bot.fit()) {
+        var c2 = bot.ctx;
+        var H = frame(bot, [24, 14, 40, 46], [0, 250], [-10, -0.5], true);
+        axes(c2, H, { xt: [0, 50, 100, 150, 200, 250], yt: [-10, -8, -6, -4, -2], fy: function (e) { return "1e" + e; }, xl: "time  (M)", yl: "change between grids" });
+        var sc = Math.pow(2, s.p);
+        c2.save();
+        clip(c2, H);
+        var p1 = [];
+        var p2 = [];
+        for (var j = 0; j < n; j += every) {
+          p1.push([H.X(j * dt), H.clampY(H.Y(R.d1[j]))]);
+          p2.push([H.X(j * dt), H.clampY(H.Y(sc * R.d2[j]))]);
+        }
+        line(c2, p1, COL.pulse, 1.6);
+        line(c2, p2, COL.acc, 1.4, [5, 3]);
+        c2.restore();
+        legend(c2, H, [{ name: "Δx " + hs[0] + " → " + hs[1], c: COL.pulse }, { name: sc + " × (Δx " + hs[1] + " → " + hs[2] + ")", c: COL.acc, dash: [5, 3] }]);
+      }
+    }
+
+    function queue() {
+      read.textContent = "Running three simulations…";
+      window.setTimeout(draw, 20);
+    }
+    redraw(draw);
+  };
+
   /* ---------- start ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll("figure[data-widget]"), function (fig) {

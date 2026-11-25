@@ -1,0 +1,152 @@
+<section class="ex" data-float>
+  <h2>Conventions</h2>
+  <ul>
+    <li><strong>Units.</strong> $G = c = 1$, and every length and time is measured in units of the black-hole mass $M$, so frequencies are multiples of $1/M$. The figures set $M = 1$ and quote the dimensionless number $M\omega$. Leaver's method is written, as Leaver wrote it, in units with $2M = 1$ (Lessons 6 and 12).</li>
+    <li><strong>Time dependence.</strong> Every mode is proportional to $e^{-i\omega t}$, with $\omega = \omega_R - i\,\omega_I$. Decaying modes have $\operatorname{Im}\omega &lt; 0$ and live in the lower half of the complex plane; each has a mirror partner $-\omega^*$, the same mode turning the other way.</li>
+    <li><strong>Geometry.</strong> The metric has signature $(-, +, +, +)$. For Schwarzschild, $ds^2 = -f\,dt^2 + dr^2/f + r^2 d\Omega^2$ with $f = 1 - 2M/r$; $t$ is the time of a distant observer and $r$ is defined by the area $4\pi r^2$ of a sphere. Kerr is written in Boyer–Lindquist coordinates.</li>
+    <li><strong>The tortoise coordinate.</strong> $r_* = r + 2M\ln(r/2M - 1)$ runs from $-\infty$ at the horizon to $+\infty$ far away. Its inverse is $r = 2M\left[1 + W\!\left(e^{\,r_*/2M - 1}\right)\right]$, with $W$ the Lambert function.</li>
+    <li><strong>Labels.</strong> $\ell$ and $m$ are the multipole numbers of the angular pattern, and $n = 0, 1, 2, \dots$ the overtone, in order of increasing damping; $n = 0$ is the fundamental mode. $s$ is the spin of the field: 0 for a scalar, 1 for the electromagnetic field, 2 for gravitational waves. Kerr modes carry all three labels, $(\ell, m, n)$.</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>Back to seconds and kilometres</h2>
+  <p>To turn a number in units of $M$ into one a detector measures, put back $G$ and $c$. For one solar mass,</p>
+  <div class="eq">$$\frac{GM_\odot}{c^3} = 4.925\ \mu\text{s}, \qquad \frac{GM_\odot}{c^2} = 1.477\ \text{km}.$$</div>
+  <p>A mode with dimensionless frequency $M\omega$ of a black hole of mass $M$ then has</p>
+  <div class="eq">$$f = \frac{\operatorname{Re}(M\omega)}{2\pi}\,\frac{c^3}{GM} = 32.31\ \text{kHz} \times \operatorname{Re}(M\omega)\,\frac{M_\odot}{M}, \qquad \tau = \frac{GM/c^3}{|\operatorname{Im}(M\omega)|} = \frac{4.925\ \mu\text{s}}{|\operatorname{Im}(M\omega)|}\,\frac{M}{M_\odot}.$$</div>
+  <p>For example, the fundamental $\ell = 2$ mode of a non-spinning black hole of ten solar masses, $M\omega = 0.3737 - 0.0890\,i$, rings at $1.21$ kHz and decays in $0.55$ ms (Lesson 6).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Symbols</h2>
+  <p>In order of appearance, with the lesson that introduces each one.</p>
+  <div class="scroll">
+    <table class="sym">
+      <thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th><th scope="col">Lesson</th></tr></thead>
+      <tbody>
+        <tr><td>$M$</td><td>Mass of the black hole, the unit of length and time.</td><td><a href="why-perturb.html">0</a></td></tr>
+        <tr><td>$\chi$</td><td>Dimensionless spin, $\chi = a/M = J/M^2$, between 0 and 1.</td><td><a href="why-perturb.html">0</a>, <a href="kerr.html">9</a></td></tr>
+        <tr><td>$h_{\mu\nu}$</td><td>Small change of the metric, $g_{\mu\nu} = g^{\text{BH}}_{\mu\nu} + h_{\mu\nu}$.</td><td><a href="why-perturb.html">0</a>, <a href="gravitational-perturbations.html">4</a></td></tr>
+        <tr><td>$\omega,$ $\omega_R,$ $\omega_I$</td><td>Complex frequency $\omega = \omega_R - i\,\omega_I$: pitch and decay rate.</td><td><a href="leaky-oscillators.html">1</a></td></tr>
+        <tr><td>$\tau$</td><td>Damping time, $\tau = 1/\omega_I$: the amplitude falls by $e$.</td><td><a href="leaky-oscillators.html">1</a></td></tr>
+        <tr><td>$Q$</td><td>Quality factor, $Q = \omega_R/2\omega_I$; $\pi$ times the number of oscillations in a damping time.</td><td><a href="leaky-oscillators.html">1</a></td></tr>
+        <tr><td>$V$</td><td>Potential barrier of a wave equation on a line.</td><td><a href="leaky-oscillators.html">1</a>, <a href="scalar-field.html">3</a></td></tr>
+        <tr><td>$V_0,$ $\alpha$</td><td>Height and sharpness of the Pöschl–Teller bump $V_0/\cosh^2(\alpha x)$. Later $V_0$ is the height of any barrier and $V_0''$ its curvature in $r_*$.</td><td><a href="leaky-oscillators.html">1</a>, <a href="quasinormal-modes.html">6</a></td></tr>
+        <tr><td>$f(r)$</td><td>$1 - 2M/r$, which vanishes at the Schwarzschild horizon.</td><td><a href="schwarzschild.html">2</a></td></tr>
+        <tr><td>$r_*$</td><td>Tortoise coordinate.</td><td><a href="schwarzschild.html">2</a></td></tr>
+        <tr><td>$b,$ $b_c$</td><td>Impact parameter $L/E$ of a ray; critical value $b_c = 3\sqrt3\,M$, which is also the radius of the shadow.</td><td><a href="schwarzschild.html">2</a></td></tr>
+        <tr><td>$\Omega_c,$ $\lambda$</td><td>Angular frequency of the light ring and its instability rate (Lyapunov exponent); both $1/(3\sqrt3\,M)$ for Schwarzschild.</td><td><a href="schwarzschild.html">2</a>, <a href="quasinormal-modes.html">6</a></td></tr>
+        <tr><td>$\Phi,$ $\psi_{\ell m}$</td><td>A scalar field and its multipoles, $\Phi = \sum \psi_{\ell m}\,Y_{\ell m}/r$.</td><td><a href="scalar-field.html">3</a></td></tr>
+        <tr><td>$Y_{\ell m}$</td><td>Spherical harmonics.</td><td><a href="scalar-field.html">3</a></td></tr>
+        <tr><td>$\ell,$ $m$</td><td>Multipole numbers. Gravitational waves start at $\ell = 2$.</td><td><a href="scalar-field.html">3</a>, <a href="gravitational-perturbations.html">4</a></td></tr>
+        <tr><td>$s$</td><td>Spin of the field: 0 scalar, 1 electromagnetic, 2 gravitational. In the Teukolsky equation, the spin weight, $s = -2$ for $\psi_4$.</td><td><a href="scalar-field.html">3</a>, <a href="kerr.html">9</a></td></tr>
+        <tr><td>$\Psi,$ $Z$</td><td>Regge–Wheeler (axial) and Zerilli (polar) functions, one per multipole.</td><td><a href="gravitational-perturbations.html">4</a></td></tr>
+        <tr><td>$V_{\rm RW},$ $V_{\rm Z},$ $V_s$</td><td>Regge–Wheeler, Zerilli and spin-$s$ potentials.</td><td><a href="gravitational-perturbations.html">4</a></td></tr>
+        <tr><td>$R,$ $T$</td><td>Reflection and transmission amplitudes of a wave of one frequency; $|R|^2 + |T|^2 = 1$.</td><td><a href="scattering.html">5</a></td></tr>
+        <tr><td>$\Gamma_\ell$</td><td>Greybody factor, $|T_\ell|^2$.</td><td><a href="scattering.html">5</a></td></tr>
+        <tr><td>$\sigma(\omega)$</td><td>Absorption cross-section.</td><td><a href="scattering.html">5</a></td></tr>
+        <tr><td>$T_H$</td><td>Hawking temperature.</td><td><a href="scattering.html">5</a></td></tr>
+        <tr><td>$n$</td><td>Overtone number; $n = 0$ is the fundamental mode.</td><td><a href="leaky-oscillators.html">1</a>, <a href="quasinormal-modes.html">6</a></td></tr>
+        <tr><td>$\omega_{\ell n}$</td><td>Quasinormal frequencies of Schwarzschild, quoted as $M\omega_{\ell n}$.</td><td><a href="quasinormal-modes.html">6</a></td></tr>
+        <tr><td>$a_k;$ $\alpha_k,$ $\beta_k,$ $\gamma_k$</td><td>Coefficients of Leaver's series and of its three-term recurrence.</td><td><a href="quasinormal-modes.html">6</a></td></tr>
+        <tr><td>$\psi_{\text{in}},$ $\psi_{\text{up}}$</td><td>Solutions purely ingoing at the horizon and purely outgoing at infinity.</td><td><a href="excitation.html">7</a></td></tr>
+        <tr><td>$W$</td><td>Wronskian of two solutions, $\psi_1\psi_2' - \psi_1'\psi_2$.</td><td><a href="scattering.html">5</a>, <a href="excitation.html">7</a></td></tr>
+        <tr><td>$A_{\text{in}},$ $A_{\text{out}}$</td><td>Incoming and outgoing amplitudes of $\psi_{\text{in}}$ far away; $A_{\text{in}} = 0$ at a quasinormal mode.</td><td><a href="excitation.html">7</a></td></tr>
+        <tr><td>$B_n$</td><td>Excitation factor, the black hole's share of a mode's amplitude.</td><td><a href="excitation.html">7</a></td></tr>
+        <tr><td>$C_n$</td><td>Amplitude of mode $n$ for given initial data.</td><td><a href="excitation.html">7</a></td></tr>
+        <tr><td>$g,$ $\tilde g(\omega)$</td><td>A wave packet and its spectrum, $\tilde g(\omega) = \int g\,e^{i\omega r_*}dr_*$.</td><td><a href="excitation.html">7</a></td></tr>
+        <tr><td>$\nu,$ $\sigma$</td><td>Central frequency and length of a Gaussian packet.</td><td><a href="excitation.html">7</a>, <a href="tails.html">8</a></td></tr>
+        <tr><td>$a$</td><td>Kerr spin parameter, $a = J/M$, a length.</td><td><a href="kerr.html">9</a></td></tr>
+        <tr><td>$r_+,$ $r_-$</td><td>Outer and inner horizons of Kerr, $M \pm \sqrt{M^2 - a^2}$.</td><td><a href="kerr.html">9</a></td></tr>
+        <tr><td>$\Omega_H$</td><td>Angular velocity of the Kerr horizon, $a/(r_+^2 + a^2)$.</td><td><a href="kerr.html">9</a></td></tr>
+        <tr><td>$\psi_4$</td><td>Weyl scalar, a component of the curvature; far away it is the gravitational wave, $\ddot h_+ - i\ddot h_\times$ up to a factor.</td><td><a href="kerr.html">9</a></td></tr>
+        <tr><td>$\Delta$</td><td>$r^2 - 2Mr + a^2$, which vanishes at the Kerr horizons.</td><td><a href="kerr.html">9</a></td></tr>
+        <tr><td>$S(t, r_*)$</td><td>Source on the right-hand side of the wave equation.</td><td><a href="sources.html">10</a></td></tr>
+        <tr><td>$A_n,$ $t_0$</td><td>Mode amplitudes and start time of a ringdown fit.</td><td><a href="sources.html">10</a></td></tr>
+        <tr><td>$\delta,$ $\varepsilon$</td><td>Proper distance from the would-be horizon to a reflecting surface, and its coordinate position $r_0 = 2M(1 + \varepsilon)$.</td><td><a href="frontiers.html">11</a></td></tr>
+        <tr><td>$\delta V,$ $\delta\omega_n$</td><td>A small change of the potential and the shift of frequency it causes.</td><td><a href="frontiers.html">11</a></td></tr>
+        <tr><td>$\Delta x,$ $\Delta t,$ $p$</td><td>Grid spacings of a numerical scheme, and its order of convergence.</td><td><a href="compute.html">12</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ex" data-float>
+  <h2>One letter, several meanings</h2>
+  <p>There are only so many letters. These are used for more than one thing; the context always decides.</p>
+  <ul>
+    <li><strong>$\lambda$</strong>: the parameter along a light ray and the instability rate of the light ring (Lesson 2); $(\ell - 1)(\ell + 2)/2$ in the Zerilli potential (Lesson 4); the separation constant of the Teukolsky equation (Lesson 9).</li>
+    <li><strong>$\sigma$</strong>: the absorption cross-section (Lesson 5); the length of a wave packet (Lessons 7 and 8).</li>
+    <li><strong>$\rho$</strong>: $-i\omega$ in Leaver's recurrence (Lesson 6); $-1/(r - ia\cos\theta)$ in the Kerr formulas (Lesson 9); the density of a scalar charge (Lesson 10).</li>
+    <li><strong>$R$</strong>: the reflection amplitude (Lesson 5); the Ricci tensor $R_{\mu\nu}$ (Lesson 4); the radial Teukolsky function $R(r)$ (Lesson 9). <strong>$T$</strong>: the transmission amplitude, and $T_H$ the Hawking temperature (Lesson 5).</li>
+    <li><strong>$\alpha$, $\beta$, $\gamma$</strong>: the sharpness of the Pöschl–Teller bump and the friction of the oscillator (Lesson 1); the coefficients of Leaver's recurrence (Lesson 6); $\beta = 6M$ in Chandrasekhar's relation between the two gravitational potentials (Lesson 4); the coefficients $\alpha_k$ of a change of the potential (Lesson 11).</li>
+    <li><strong>$\varepsilon$</strong>: $s^2 - 1$ in Leaver's recurrence (Lesson 6); the size of a perturbation (Lessons 4 and 11); the position of a reflecting surface (Lesson 11).</li>
+    <li><strong>$\Delta$</strong>: $r^2 - 2Mr + a^2$ (Lesson 9); $\Delta t$ for the delay between echoes (Lesson 11) and for the time step of a grid (Lesson 12).</li>
+    <li><strong>$W$</strong>: the Wronskian (Lessons 5 and 7); the Lambert function (Lesson 12).</li>
+    <li><strong>$Q$</strong>: the quality factor (Lesson 1); $\mathcal{Q}$, the quadratic source of second-order perturbations (Lesson 11).</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>Glossary</h2>
+  <dl class="gloss">
+    <div id="absorption-cross-section"><dt>Absorption cross-section</dt><dd>The area a black hole presents to a plane wave, $\sigma = (\pi/\omega^2)\sum_\ell (2\ell + 1)\Gamma_\ell$. For a massless scalar it tends to the horizon area, $16\pi M^2$, at low frequency and to the capture area of light, $27\pi M^2$, at high frequency. <a href="scattering.html">Lesson 5</a></dd></div>
+    <div id="axial"><dt>Axial perturbation</dt><dd>A deformation built from the curls of spherical harmonics, which changes as $(-1)^{\ell+1}$ under reflection through the centre: it twists rather than stretches. Also called odd. It obeys the Regge–Wheeler equation. <a href="gravitational-perturbations.html">Lesson 4</a></dd></div>
+    <div id="birkhoff"><dt>Birkhoff's theorem</dt><dd>Schwarzschild is the only spherically symmetric solution of Einstein's equations in vacuum, so a black hole cannot radiate in the $\ell = 0$ pattern. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="bhpt"><dt>Black-hole perturbation theory</dt><dd>The description of a black hole plus a small distortion by Einstein's equations, kept to first order in the distortion, which makes them linear wave equations on the fixed black hole. <a href="why-perturb.html">Lesson 0</a></dd></div>
+    <div id="spectroscopy"><dt>Black-hole spectroscopy</dt><dd>Measuring several quasinormal modes of one black hole. One mode gives the mass and the spin; every further mode tests the no-hair theorem. <a href="why-perturb.html">Lesson 0</a>, <a href="kerr.html">9</a>, <a href="sources.html">10</a></dd></div>
+    <div id="branch-cut"><dt>Branch cut</dt><dd>A line in the complex frequency plane, along the negative imaginary axis for Schwarzschild, across which the Green's function jumps. Its contribution to the signal is the late-time tail. <a href="excitation.html">Lesson 7</a>, <a href="tails.html">8</a></dd></div>
+    <div id="continuation"><dt>Continuation</dt><dd>Following a solution as a parameter changes in small steps, predicting each new value from the previous ones. Used to follow each Kerr mode from zero spin. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="convergence-test"><dt>Convergence test</dt><dd>Repeating a computation at several resolutions to check that it approaches a limit at the expected rate, and to estimate its error without knowing the exact answer. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="cfl"><dt>Courant–Friedrichs–Lewy condition</dt><dd>The time step of an explicit scheme for a wave equation must not exceed the time a wave takes to cross one cell of the grid, or the scheme blows up. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="echoes"><dt>Echoes</dt><dd>Delayed copies of the ringdown that would follow if a compact object had a reflecting surface instead of a horizon. They are spaced by twice the time light takes to cross the cavity between the barrier and the surface. <a href="frontiers.html">Lesson 11</a></dd></div>
+    <div id="ergoregion"><dt>Ergoregion</dt><dd>The region just outside the horizon of a spinning black hole, reaching $2M$ at the equator, where nothing can stand still: everything is dragged around with the hole. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="event-horizon"><dt>Event horizon</dt><dd>The surface of no return, at $r = 2M$ for Schwarzschild. Seen from outside, it acts as a perfect absorber: waves go in and never come back. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="excitation-factor"><dt>Excitation factor</dt><dd>$B_n$, the part of a mode's amplitude that depends only on the black hole: how easily the mode can be excited at all. <a href="excitation.html">Lesson 7</a></dd></div>
+    <div id="eco"><dt>Exotic compact object</dt><dd>A hypothetical object as compact as a black hole but without a horizon, for instance one with a surface just outside where the horizon would be. <a href="frontiers.html">Lesson 11</a></dd></div>
+    <div id="extremal"><dt>Extremal black hole</dt><dd>A Kerr black hole at the maximum spin, $\chi \to 1$, where the two horizons meet and many properties change dramatically. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="emri"><dt>Extreme-mass-ratio inspiral</dt><dd>A small compact body spiralling into a supermassive black hole, with mass ratios around $10^{-5}$. A main target of LISA, and a problem in which perturbation theory becomes exact as the mass ratio goes to zero. <a href="sources.html">Lesson 10</a></dd></div>
+    <div id="fundamental-mode"><dt>Fundamental mode</dt><dd>The least damped mode of a multipole, $n = 0$: it rings longest and dominates the end of the ringdown. <a href="leaky-oscillators.html">Lesson 1</a>, <a href="quasinormal-modes.html">6</a></dd></div>
+    <div id="gauge"><dt>Gauge</dt><dd>The freedom to relabel the points of spacetime, $x^\mu \to x^\mu + \xi^\mu$, which changes $h_{\mu\nu}$ without changing the geometry. <a href="gravitational-perturbations.html">Lesson 4</a></dd></div>
+    <div id="greybody"><dt>Greybody factor</dt><dd>$\Gamma_\ell(\omega) = |T_\ell(\omega)|^2$, the fraction of a wave of one frequency and multipole that gets through the barrier into the hole. The name comes from its role in the spectrum of Hawking radiation. <a href="scattering.html">Lesson 5</a></dd></div>
+    <div id="green"><dt>Green's function</dt><dd>The tool that solves a linear wave equation for any initial data or source at once. Deforming its frequency integral splits the signal into a prompt response, quasinormal modes and a tail. <a href="excitation.html">Lesson 7</a></dd></div>
+    <div id="hawking"><dt>Hawking radiation</dt><dd>The thermal glow of a black hole once quantum mechanics is included, at a temperature inversely proportional to its mass, filtered by the greybody factors on its way out. <a href="scattering.html">Lesson 5</a></dd></div>
+    <div id="impact-parameter"><dt>Impact parameter</dt><dd>How far from the centre a ray would pass if there were no gravity, $b = L/E$. Light with $b &lt; 3\sqrt3\,M$ falls into a Schwarzschild black hole. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="isco"><dt>ISCO</dt><dd>The innermost stable circular orbit of a massive body: $6M$ for Schwarzschild, and between $M$ and $9M$ for Kerr, depending on the spin and on the sense of the orbit. <a href="schwarzschild.html">Lesson 2</a>, <a href="kerr.html">9</a></dd></div>
+    <div id="kerr"><dt>Kerr black hole</dt><dd>The spinning black hole, found by Roy Kerr in 1963, described by its mass and its spin. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="leapfrog"><dt>Leapfrog scheme</dt><dd>The finite-difference scheme of the time-domain figures: each new value follows from the two previous time levels through centred differences. Its errors shrink as the square of the grid spacing. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="leaver"><dt>Leaver's method</dt><dd>Computing quasinormal frequencies to any precision as the zeros of a continued fraction built from a three-term recurrence. Inverting the fraction $n$ times makes overtone $n$ the easiest zero to find. For Kerr, an angular and a radial fraction are solved together. <a href="quasinormal-modes.html">Lesson 6</a>, <a href="compute.html">12</a></dd></div>
+    <div id="light-ring"><dt>Light ring</dt><dd>The circular orbit of light, at $r = 3M$ for Schwarzschild, also called the photon sphere. It is unstable, and quasinormal modes of large $\ell$ are waves trapped on it and slowly leaking off. <a href="schwarzschild.html">Lesson 2</a>, <a href="quasinormal-modes.html">6</a></dd></div>
+    <div id="lyapunov"><dt>Lyapunov exponent</dt><dd>The rate $\lambda$ at which a ray slightly off the light ring moves away from it, as $e^{\lambda t}$. In the light-ring picture it sets the damping of the modes. <a href="schwarzschild.html">Lesson 2</a>, <a href="quasinormal-modes.html">6</a></dd></div>
+    <div id="mirror-mode"><dt>Mirror mode</dt><dd>The partner $-\omega^*$ of a quasinormal frequency $\omega$: the same mode turning the other way. <a href="quasinormal-modes.html">Lesson 6</a></dd></div>
+    <div id="no-hair"><dt>No-hair theorem</dt><dd>In general relativity a black hole that has settled down is described by its mass and spin alone; electric charge, the only other possibility, is negligible for astrophysical black holes. <a href="why-perturb.html">Lesson 0</a></dd></div>
+    <div id="open-system"><dt>Open system</dt><dd>A system that loses energy by radiating it away rather than by friction. Its natural frequencies are complex. A black hole is open in two directions, to infinity and into the horizon. <a href="leaky-oscillators.html">Lesson 1</a></dd></div>
+    <div id="overtone"><dt>Overtone</dt><dd>A quasinormal mode with $n \ge 1$, damped faster than the fundamental mode of the same multipole. <a href="leaky-oscillators.html">Lesson 1</a>, <a href="quasinormal-modes.html">6</a>, <a href="sources.html">10</a></dd></div>
+    <div id="penrose"><dt>Penrose process</dt><dd>Extracting energy from a spinning black hole with a particle that splits inside the ergoregion, one half escaping with more energy than the whole had. Superradiance is its wave version. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="polar"><dt>Polar perturbation</dt><dd>A deformation built from spherical harmonics and their gradients, which changes as $(-1)^\ell$ under reflection through the centre: it stretches and squeezes. Also called even. It obeys the Zerilli equation. <a href="gravitational-perturbations.html">Lesson 4</a></dd></div>
+    <div id="poschl-teller"><dt>Pöschl–Teller bump</dt><dd>The potential $V_0/\cosh^2(\alpha x)$, whose quasinormal modes and transmission are known exactly. A good stand-in for the black-hole barrier near its top. <a href="leaky-oscillators.html">Lesson 1</a>, <a href="scattering.html">5</a>, <a href="quasinormal-modes.html">6</a></dd></div>
+    <div id="price"><dt>Price's law</dt><dd>At a fixed radius, the late-time tail of each multipole decays as $t^{-(2\ell + 3)}$. <a href="tails.html">Lesson 8</a></dd></div>
+    <div id="prompt-response"><dt>Prompt response</dt><dd>The part of a signal that travels more or less straight from the source to the observer, before the ringing. It comes from high frequencies, the large arc of the contour. <a href="excitation.html">Lesson 7</a></dd></div>
+    <div id="prony"><dt>Prony's method</dt><dd>Reading complex frequencies off a sampled signal by linear prediction: a sum of damped sinusoids obeys a linear recurrence, whose coefficients follow from a linear fit. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="pseudospectrum"><dt>Pseudospectrum</dt><dd>A map of how far the eigenvalues of an operator can move under small changes of it. For black holes it shows that overtones are very sensitive to small changes of the potential. <a href="frontiers.html">Lesson 11</a></dd></div>
+    <div id="quadratic-mode"><dt>Quadratic quasinormal mode</dt><dd>A mode of the second-order perturbation at the sum of two linear frequencies, $\omega_a + \omega_b$, with an amplitude proportional to the product of theirs. <a href="frontiers.html">Lesson 11</a></dd></div>
+    <div id="quality-factor"><dt>Quality factor</dt><dd>$Q = \omega_R/2\omega_I$, $\pi$ times the number of oscillations in one damping time. About 2.1 for the fundamental $\ell = 2$ mode of Schwarzschild, almost 15 for the $\ell = m = 2$ mode at $\chi = 0.99$. <a href="leaky-oscillators.html">Lesson 1</a>, <a href="quasinormal-modes.html">6</a>, <a href="kerr.html">9</a></dd></div>
+    <div id="qnm"><dt>Quasinormal mode</dt><dd>A solution of the perturbation equations that is purely ingoing at the horizon and purely outgoing at infinity. Only a discrete set of complex frequencies allows it, and they depend on the black hole alone. <a href="leaky-oscillators.html">Lesson 1</a>, <a href="quasinormal-modes.html">6</a></dd></div>
+    <div id="regge-wheeler"><dt>Regge–Wheeler equation</dt><dd>The wave equation of axial gravitational perturbations of Schwarzschild, with potential $f\left[\ell(\ell+1)/r^2 - 6M/r^3\right]$. <a href="gravitational-perturbations.html">Lesson 4</a></dd></div>
+    <div id="richardson"><dt>Richardson extrapolation</dt><dd>Combining results at two resolutions to cancel the leading error; for a second-order scheme, $(4\,\omega_{h/2} - \omega_h)/3$. <a href="compute.html">Lesson 12</a></dd></div>
+    <div id="ringdown"><dt>Ringdown</dt><dd>The last part of the signal of a merger, a fading tone made of the quasinormal modes of the final black hole. <a href="why-perturb.html">Lesson 0</a></dd></div>
+    <div id="sasaki-nakamura"><dt>Sasaki–Nakamura equation</dt><dd>A transformation of the radial Teukolsky equation into one with a real, short-range potential, better suited to numerical work. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="schwarzschild"><dt>Schwarzschild black hole</dt><dd>The black hole without spin or charge, described by its mass alone. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="self-force"><dt>Self-force</dt><dd>The force a small body feels from its own field as it moves near a large black hole. It carries away energy and angular momentum and makes the body spiral in. <a href="sources.html">Lesson 10</a></dd></div>
+    <div id="shadow"><dt>Shadow</dt><dd>The dark patch a black hole casts on the sky. Its edge is set by the light ring: its radius is $b_c = 3\sqrt3\,M$ for Schwarzschild, not $2M$. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="spheroidal"><dt>Spin-weighted spheroidal harmonics</dt><dd>The angular functions of the Teukolsky equation. They depend on $a\omega$, and become spin-weighted spherical harmonics when it vanishes. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="superradiance"><dt>Superradiance</dt><dd>The amplification of a wave scattered by a spinning black hole when $0 &lt; \omega &lt; m\,\Omega_H$, at the expense of the hole's rotation. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="tail"><dt>Tail</dt><dd>The slow decay, as a power of time and without oscillation, that follows the ringing. It comes from waves scattered back by the curvature far from the hole. <a href="tails.html">Lesson 8</a></dd></div>
+    <div id="teukolsky"><dt>Teukolsky equation</dt><dd>The equation for perturbations of a Kerr black hole, written for a curvature scalar such as $\psi_4$. It separates into an angular and a radial equation. <a href="kerr.html">Lesson 9</a></dd></div>
+    <div id="tortoise"><dt>Tortoise coordinate</dt><dd>$r_* = r + 2M\ln(r/2M - 1)$, in which radial light moves at constant speed and the horizon lies at $r_* = -\infty$. <a href="schwarzschild.html">Lesson 2</a></dd></div>
+    <div id="wkb"><dt>WKB approximation</dt><dd>Matching approximate wave solutions on either side of the barrier through its parabolic top, to estimate quasinormal frequencies and transmission. <a href="quasinormal-modes.html">Lesson 6</a></dd></div>
+    <div id="wronskian"><dt>Wronskian</dt><dd>$W = \psi_1\psi_2' - \psi_1'\psi_2$, constant for two solutions of the same equation. It proves that $|R|^2 + |T|^2 = 1$, appears in the Green's function, and vanishes at a quasinormal mode. <a href="scattering.html">Lesson 5</a>, <a href="excitation.html">7</a></dd></div>
+    <div id="zerilli"><dt>Zerilli equation</dt><dd>The wave equation of polar gravitational perturbations of Schwarzschild. Its potential looks nothing like Regge–Wheeler's, yet it gives the same frequencies and the same transmission. <a href="gravitational-perturbations.html">Lesson 4</a></dd></div>
+  </dl>
+</section>

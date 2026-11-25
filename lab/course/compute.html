@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compute it yourself · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 12 of a short course on black-hole perturbation theory. The short programs behind every number of the course, explained and ready to run as notebooks.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Compute it yourself · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 12 of a short course on black-hole perturbation theory. The short programs behind every number of the course, explained and ready to run as notebooks.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/compute.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/compute.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="head-links"><a class="back" href="./">← Course contents</a><a class="back" href="notation.html">Notation and glossary</a></div>
+        <span class="label" data-float>Lesson 12 · Part IV · Hands-on</span>
+        <h1 data-float>Compute it yourself</h1>
+        <p class="lede" data-float>Every number in this course came out of a short program. Here are the programs, explained, as notebooks you can open in your browser and change.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>Every number has a program</h2>
+  <p>Every number in this course was computed for it: the quasinormal frequencies, the greybody factors, the amplitudes of the overtones, the spins of Lesson 9. Behind them there are only three ideas, used again and again.</p>
+  <ul>
+    <li><strong>Solve in frequency.</strong> Fix $\omega$, and the wave equation becomes an ordinary differential equation. Integrate it (Lesson 5), or turn it into a recurrence and look for the frequencies at which its solution behaves (Leaver's method, Lessons 6 and 9).</li>
+    <li><strong>Solve in time.</strong> Put the wave equation on a grid and step it forward, the way Nature does it. This is what the live figures of the course do.</li>
+    <li><strong>Fit.</strong> Read numbers off a signal: frequencies, damping times, amplitudes. Simple in principle and treacherous in practice (Lesson 10).</li>
+  </ul>
+  <p>This lesson explains each idea through the few lines of code that carry it. The full programs are five notebooks, each of which reproduces the numbers of a lesson. They need nothing beyond Python with NumPy, SciPy and Matplotlib, and each runs in seconds, the slowest in about a minute. Open them in Google Colab to run them in your browser without installing anything, or download them and run them on your own computer.</p>
+</section>
+
+<section class="notebooks" data-float>
+  <span class="label">The notebooks</span>
+  <ol class="nb-list">
+    <li>
+      <h3>Quasinormal modes with Leaver's method</h3>
+      <p>Leaver's continued fraction and a root finder: the Schwarzschild spectrum of Lesson 6, eight overtones of three multipoles, to six digits.</p>
+      <p class="nb-links"><a href="https://colab.research.google.com/github/svykho/svykho.github.io/blob/main/lab/course/code/leaver.ipynb" rel="noopener">Open in Colab</a><a href="https://github.com/svykho/svykho.github.io/blob/main/lab/course/code/leaver.ipynb" rel="noopener">View</a><a href="code/leaver.ipynb" download>Download</a><span>Lesson 6 · 3 s</span></p>
+    </li>
+    <li>
+      <h3>Ringing a black hole in the time domain</h3>
+      <p>The scheme of the live figures: a wave packet hits the barrier, the frequency is read off the ringing, the result passes a convergence test, and Price's tail appears.</p>
+      <p class="nb-links"><a href="https://colab.research.google.com/github/svykho/svykho.github.io/blob/main/lab/course/code/time-domain.ipynb" rel="noopener">Open in Colab</a><a href="https://github.com/svykho/svykho.github.io/blob/main/lab/course/code/time-domain.ipynb" rel="noopener">View</a><a href="code/time-domain.ipynb" download>Download</a><span>Lessons 4, 6 and 8 · 5 s</span></p>
+    </li>
+    <li>
+      <h3>Fitting a ringdown with overtones</h3>
+      <p>Linear least squares with the frequencies fixed: when does the ringdown start, and are the overtones really there?</p>
+      <p class="nb-links"><a href="https://colab.research.google.com/github/svykho/svykho.github.io/blob/main/lab/course/code/fitting.ipynb" rel="noopener">Open in Colab</a><a href="https://github.com/svykho/svykho.github.io/blob/main/lab/course/code/fitting.ipynb" rel="noopener">View</a><a href="code/fitting.ipynb" download>Download</a><span>Lesson 10 · 3 s</span></p>
+    </li>
+    <li>
+      <h3>Greybody factors and the absorption cross-section</h3>
+      <p>Start a wave at the horizon, integrate it outwards, split it far away into what came in and what went out, and add up the multipoles.</p>
+      <p class="nb-links"><a href="https://colab.research.google.com/github/svykho/svykho.github.io/blob/main/lab/course/code/scattering.ipynb" rel="noopener">Open in Colab</a><a href="https://github.com/svykho/svykho.github.io/blob/main/lab/course/code/scattering.ipynb" rel="noopener">View</a><a href="code/scattering.ipynb" download>Download</a><span>Lesson 5 · 1 min</span></p>
+    </li>
+    <li>
+      <h3>Kerr quasinormal modes with Leaver's method</h3>
+      <p>Two continued fractions solved together and followed in spin from Schwarzschild: the split spectrum of Lesson 9 and its spectroscopy exercise.</p>
+      <p class="nb-links"><a href="https://colab.research.google.com/github/svykho/svykho.github.io/blob/main/lab/course/code/kerr.ipynb" rel="noopener">Open in Colab</a><a href="https://github.com/svykho/svykho.github.io/blob/main/lab/course/code/kerr.ipynb" rel="noopener">View</a><a href="code/kerr.ipynb" download>Download</a><span>Lesson 9 · 5 s</span></p>
+    </li>
+  </ol>
+</section>
+
+<section class="ex" data-float>
+  <h2>Modes are zeros</h2>
+  <p>Leaver's method (Lesson 6) turns the search for quasinormal modes into the search for zeros of one function of the frequency, a continued fraction. In code it is a single loop, run from the bottom of the fraction up:</p>
+  <pre class="code"><code>def leaver_cf(w, l, s=2, n=0, depth=3000):
+    rho, eps = -1j * w, s * s - 1          <span class="c"># units 2M = 1</span>
+    alpha = lambda k: k*k + (2*rho + 2)*k + 2*rho + 1
+    beta  = lambda k: -(2*k*k + (8*rho + 2)*k + 8*rho*rho + 4*rho + l*(l + 1) - eps)
+    gamma = lambda k: k*k + 4*rho*k + 4*rho*rho - eps - 1
+    tail = 0
+    for k in range(depth, n, -1):          <span class="c"># the fraction, bottom up</span>
+        tail = alpha(k - 1) * gamma(k) / (beta(k) - tail)
+    head = 0
+    if n &gt; 0:                              <span class="c"># the n levels moved by the inversion</span>
+        x = beta(0)
+        for k in range(1, n):
+            x = beta(k) - alpha(k - 1) * gamma(k) / x
+        head = alpha(n - 1) * gamma(n) / x
+    return beta(n) - tail - head</code></pre>
+  <p>Hand this function to any root finder that works with complex numbers. The notebook uses the secant method, which needs no derivative: draw a straight line through the last two points and see where it crosses zero. A function of a complex variable can also be looked at, and that tells you a lot about how the search will go.</p>
+</section>
+
+<figure class="w" data-widget="cfmap">
+  <figcaption><strong>Modes are zeros.</strong> The size of Leaver's continued fraction over the complex frequency plane, on a logarithmic scale: bright wells are its zeros, dark spots its poles. The rings are the modes of Lesson 6, and the orange one is the overtone the fraction has been inverted for. Click or tap anywhere to start the secant method there and watch it walk to a zero.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>Every mode is a well</strong>, and the wells sit exactly on the rings. Nothing in the map knows about the table: the zeros are where the series converges at infinity.</li>
+    <li><strong>Zeros come with poles.</strong> Next to most wells there is a dark spot where the fraction blows up. A root finder that starts on the wrong side of a pole can be thrown far away.</li>
+    <li><strong>Inverting changes the landscape, not the zeros.</strong> Each inversion moves the poles and reshapes the wells, but the zeros stay where they are. Leaver showed that the zero of overtone $n$ is most stable after $n$ inversions, so each overtone is computed with its own, starting from a guess extrapolated from the previous ones.</li>
+    <li><strong>From a good start the secant method needs five or six steps</strong> to reach twelve digits. From a poor one it wanders, lands on another zero, or leaves the map.</li>
+  </ul>
+  <p>The table of Lesson 6 was computed with 30 digits and a fraction 4000 levels deep. Ordinary double-precision numbers and a depth of 3000 reproduce all its six decimals, and all 24 modes take less than a second in plain Python.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Ringing in time</h2>
+  <p>The other way to find the modes is to hit the black hole and listen. Put the wave equation on a grid with spacing $\Delta x$ in $r_*$ and $\Delta t$ in time, and replace each second derivative by its centred difference. The new value at each point is then given by the two previous ones:</p>
+  <div class="eq">$$\psi^{k+1}_j = 2\psi^k_j - \psi^{k-1}_j + \left(\frac{\Delta t}{\Delta x}\right)^2\left(\psi^k_{j+1} - 2\psi^k_j + \psi^k_{j-1}\right) - \Delta t^2\,V_j\,\psi^k_j .$$</div>
+  <p>This is the leapfrog scheme. Three details make it work.</p>
+  <ul>
+    <li><strong>Stability.</strong> Information must not travel more than one cell per step, so $\Delta t$ must not exceed $\Delta x$ (Courant, Friedrichs and Lewy, 1928). With the potential and the boundaries even $\Delta t = \Delta x$ is marginal, and the course uses $\Delta t = \Delta x/2$. Make $\Delta t$ one per cent larger than $\Delta x$ and the solution explodes in about 150 steps.</li>
+    <li><strong>The ends of the grid.</strong> Waves must leave without bouncing back. At each end the wave is only allowed to move outwards, $\partial_t\psi = \pm\partial_{r_*}\psi$. That is exact where the potential vanishes; far out it still falls off as $\ell(\ell+1)/r^2$, so the outer end is put far enough away that nothing reflected there can reach the observer during the run.</li>
+    <li><strong>The potential.</strong> The grid is uniform in $r_*$, but $V$ is a function of $r$. The inverse of the tortoise coordinate has a closed form with the Lambert function $W$, defined by $W e^W = x$ and available in SciPy:</li>
+  </ul>
+  <div class="eq">$$r = 2M\left[1 + W\!\left(e^{\,r_*/2M - 1}\right)\right].$$</div>
+  <p>With NumPy the whole time step is one line, applied to every point of the grid at once:</p>
+  <pre class="code"><code>for k in range(steps):
+    new[1:-1] = (2*now[1:-1] - old[1:-1]
+                 + lam * (now[2:] - 2*now[1:-1] + now[:-2])
+                 - V[1:-1] * dt**2 * now[1:-1])
+    new[0]  = now[0]  + c * (now[1]  - now[0])    <span class="c"># outgoing, into the hole</span>
+    new[-1] = now[-1] - c * (now[-1] - now[-2])   <span class="c"># outgoing, to infinity</span>
+    old, now, new = now, new, old
+    signal[k] = now[i_obs]</code></pre>
+  <p>Here <code>lam</code> $= (\Delta t/\Delta x)^2$ and <code>c</code> $= \Delta t/\Delta x$. The experiment of Lesson 6, 4300 steps on a grid of 4500 points, takes a tenth of a second. The figures of the course run the same loop in JavaScript, in your browser.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Trust, but check</h2>
+  <p>A program that runs is not yet a program that is right. Its answer differs from the exact one because the grid is finite, and the first job is to find out by how much. The scheme makes errors proportional to $\Delta x^2$, so each halving of the spacing should divide them by four. That can be tested without knowing the exact answer: run three grids, $\Delta x = h$, $h/2$ and $h/4$, and compare the changes,</p>
+  <div class="eq">$$\frac{\psi_h - \psi_{h/2}}{\psi_{h/2} - \psi_{h/4}} \approx 2^p ,$$</div>
+  <p>where $p$ is the order of the scheme. If the ratio comes out right, the last change is a good estimate of the error of the finest run.</p>
+</section>
+
+<figure class="w" data-widget="converge">
+  <figcaption><strong>Trust, but check.</strong> The experiment of Lesson 6 run on three grids, each twice as fine as the last. Top, the three signals, which look identical. Bottom, the change from the coarsest grid to the middle one, and the change from the middle one to the finest multiplied by $2^p$. Only for the right order $p$ do the two curves coincide. The readout gives the frequency fitted on each grid.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>The scheme is second order.</strong> For $p = 2$ the two curves lie on top of each other at all times; for $p = 1$ or $3$ they are a factor of two apart. The measured order is 2.0.</li>
+    <li><strong>The fitted frequency converges too</strong>, and two grids can be combined to remove the leading error, $\omega \approx (4\,\omega_{h/2} - \omega_h)/3$ (Richardson, 1911).</li>
+    <li><strong>Converged is not the same as right.</strong> Even the extrapolated frequency differs from Leaver's by about one part in three thousand, more than ten times the error of the grid. That difference is not numerical: in the window of the fit the signal still contains overtones and the tail, and a single damped sinusoid cannot describe them. A convergence test measures the error of the computer, not the error of the model.</li>
+  </ul>
+  <p>The same habit has other forms. Compare with something known: the frequency read off the ringing against Leaver's, or the Regge–Wheeler barrier against the Zerilli one, which must ring identically and do so to every digit printed. Check what the equations guarantee: in the scattering notebook $|R|^2 + |T|^2 = 1$ holds to better than one part in ten million without being imposed anywhere. And move whatever is arbitrary. While this course was being written, a faint spike in the echoes figure of Lesson 11, a thousandth of the signal, turned out to be a reflection from the edge of the grid; moving the edge $150M$ further out removed it.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Listening</h2>
+  <p>Once the frequencies are known, fitting a ringdown is easy. With $\omega_n$ fixed, the model $\sum_n A_n e^{-i\omega_n(t - t_0)}$ is linear in the amplitudes, and the best fit is one linear least-squares problem: no initial guess, no iterations, one answer.</p>
+  <pre class="code"><code>tau = t[window] - t0
+cols = []
+for w in qnms:                             <span class="c"># fixed complex frequencies</span>
+    e = np.exp(w.imag * tau)
+    cols += [e * np.cos(w.real * tau), e * np.sin(w.real * tau)]
+c = np.linalg.lstsq(np.column_stack(cols), psi[window], rcond=None)[0]
+amplitudes = np.hypot(c[0::2], c[1::2])  <span class="c"># at t0, one per mode</span></code></pre>
+  <p>When the frequencies are unknown the problem becomes nonlinear. Prony's method avoids that for a single mode: a damped sinusoid sampled every $d$ obeys $y_k = c_1 y_{k-1} + c_2 y_{k-2}$ exactly, so $c_1$ and $c_2$ follow from a linear fit, and the frequency from the roots of $z^2 - c_1 z - c_2 = 0$. This is how the figures of Lessons 1 and 6 read the ringing. With several unknown modes, a general nonlinear least-squares fit needs a starting point and can settle in the wrong minimum, and every extra mode makes it easier to fit what is not there. Lesson 10 showed how to guard against that: change the start time and the number of modes, and believe only what does not move.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>One frequency at a time</h2>
+  <p>The greybody factors of Lesson 5 need the stationary problem at a real frequency. Start close to the horizon with the purely ingoing wave $e^{-i\omega r_*}$, integrate outwards, and far away split the result into its incoming and outgoing parts. Two details matter. Carrying $r$ along as a third unknown, with $dr/dr_* = 1 - 2M/r$, avoids inverting $r_*(r)$ during the integration. And since the potential falls off only as $1/r^2$, the waves far away are not quite $e^{\pm i\omega r_*}$: they are $e^{\pm i\omega r_*}\sum_k a_k/r^k$, with coefficients from a recurrence. That series is asymptotic, so it is summed only up to its smallest term. An eighth-order Runge–Kutta integrator, SciPy's <code>DOP853</code>, takes care of the rest.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Adding spin</h2>
+  <p>For Kerr, Leaver's method needs two continued fractions, because the angular equation now depends on the frequency too (Lesson 9). For a trial $\omega$, first find the separation constant that makes the angular fraction vanish, then evaluate the radial fraction with it; a quasinormal mode is a zero of the result. Each mode is followed from Schwarzschild by small steps in spin, predicting the next value from the last two. This is called continuation, and it keeps every mode on its own branch. Near $\chi = 1$ the modes change quickly and the fraction converges slowly, so the steps get smaller and the fraction deeper. In double precision the notebook reproduces the frequencies of Lesson 9, computed with 25 digits, to better than one part in a million, and the five $\ell = 2$ modes up to $\chi = 0.99$ take a few seconds.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$\frac{\psi_h - \psi_{h/2}}{\psi_{h/2} - \psi_{h/4}} \approx 2^p$$</div>
+  <p>The convergence test: three resolutions tell you whether a numerical answer behaves as it should, and how far it is from the exact one, without knowing the exact one.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Everything in black-hole perturbation theory can be computed with three ideas, solving in frequency, solving in time and fitting, in a few dozen lines each, provided every answer is checked against the grid, against known values and against what the equations guarantee.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>The notebook <em>Ringing a black hole in the time domain</em> fits the fundamental $\ell = 2$ mode in the same window on three grids:</p>
+  <div class="scroll">
+    <table class="cmp">
+      <thead><tr><th scope="col">$\Delta x$</th><th scope="col">Fitted $M\omega$</th></tr></thead>
+      <tbody>
+        <tr><td>0.4</td><td>0.3738892 − 0.0889794i</td></tr>
+        <tr><td>0.2</td><td>0.3738015 − 0.0889026i</td></tr>
+        <tr><td>0.1</td><td>0.3737795 − 0.0888835i</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>(a) Show that the scheme converges at second order. (b) Extrapolate to $\Delta x = 0$. (c) Estimate the error of the finest grid, and the spacing that would bring it down to $10^{-6}$. How much longer would that run take? (d) Compare with Leaver's value, $0.373672 - 0.088962\,i$. What limits the agreement?</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) The changes are $\omega_{0.4} - \omega_{0.2} = 0.0000877 - 0.0000768\,i$, of size $1.166\times10^{-4}$, and $\omega_{0.2} - \omega_{0.1} = 0.0000220 - 0.0000191\,i$, of size $2.91\times10^{-5}$. Their ratio is $4.00 = 2^2$, so $p = 2$.</p>
+      <p>(b) Richardson's extrapolation removes the $\Delta x^2$ error:</p>
+      <div class="eq">$$\omega_0 \approx \frac{4\,\omega_{0.1} - \omega_{0.2}}{3} = 0.3737722 - 0.0888771\,i .$$</div>
+      <p>(c) With $\omega_{\Delta x} \approx \omega_0 + C\,\Delta x^2$, the last change is $C(0.2^2 - 0.1^2) = 3C(0.1)^2$, so the error of the finest grid is a third of it, about $1.0\times10^{-5}$. To bring it to $10^{-6}$ the spacing must shrink by $\sqrt{10}$, to $\Delta x \approx 0.03$. Both the number of points and the number of steps grow by $\sqrt{10}$, so the run takes about ten times longer.</p>
+      <p>(d) The difference with Leaver's value is $0.000100 + 0.000085\,i$, of size $1.3\times10^{-4}$, thirteen times the error of the grid. It comes from the model, not from the computer: in the window of the fit the signal is not yet a pure mode. Moving the window, or fitting two modes, changes it; refining the grid does not.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>E. W. Leaver, <a href="https://doi.org/10.1098/rspa.1985.0119" rel="noopener"><em>An analytic representation for the quasi-normal modes of Kerr black holes</em></a>, Proc. R. Soc. Lond. A 402, 285 (1985).</li>
+    <li>H.-P. Nollert, <a href="https://doi.org/10.1103/PhysRevD.47.5253" rel="noopener"><em>Quasinormal modes of Schwarzschild black holes: the determination of quasinormal frequencies with very large imaginary parts</em></a>, Phys. Rev. D 47, 5253 (1993).</li>
+    <li>G. B. Cook and M. Zalutskiy, <a href="https://doi.org/10.1103/PhysRevD.90.124021" rel="noopener"><em>Gravitational perturbations of the Kerr geometry: high-accuracy study</em></a>, Phys. Rev. D 90, 124021 (2014).</li>
+    <li>L. C. Stein, <a href="https://doi.org/10.21105/joss.01683" rel="noopener"><em>qnm: a Python package for calculating Kerr quasinormal modes, separation constants, and spherical-spheroidal mixing coefficients</em></a>, J. Open Source Softw. 4, 1683 (2019). The quickest way to get Kerr frequencies in Python.</li>
+    <li>C. Gundlach, R. H. Price and J. Pullin, <a href="https://doi.org/10.1103/PhysRevD.49.883" rel="noopener"><em>Late-time behavior of stellar collapse and explosions. I. Linearized perturbations</em></a>, Phys. Rev. D 49, 883 (1994). The standard time-domain method on a grid of light rays.</li>
+    <li>E. Berti, V. Cardoso, J. A. González and U. Sperhake, <a href="https://doi.org/10.1103/PhysRevD.75.124017" rel="noopener"><em>Mining information from binary black hole mergers: a comparison of estimation methods for complex exponentials in noise</em></a>, Phys. Rev. D 75, 124017 (2007).</li>
+    <li>R. Courant, K. Friedrichs and H. Lewy, <a href="https://doi.org/10.1007/BF01448839" rel="noopener"><em>Über die partiellen Differenzengleichungen der mathematischen Physik</em></a>, Math. Ann. 100, 32 (1928).</li>
+    <li>L. F. Richardson, <a href="https://doi.org/10.1098/rsta.1911.0009" rel="noopener"><em>The approximate arithmetical solution by finite differences of physical problems involving differential equations, with an application to the stresses in a masonry dam</em></a>, Phil. Trans. R. Soc. A 210, 307 (1911).</li>
+    <li>R. J. LeVeque, <a href="https://doi.org/10.1137/1.9780898717839" rel="noopener"><em>Finite difference methods for ordinary and partial differential equations</em></a>, SIAM (2007).</li>
+    <li>The <a href="https://bhptoolkit.org" rel="noopener">Black Hole Perturbation Toolkit</a>: open-source codes and data for perturbation theory, from quasinormal modes to the self-force.</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="frontiers.html"><small>← Previous · 11</small><b>Frontiers</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <span class="next"></span>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -46,7 +46,7 @@
   <div class="wrap">
     <div class="head">
       <div>
-        <a class="back" href="./">← Course contents</a>
+        <div class="head-links"><a class="back" href="./">← Course contents</a><a class="back" href="notation.html">Notation and glossary</a></div>
         <span class="label" data-float>Lesson 06 · Part II · Ringing black holes</span>
         <h1 data-float>Quasinormal modes</h1>
         <p class="lede" data-float>A black hole rings at a ladder of complex frequencies set only by its mass. What they are, how to compute them, and how to hear them.</p>
@@ -125,7 +125,7 @@
       <div class="eq">$$\begin{aligned} \alpha_k &amp;= k^2 + (2\rho + 2)\,k + 2\rho + 1, \\ \beta_k &amp;= -\left[2k^2 + (8\rho + 2)\,k + 8\rho^2 + 4\rho + \ell(\ell+1) - \varepsilon\right], \\ \gamma_k &amp;= k^2 + 4\rho\, k + 4\rho^2 - \varepsilon - 1. \end{aligned}$$</div>
       <p>A three-term recurrence has two independent solutions. The one we need is the minimal solution, which decays fastest as $k \to \infty$ and makes the series converge at infinity. It exists exactly when</p>
       <div class="eq">$$0 = \beta_0 - \cfrac{\alpha_0\,\gamma_1}{\beta_1 - \cfrac{\alpha_1\,\gamma_2}{\beta_2 - \cfrac{\alpha_2\,\gamma_3}{\beta_3 - \cdots}}}$$</div>
-      <p>For the overtone $n$ it is much better to invert the fraction $n$ times, which makes the wanted root the most stable one (Leaver, 1985). For this course we truncated the fraction at depth 4000, found the roots with a Newton-type solver working with 30 digits, and divided by two to get $M\omega$. The whole computation is about thirty lines of Python, and it agrees with the standard tables to every digit shown here.</p>
+      <p>For the overtone $n$ it is much better to invert the fraction $n$ times, which makes the wanted root the most stable one (Leaver, 1985). For this course we truncated the fraction at depth 4000, found the roots with a Newton-type solver working with 30 digits, and divided by two to get $M\omega$. The whole computation is about thirty lines of Python, given and explained in <a href="compute.html">Lesson 12</a>, and it agrees with the standard tables to every digit shown here.</p>
     </div>
   </details>
 </section>
@@ -179,7 +179,7 @@
   <details class="sol">
     <summary>Show the solution</summary>
     <div>
-      <p>(a) For $10\,M_\odot$ the mode has $f = 1207.5$ Hz and $\tau = 0.554$ ms, and $f \propto 1/M$, $\tau \propto M$. The frequency gives $M = 10 \times 1207.5/250 \approx 48\,M_\odot$; the damping time gives $M = 10 \times 4/0.554 \approx 72\,M_\odot$.</p>
+      <p>(a) For $10\,M_\odot$ the mode has $f = 1207.4$ Hz and $\tau = 0.554$ ms, and $f \propto 1/M$, $\tau \propto M$. The frequency gives $M = 10 \times 1207.5/250 \approx 48\,M_\odot$; the damping time gives $M = 10 \times 4/0.554 \approx 72\,M_\odot$.</p>
       <p>(b) No.</p>
       <p>(c) $Q = \pi \times 250 \times 0.004 \approx 3.1$. For a non-spinning black hole, whatever its mass,</p>
       <div class="eq">$$Q = \frac{\operatorname{Re}\omega}{2\,|\operatorname{Im}\omega|} = \frac{0.37367}{0.17792} \approx 2.10 .$$</div>
