@@ -1,0 +1,116 @@
+<section class="ex" data-float>
+  <h2>Where perturbations come from</h2>
+  <p>Until now the perturbation was a wave packet, put in by hand. Nature provides two kinds.</p>
+  <ul>
+    <li><strong>The end of a merger.</strong> When two black holes merge, the remnant is born distorted and settles down by ringing. Here perturbation theory describes only the last part of the signal, after the violent merger itself, which needs numerical relativity.</li>
+    <li><strong>A small body falling into a big hole.</strong> A star or a stellar-mass black hole spiralling into a supermassive black hole, with a mass ratio of order $10^{-5}$. Such <em>extreme-mass-ratio inspirals</em> are prime targets of the space detector LISA, planned for the 2030s. Here the small body is the perturbation, and perturbation theory is not an approximation of convenience: it is exact in the limit of small mass ratio.</li>
+  </ul>
+  <p>For the second kind the wave equation of the earlier lessons acquires a right-hand side, the source,</p>
+  <div class="eq">$$\left[-\frac{\partial^2}{\partial t^2} + \frac{\partial^2}{\partial r_*^2} - V(r)\right]\psi = S(t, r_*),$$</div>
+  <p>which is concentrated on the path of the small body. The Green's function of Lesson 7 solves it: the signal is the sum of the waves emitted by each point of the path, each one filtered by the barrier on its way out.</p>
+  <details class="calc">
+    <summary>The source of a falling charge</summary>
+    <div>
+      <p>Take a scalar charge $q$ moving along a path $z^\mu(\tau)$. Its field obeys $\Box\Phi = -4\pi\rho$, with</p>
+      <div class="eq">$$\rho = q\int d\tau\,\frac{\delta^4\big(x - z(\tau)\big)}{\sqrt{-g}} = \frac{q}{u^t\,r^2}\,\delta(r - r_p)\,\frac{\delta(\theta - \theta_p)\,\delta(\phi - \phi_p)}{\sin\theta},$$</div>
+      <p>where $u^t = dt/d\tau$. Expand the angular delta function in spherical harmonics,</p>
+      <div class="eq">$$\frac{\delta(\theta - \theta_p)\,\delta(\phi - \phi_p)}{\sin\theta} = \sum_{\ell, m} Y^*_{\ell m}(\theta_p, \phi_p)\,Y_{\ell m}(\theta, \phi),$$</div>
+      <p>and repeat the separation of Lesson 3, which multiplied the equation by $r f$. With $\delta(r - r_p) = \delta(r_* - r_{*p})/f$,</p>
+      <div class="eq">$$S_{\ell m}(t, r_*) = -\frac{4\pi q}{u^t\,r_p}\,Y^*_{\ell m}(\theta_p, \phi_p)\,\delta\big(r_* - r_{*p}(t)\big).$$</div>
+      <p>For a charge falling from rest at infinity, energy conservation gives $u^t = 1/f(r_p)$, and the geodesic equation $dr/d\tau = -\sqrt{2M/r}$. In the tortoise coordinate the charge then moves as</p>
+      <div class="eq">$$\frac{dr_{*p}}{dt} = -\sqrt{\frac{2M}{r_p}},$$</div>
+      <p>which tends to the speed of light at the horizon. The figure below solves exactly this, with the delta function replaced by a narrow Gaussian.</p>
+    </div>
+  </details>
+  <p>The body also feels its own field. The waves it emits carry away energy and angular momentum, and the back-reaction, the <strong>self-force</strong>, makes it spiral in. Computing it is subtle, because the field of a point particle is infinite at the particle, and it took decades to learn how to remove the infinite part correctly. To follow an inspiral over the years it spends in LISA's band, the self-force is needed to second order in the mass ratio, the present frontier of the field.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>A charge falls in</h2>
+  <p>The simplest source is a scalar charge dropped from rest far away, falling straight into the hole. It is the problem Davis, Ruffini, Press and Price solved in 1971 for a falling mass, one of the classic calculations of black-hole perturbation theory. Watch the charge cross the barrier, and the signal it produces far away.</p>
+</section>
+
+<figure class="w" data-widget="infall">
+  <figcaption><strong>A charge falls in.</strong> Top, the potential barrier and the falling charge. Middle, the scalar wave recorded far away against retarded time, with the moving line following the charge; it is switched on gently at the start so as not to create a spurious burst. Bottom, the energy spectrum of the signal, with the frequency of the fundamental quasinormal mode dashed. Computed in your browser.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>A precursor, a burst and a ringing.</strong> While the charge is far away the signal changes slowly. The main burst arrives when the charge crosses the top of the barrier, and then the black hole rings at its own frequency. The charge has disappeared behind the horizon and the hole has forgotten it: what remains rings at the hole's frequencies, not the charge's.</li>
+    <li><strong>The spectrum peaks below the ringing.</strong> For $\ell = 2$ the energy spectrum peaks at $M\omega \approx 0.405$, below the fundamental mode at $0.484$, and falls steeply above it. The peak sits at 72, 84 and 88 % of the mode frequency for $\ell = 1$, 2 and 3. Most of the energy comes out in the burst, and the ringdown is the high-frequency edge of the signal. Davis, Ruffini, Press and Price found the same shape for gravitational waves.</li>
+    <li><strong>Higher multipoles ring higher</strong>, at the frequencies of Lesson 6. A real source emits all of them at once, with amplitudes set by the path of the body.</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>When does the ringdown start?</h2>
+  <p>To measure the ringing in a real signal, one fits it with a sum of damped sinusoids whose frequencies are fixed by the mass and the spin of the remnant,</p>
+  <div class="eq">$$h(t) = \sum_n A_n\,e^{-i\omega_n (t - t_0)}, \qquad t \ge t_0,$$</div>
+  <p>leaving the amplitudes $A_n$ free. But Lesson 7 showed that a signal is a sum of modes only after the prompt response has passed, and near the peak the merger is not a small perturbation at all. Start too early and the model is wrong; start too late and the signal has faded into the detector's noise. Where to put $t_0$?</p>
+  <p>Overtones complicate the choice. They decay quickly, but Lesson 7 showed that their excitation factors grow with $n$, and near the peak they can be louder than the fundamental mode. In 2019 Giesler, Isi, Scheel and Teukolsky showed that the waveform of a numerical-relativity merger can be fitted from the peak onwards if seven overtones are included. Whether they are really there, or the extra sinusoids are just absorbing everything that is not ringing, became a lively debate.</p>
+  <p>The figure lets you run the experiment on a signal we know exactly: the ringing of the $\ell = 2$ barrier hit by a wave packet, where linear theory holds at all times and the frequencies are known to six digits.</p>
+</section>
+
+<figure class="w" data-widget="overtones">
+  <figcaption><strong>How many modes?</strong> Top, the amplitude of the fundamental mode, extrapolated back to the peak, as a function of the time at which the fit starts, for fits with one to four modes; 1 is the correct value. Drag along it or use the slider. Bottom, the signal on a logarithmic scale and the fitted sum of modes over the shaded fitting window, which ends $140M$ after the peak.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>One mode is not enough near the peak.</strong> Fitted from the peak with the fundamental mode alone, its amplitude comes out wrong by a factor of two. It is within a few per cent only for fits starting $15M$ or more after the peak, and exact from about $25M$.</li>
+    <li><strong>Each overtone lets the fit start earlier.</strong> With two modes the fundamental is right to about 1 % from $10M$, with three from $5M$, and with four it is within 2 % already at the peak. Overtones do describe the early ringing.</li>
+    <li><strong>The overtones themselves are fragile.</strong> Look at their amplitudes in the readout. The first overtone settles at about 3.9 times the fundamental, but only for fits with three or four modes starting between roughly $10M$ and $25M$. Start later and it has decayed into the residue of the signal, and extrapolating that residue back to the peak, by a factor $e^{0.27\,t_0/M}$, blows it up. The second overtone never settles convincingly.</li>
+  </ul>
+  <p>Even in this clean experiment, with no noise and no nonlinearity, only the fundamental mode is robust. In a real merger, the early part of the signal also contains the nonlinear effects of Lesson 11, which a sum of linear overtones can imitate. Careful analyses therefore test which modes are stable against the start time and the number of modes before believing any of them (Baibhav and collaborators, 2023).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Real ringdowns</h2>
+  <ul>
+    <li><strong>GW150914</strong> (2015). The frequency and damping time of the late signal agreed with the fundamental mode of the remnant whose mass and spin were inferred from the inspiral. In 2019 Isi and collaborators reported evidence for the first overtone, fitting from the peak; later analyses found that the evidence depends strongly on the start time and on how the noise is handled (Cotesta, Carullo, Berti and Cardoso, 2022).</li>
+    <li><strong>GW250114</strong> (2025). The loudest signal so far, with a signal-to-noise ratio of 76. The fundamental mode and its first overtone are both measured, and their frequencies and damping times agree with the predictions for a Kerr black hole of the remnant's mass and spin. The same signal confirmed Hawking's theorem that the total horizon area cannot decrease.</li>
+  </ul>
+  <p>Black-hole spectroscopy, the idea of Lesson 0, has become an observational science.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$h(t) = \sum_n A_n\,e^{-i\omega_n (t - t_0)}, \qquad t \ge t_0$$</div>
+  <p>The ringdown model: frequencies fixed by the black hole, amplitudes set by the source, and a start time $t_0$ that has to be chosen with care.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Real perturbations come from mergers and from small bodies falling in, the ringing is only the high-frequency end of what they emit, and measuring it means fitting damped sinusoids from a start time that trades the validity of the model against the strength of the signal.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>For $\ell = 2$, the fundamental mode decays as $e^{-0.0890\,t/M}$ and the first overtone as $e^{-0.2739\,t/M}$. (a) By what factor does the ratio of the overtone to the fundamental drop every $10M$? (b) The figure finds the overtone 3.9 times louder than the fundamental at the peak. When are they equally loud, and when is the overtone down to 1 % of the fundamental? Compare with the figure. (c) What is that last time in milliseconds for a non-spinning remnant of $60\,M_\odot$?</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) The ratio decays as $e^{-(0.2739 - 0.0890)\,t/M} = e^{-0.1849\,t/M}$, so it drops by $e^{1.849} \approx 6.4$ every $10M$.</p>
+      <p>(b) $3.9\,e^{-0.1849\,t/M} = 1$ at $t = \ln 3.9/0.1849 \approx 7.4M$, and $= 0.01$ at $t = \ln 390/0.1849 \approx 32M$. This matches the figure: a one-mode fit becomes exact for start times around $25$ to $30M$.</p>
+      <p>(c) $GM/c^3 = 60 \times 4.93\ \mu\text{s} = 0.296$ ms, so $32M \approx 9.5$ ms. For a remnant like that of GW150914, the overtone matters only in the first few milliseconds of the ringdown.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>M. Davis, R. Ruffini, W. H. Press and R. H. Price, <a href="https://doi.org/10.1103/PhysRevLett.27.1466" rel="noopener"><em>Gravitational radiation from a particle falling radially into a Schwarzschild black hole</em></a>, Phys. Rev. Lett. 27, 1466 (1971).</li>
+    <li>E. Poisson, A. Pound and I. Vega, <a href="https://doi.org/10.12942/lrr-2011-7" rel="noopener"><em>The motion of point particles in curved spacetime</em></a>, Living Rev. Relativ. 14, 7 (2011).</li>
+    <li>A. Pound and B. Wardell, <a href="https://doi.org/10.1007/978-981-15-4702-7_38-1" rel="noopener"><em>Black hole perturbation theory and gravitational self-force</em></a>, in <em>Handbook of Gravitational Wave Astronomy</em>, Springer (2021); <a href="https://arxiv.org/abs/2101.04592" rel="noopener">arXiv:2101.04592</a>.</li>
+    <li>M. Giesler, M. Isi, M. A. Scheel and S. A. Teukolsky, <a href="https://doi.org/10.1103/PhysRevX.9.041060" rel="noopener"><em>Black hole ringdown: the importance of overtones</em></a>, Phys. Rev. X 9, 041060 (2019).</li>
+    <li>X. Jiménez Forteza, S. Bhagwat, P. Pani and V. Ferrari, <a href="https://doi.org/10.1103/PhysRevD.102.044053" rel="noopener"><em>Spectroscopy of binary black hole ringdown using overtones and angular modes</em></a>, Phys. Rev. D 102, 044053 (2020).</li>
+    <li>V. Baibhav, M. H.-Y. Cheung, E. Berti, V. Cardoso and collaborators, <a href="https://doi.org/10.1103/PhysRevD.108.104020" rel="noopener"><em>Agnostic black hole spectroscopy: quasinormal mode content of numerical relativity waveforms and limits of validity of linear perturbation theory</em></a>, Phys. Rev. D 108, 104020 (2023).</li>
+    <li>LIGO and Virgo Collaborations, <a href="https://doi.org/10.1103/PhysRevLett.116.221101" rel="noopener"><em>Tests of general relativity with GW150914</em></a>, Phys. Rev. Lett. 116, 221101 (2016).</li>
+    <li>M. Isi, M. Giesler, W. M. Farr, M. A. Scheel and S. A. Teukolsky, <a href="https://doi.org/10.1103/PhysRevLett.123.111102" rel="noopener"><em>Testing the no-hair theorem with GW150914</em></a>, Phys. Rev. Lett. 123, 111102 (2019).</li>
+    <li>R. Cotesta, G. Carullo, E. Berti and V. Cardoso, <a href="https://doi.org/10.1103/PhysRevLett.129.111102" rel="noopener"><em>Analysis of ringdown overtones in GW150914</em></a>, Phys. Rev. Lett. 129, 111102 (2022).</li>
+    <li>LIGO, Virgo and KAGRA Collaborations, <a href="https://doi.org/10.1103/kw5g-d732" rel="noopener"><em>GW250114: testing Hawking's area law and the Kerr nature of black holes</em></a>, Phys. Rev. Lett. 135, 111403 (2025).</li>
+  </ol>
+</section>

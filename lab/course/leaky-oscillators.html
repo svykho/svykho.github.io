@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaky oscillators · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 1 of a short course on black-hole perturbation theory. Ringing that fades: complex frequencies, open systems and a bump you can solve exactly.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Leaky oscillators · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 1 of a short course on black-hole perturbation theory. Ringing that fades: complex frequencies, open systems and a bump you can solve exactly.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/leaky-oscillators.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/leaky-oscillators.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 01 · Part I · Foundations</span>
+        <h1 data-float>Leaky oscillators</h1>
+        <p class="lede" data-float>Before any black hole: what it means for something to ring and fade, and why the natural language for it is a complex frequency.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>A struck bell</h2>
+  <p>Strike a bell and it sings at a definite pitch that slowly fades. The pitch and the time it takes to fade belong to the bell: hit it harder and it is louder, but it sings the same note for the same time. A black hole does exactly this when something disturbs it. Before we get to black holes, it pays to understand the simplest thing that rings and fades.</p>
+  <p>That thing is a mass on a spring with a little friction,</p>
+  <div class="eq">$$\ddot x + 2\gamma\,\dot x + \omega_0^2\,x = 0,$$</div>
+  <p>where $\omega_0$ is the frequency it would have without friction and $\gamma$ measures the friction. Try a solution of the form $x = e^{-i\omega t}$. Every term becomes a multiple of the same exponential, and the equation turns into $\omega^2 + 2i\gamma\,\omega - \omega_0^2 = 0$, with roots</p>
+  <div class="eq">$$\omega = \pm\sqrt{\omega_0^2-\gamma^2}\;-\;i\gamma .$$</div>
+  <p>The frequency has come out complex, and both of its parts mean something. Write $\omega = \omega_R - i\,\omega_I$. Then</p>
+  <div class="eq">$$e^{-i\omega t} = e^{-\omega_I t}\,e^{-i\omega_R t},$$</div>
+  <p>so the real part $\omega_R$ is the pitch and the imaginary part $\omega_I$ is the rate at which the oscillation dies away. The actual motion is the real part of a combination of the two roots, $x(t) = A\,e^{-\omega_I t}\cos(\omega_R t + \varphi)$.</p>
+</section>
+
+<figure class="w" data-widget="oscillator">
+  <figcaption><strong>A damped oscillator.</strong> Left, the motion after the mass is released from rest; the dashed lines are the envelope $e^{-\gamma t}$. Right, its two frequencies in the complex plane. Friction pulls them down along a circle of radius $\omega_0$ until they meet on the imaginary axis. Beyond that point, called critical damping, the mass creeps back without oscillating at all.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Two numbers for any ringing</h2>
+  <p>Two numbers summarise a damped oscillation. The <strong>damping time</strong> $\tau = 1/\omega_I$ is how long the amplitude takes to fall by a factor $e$. The <strong>quality factor</strong></p>
+  <div class="eq">$$Q = \frac{\omega_R}{2\,\omega_I}$$</div>
+  <p>says how many oscillations fit into that time: there are $Q/\pi$ of them. A good bell has $Q$ in the thousands. A black hole, we will find, has $Q \approx 2$: it barely completes one oscillation before it has faded.</p>
+  <p>A word on signs. Throughout the course the time dependence is $e^{-i\omega t}$, the usual convention in this field. Oscillations that decay then have $\operatorname{Im}\omega &lt; 0$ and live in the lower half of the complex plane.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Losing energy without friction</h2>
+  <p>Friction turns motion into heat. There is another way to lose energy, and it is the one that matters for black holes: radiation. Tie a guitar string to a second string that goes on forever, and pluck it. There is no friction anywhere, yet the vibration fades, because waves carry its energy away along the endless string. Such a system is called <em>open</em>.</p>
+  <p>A black hole is open in two directions. Waves around it can escape to infinity, and they can fall through the horizon, from which nothing comes back. So a disturbed black hole must lose energy, and its vibrations must fade. Its frequencies will be complex for the same reason as the oscillator's, although nothing in it resembles friction.</p>
+  <p>The simplest open system that can ring is a wave on an infinite line that meets a bump:</p>
+  <div class="eq">$$-\frac{\partial^2\psi}{\partial t^2} + \frac{\partial^2\psi}{\partial x^2} - V(x)\,\psi = 0 .$$</div>
+  <p>Where $V = 0$ the wave travels freely at unit speed in either direction. The bump $V(x)$ scatters it: waves with $\omega^2$ well below the top of the bump are mostly reflected, and waves well above it mostly get through. A wave caught on the bump leaks away to both sides. In Lesson 4 we will find that the perturbations of a black hole obey exactly this equation, with a bump of a particular shape.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Only outgoing waves</h2>
+  <p>To find the natural frequencies of a string fixed at both ends, you look for solutions $\psi = e^{-i\omega t}\phi(x)$ that vanish at the ends. Only special values of $\omega$ allow it. These are the normal modes, and since no energy is lost they are real.</p>
+  <p>For the open line the right question is different: what can the bump do on its own, with nothing sent in from far away? The wave must then be purely <em>outgoing</em> at both ends,</p>
+  <div class="eq">$$\psi \propto e^{-i\omega(t-x)} \quad (x\to+\infty), \qquad \psi \propto e^{-i\omega(t+x)} \quad (x\to-\infty).$$</div>
+  <p>These are two conditions on the solutions of a second-order equation, so again only special values of $\omega$ satisfy them. Because energy now leaves through both ends, those values are complex. They are the <strong>quasinormal modes</strong> of the bump: the normal modes of a system that leaks.</p>
+  <p>They have one strange property. With $\operatorname{Im}\omega &lt; 0$ the factor $e^{i\omega x}$ grows with $x$, so at a fixed time a quasinormal mode is larger the further away you look. This is not a mistake. The wave you see far away left the bump long ago, when the ringing was much louder. It does mean that quasinormal modes cannot be normalised, and that familiar tools for normal modes, such as orthogonality and completeness, need care. We come back to this in Lesson 7.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>A bump you can solve exactly</h2>
+  <p>For most bumps the quasinormal frequencies have to be computed numerically. One exception is the Pöschl–Teller bump,</p>
+  <div class="eq">$$V(x) = \frac{V_0}{\cosh^2(\alpha x)},$$</div>
+  <p>whose modes can be written down exactly:</p>
+  <div class="eq">$$\omega_n = \pm\sqrt{V_0 - \frac{\alpha^2}{4}}\;-\;i\alpha\left(n+\tfrac12\right), \qquad n = 0, 1, 2, \dots$$</div>
+  <p>The height $V_0$ sets the pitch, roughly $\sqrt{V_0}$, as the picture of a barrier suggests. The width $1/\alpha$ sets the damping: a sharp, narrow bump holds waves badly and leaks fast. The integer $n$ labels the <em>overtones</em>. Here they all share the same pitch, and each dies faster than the one before, in equal steps of $\alpha$. The fundamental mode, $n = 0$, lasts longest, so it is the one you hear at the end.</p>
+  <details class="calc">
+    <summary>The full calculation</summary>
+    <div>
+      <p>Write $\psi = e^{-i\omega t}\phi(x)$, so that $\phi'' + [\omega^2 - V_0\cosh^{-2}(\alpha x)]\,\phi = 0$. Far from the bump, $\phi \approx e^{\pm i\omega x}$. Change variable to</p>
+      <div class="eq">$$\xi = \frac{1}{1 + e^{-2\alpha x}},$$</div>
+      <p>which runs from 0 at $x = -\infty$ to 1 at $x = +\infty$, and set $\phi = [\xi(1-\xi)]^{-i\omega/2\alpha}\,y(\xi)$. A short calculation turns the equation for $y$ into the hypergeometric equation, $\xi(1-\xi)\,y'' + [c - (a+b+1)\xi]\,y' - ab\,y = 0$, with</p>
+      <div class="eq">$$a = \tfrac12 + q - \tfrac{i\omega}{\alpha}, \qquad b = \tfrac12 - q - \tfrac{i\omega}{\alpha}, \qquad c = 1 - \tfrac{i\omega}{\alpha}, \qquad q = \sqrt{\tfrac14 - \tfrac{V_0}{\alpha^2}}\, .$$</div>
+      <p>Near $\xi = 0$ we have $\xi \approx e^{2\alpha x}$, so the solution $y = {}_2F_1(a, b; c; \xi)$ gives $\phi \approx e^{-i\omega x}$: purely outgoing towards $x = -\infty$. Near $\xi = 1$ the same function splits, by the standard connection formula, into a piece that tends to a constant and a piece proportional to $(1-\xi)^{c-a-b} = (1-\xi)^{i\omega/\alpha}$. Since $1 - \xi \approx e^{-2\alpha x}$, the first gives $\phi \approx e^{+i\omega x}$, outgoing towards $+\infty$, and the second gives $\phi \approx e^{-i\omega x}$, a wave coming in from $+\infty$. The incoming piece has the coefficient</p>
+      <div class="eq">$$\frac{\Gamma(c)\,\Gamma(a+b-c)}{\Gamma(a)\,\Gamma(b)},$$</div>
+      <p>which vanishes only where $\Gamma(a)$ or $\Gamma(b)$ is infinite, that is, when $a = -n$ or $b = -n$ with $n = 0, 1, 2, \dots$ Solving $a = -n$ for $\omega$, with $q = i\sqrt{V_0/\alpha^2 - 1/4}$ when the bump is high enough to ring, gives the formula above; $b = -n$ gives the mirror modes, with the opposite sign of the real part. We checked numerically that this function solves the equation to 30 digits.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Kick it and listen</h2>
+  <p>Now comes the experiment that this whole course is built on. Send a short wave packet at the bump and record the wave at a point further out, as a distant observer would. First comes a burst, the packet bouncing off the bump. Then comes a ringing that fades at a steady rate. Fit a single damped sinusoid to that ringing and you recover the fundamental frequency of the formula above, although nothing in the simulation knows about the formula.</p>
+</section>
+
+<figure class="w" data-widget="pt">
+  <figcaption><strong>A pulse rings a Pöschl–Teller bump.</strong> Top, the wave on the line (orange and blue are its two signs) and the bump. Bottom left, the signal at the observer. On the logarithmic scale a damped sinusoid is a straight line, notched where it crosses zero, with slope $\omega_I$. The dashed line is a single damped sinusoid fitted inside the shaded window (on the logarithmic scale, its envelope): drag on the signal to move the window. Bottom right, the exact modes and the fit.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the ringing knows</h2>
+  <p>Two things to try. Start the fit right at the peak and the answer is wrong, because the burst and the overtones are still there. Move it later and the fit settles onto the exact fundamental mode, to a fraction of a per cent. Then make the bump sharper and watch the ringing die faster while its pitch hardly changes.</p>
+  <p>Had we sent a different packet, the burst would look different, but the ringing would have the same frequency: it belongs to the bump, not to whatever hit it. That is what makes quasinormal modes so useful. Measure them and you learn about the object itself.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$\psi(t) \simeq A\,e^{-\omega_I t}\cos(\omega_R t + \varphi), \qquad \omega = \omega_R - i\,\omega_I$$</div>
+  <p>An open system rings at complex frequencies. The real part is the pitch, the imaginary part is the decay rate, and both belong to the system alone.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Anything that loses energy while it vibrates, by friction or by radiating it away, rings at complex frequencies: the real part is the pitch and the imaginary part says how quickly it fades.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>A Pöschl–Teller bump has height $V_0 = 0.15$ and sharpness $\alpha = 0.18$. (a) Find its fundamental quasinormal frequency. (b) Find its damping time and quality factor. (c) How many oscillations does it complete in one damping time? Check (a) with the figure above.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) From the formula with $n = 0$,</p>
+      <div class="eq">$$\omega_0 = \sqrt{0.15 - 0.0081} - 0.09\,i \approx 0.3767 - 0.0900\,i .$$</div>
+      <p>(b) $\tau = 1/0.09 \approx 11.1$ and $Q = 0.3767/0.18 \approx 2.09$.</p>
+      <p>(c) $Q/\pi \approx 0.67$: not even one full oscillation.</p>
+      <p>These numbers are no coincidence. To two digits, this is the bump that best fits the potential around a black hole of unit mass for $\ell = 2$ (Lessons 4 and 6), whose exact fundamental mode is $M\omega = 0.3737 - 0.0890\,i$. As bells go, a black hole is a very poor one.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>E. S. C. Ching, P. T. Leung, A. Maassen van den Brink, W. M. Suen, S. S. Tong and K. Young, <a href="https://doi.org/10.1103/RevModPhys.70.1545" rel="noopener"><em>Quasinormal-mode expansion for waves in open systems</em></a>, Rev. Mod. Phys. 70, 1545 (1998). Open systems in general, with many examples.</li>
+    <li>H.-P. Nollert, <a href="https://doi.org/10.1088/0264-9381/16/12/201" rel="noopener"><em>Quasinormal modes: the characteristic “sound” of black holes and neutron stars</em></a>, Class. Quantum Grav. 16, R159 (1999). A gentle review.</li>
+    <li>V. Ferrari and B. Mashhoon, <a href="https://doi.org/10.1103/PhysRevD.30.295" rel="noopener"><em>New approach to the quasinormal modes of a black hole</em></a>, Phys. Rev. D 30, 295 (1984). Where the Pöschl–Teller trick comes from.</li>
+    <li>E. Berti, V. Cardoso and A. O. Starinets, <a href="https://doi.org/10.1088/0264-9381/26/16/163001" rel="noopener"><em>Quasinormal modes of black holes and black branes</em></a>, Class. Quantum Grav. 26, 163001 (2009). The standard modern review.</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="why-perturb.html"><small>← Previous · 00</small><b>Why perturb a black hole</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <div class="next"><a href="schwarzschild.html"><small>Next · 02 →</small><b>Just enough Schwarzschild</b></a></div>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

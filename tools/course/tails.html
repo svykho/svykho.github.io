@@ -1,0 +1,83 @@
+<section class="ex" data-float>
+  <h2>After the ringing</h2>
+  <p>Wait long enough after a black hole has been disturbed and the ringing fades below something else: a slow decay with no oscillation at all, which falls off as a power of time rather than exponentially. Richard Price found it in 1972 while studying the collapse of a slightly non-spherical star. At a fixed distance from the hole, each multipole decays as</p>
+  <div class="eq">$$\psi_\ell(t) \propto t^{-(2\ell + 3)}.$$</div>
+  <p>This is <strong>Price's law</strong>. For the dominant gravitational multipole, $\ell = 2$, the tail falls off as $t^{-7}$; for a scalar monopole as $t^{-3}$. An exponential always beats a power law in the end, so however loud the ringing was, the tail eventually takes over.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Where it comes from</h2>
+  <p>In flat space a wave that has left a region never comes back. Around a black hole it can: the curvature of spacetime far from the hole scatters a little of the outgoing wave back inwards, and that backscattered wave keeps arriving long after the main signal has passed. The slow decay of the tail reflects the slow decay of the curvature with distance.</p>
+  <p>In the language of Lesson 7, the tail is the contribution of the branch cut, which starts at $\omega = 0$. Long times probe low frequencies, and the behaviour of the Green's function near zero frequency fixes the power.</p>
+  <details class="calc">
+    <summary>Where the power comes from</summary>
+    <div>
+      <p>Far away, written in the tortoise coordinate, the potential is</p>
+      <div class="eq">$$V \approx \frac{\ell(\ell + 1)}{r_*^2} + \frac{4M\,\ell(\ell+1)\ln(r_*/2M)}{r_*^3} + \dots$$</div>
+      <p>The first term is the centrifugal barrier of flat space, which produces no tail at all: the flat-space Green's function has no branch cut. The tail comes from the corrections, the logarithm above, which appears because $r$ and $r_*$ differ by $2M\ln(r/2M - 1)$, and terms in $1/r_*^3$ (the only ones left when $\ell = 0$). Ching, Leung, Suen and Young (1995) showed that corrections like these make the discontinuity of the Green's function across the cut behave, near $\omega = 0$ and for two points at finite radius, as $\omega^{2\ell + 2}$. The time signal is its Fourier transform, and</p>
+      <div class="eq">$$\int d\omega\; \omega^{2\ell + 2}\, e^{-i\omega t} \;\propto\; t^{-(2\ell + 3)}.$$</div>
+      <p>Far away along outgoing light rays, where a detector sits, the same analysis gives a slower decay, $u^{-(\ell + 2)}$ in retarded time $u = t - r_*$ (Gundlach, Price and Pullin, 1994).</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>See it</h2>
+  <p>The figure solves the scalar wave equation for a wave packet thrown at the hole and follows the signal for $1500M$, on logarithmic axes, where a power law is a straight line. The lower panel shows the local power, the slope of that line, as it settles to Price's value.</p>
+</section>
+
+<figure class="w" data-widget="tail">
+  <figcaption><strong>The tail.</strong> Top, the signal far from the hole on logarithmic axes: the ringing first, then a straight line, the power law, with Price's slope dashed. Bottom, the local power of the decay. Change $\ell$, or make the packet oscillate, and compare its tail with that of a smooth packet (grey).</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Reading the figure</h2>
+  <ul>
+    <li>The local power heads to $-3$, $-5$ and $-7$ for $\ell = 0$, $1$ and $2$. It gets there slowly: the difference shrinks only roughly as $1/t$.</li>
+    <li>For higher $\ell$ the tail starts later and is much weaker. For $\ell = 2$ it is ten orders of magnitude below the peak, close to the rounding errors of the computer (about $10^{-15}$), where the curve becomes noisy.</li>
+    <li>The tail never oscillates. It can change sign once, early on, and then decays with a fixed sign.</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>Why tails are often weak</h2>
+  <p>The tail is made of the lowest frequencies, so its amplitude depends on how much low-frequency content the perturbation has. For a perturbation that starts far from the hole, the amplitude of the tail is proportional to the spectrum of the perturbation at zero frequency, $\tilde g(0) = \int g\,dr_*$. A smooth bump has plenty. An oscillating packet, whose positive and negative parts nearly cancel, has very little.</p>
+  <p>Switch on the oscillation in the figure. The ringing hardly changes, but the tail drops, by just the factor the packet's spectrum predicts. The signal of a merger is like the oscillating packet: it is dominated by frequencies near the orbital frequency and has little content near zero. This is why linear tails are so faint in signals from merging black holes, an effect quantified in <em>Spectral suppression of black hole ringdown tails</em> (León Vega and collaborators, 2026).</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$\psi_\ell(t) \propto t^{-(2\ell + 3)}$$</div>
+  <p>Price's law: at a fixed radius, each multipole decays at late times as an inverse power of time, set only by $\ell$.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>After the ringing, waves scattered back by the curvature far from the hole produce a tail that decays as $t^{-(2\ell+3)}$, whose amplitude is set by the perturbation's content at zero frequency, which is why it is so weak for oscillating sources such as mergers.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>(a) By what factor does an $\ell = 2$ tail drop between $t = 200M$ and $t = 400M$? (b) The packet in the figure is $e^{-z^2/2\sigma^2}\cos(\nu z)$ with $\sigma = 6M$. Predict by how much its tail is weaker than that of the smooth packet, $\nu = 0$, when $\nu = 0.4/M$, and check it against the figure. (c) The fundamental $\ell = 2$ mode decays as $e^{-0.089\,t/M}$. If the ringing starts with amplitude 1 and the tail is $10^{-6}(100M/t)^7$, roughly when does the tail take over?</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) $2^7 = 128$.</p>
+      <p>(b) The spectrum at zero frequency is</p>
+      <div class="eq">$$\tilde g(0) = \int e^{-z^2/2\sigma^2}\cos(\nu z)\,dz = \sqrt{2\pi}\,\sigma\,e^{-\sigma^2\nu^2/2},$$</div>
+      <p>so the ratio to the smooth packet is $e^{-\sigma^2\nu^2/2} = e^{-18\times0.16} \approx 0.056$, about 18 times weaker. The figure measures about $0.06$; the small difference comes from the packet starting close enough to the hole that the far-field argument is only approximate.</p>
+      <p>(c) Solve $e^{-0.089\,t} = 10^{-6}(100/t)^7$. Taking logarithms, $0.089\,t = 13.8 + 7\ln(t/100)$, which is satisfied near $t \approx 215M$, about 200M after the ringing starts. For a black hole of $60\,M_\odot$ that is 64 ms, but by then the signal is far below any detector's noise.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>R. H. Price, <a href="https://doi.org/10.1103/PhysRevD.5.2419" rel="noopener"><em>Nonspherical perturbations of relativistic gravitational collapse. I. Scalar and gravitational perturbations</em></a>, Phys. Rev. D 5, 2419 (1972); <a href="https://doi.org/10.1103/PhysRevD.5.2439" rel="noopener"><em>II. Integer-spin, zero-rest-mass fields</em></a>, Phys. Rev. D 5, 2439 (1972).</li>
+    <li>E. W. Leaver, <a href="https://doi.org/10.1103/PhysRevD.34.384" rel="noopener"><em>Spectral decomposition of the perturbation response of the Schwarzschild geometry</em></a>, Phys. Rev. D 34, 384 (1986).</li>
+    <li>C. Gundlach, R. H. Price and J. Pullin, <a href="https://doi.org/10.1103/PhysRevD.49.883" rel="noopener"><em>Late-time behavior of stellar collapse and explosions. I. Linearized perturbations</em></a>, Phys. Rev. D 49, 883 (1994).</li>
+    <li>E. S. C. Ching, P. T. Leung, W. M. Suen and K. Young, <a href="https://doi.org/10.1103/PhysRevLett.74.2414" rel="noopener"><em>Wave propagation in gravitational systems: late time behavior</em></a>, Phys. Rev. Lett. 74, 2414 (1995).</li>
+    <li>J. A. León Vega, A. Svyatkovskyy Kholyavka, S. Datta and X. Jiménez Forteza, <a href="https://arxiv.org/abs/2606.02146" rel="noopener"><em>Spectral suppression of black hole ringdown tails</em></a>, arXiv:2606.02146 (2026).</li>
+  </ol>
+</section>

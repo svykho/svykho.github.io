@@ -3,7 +3,10 @@
 
 /* ---------- lab index ---------- */
 
+.lab-sec { display: block; margin-bottom: 14px; }
 .sims { padding-bottom: clamp(40px, 6vw, 72px); }
+.sims-course { padding-bottom: clamp(28px, 4vw, 48px); }
+.sims-course > li { border-bottom: 1px solid var(--line); }
 .sims > li { border-top: 1px solid var(--line); }
 .sims a {
   display: grid;

@@ -1,0 +1,100 @@
+<section class="ex" data-float>
+  <h2>One frequency at a time</h2>
+  <p>Lesson 3 threw packets at the barrier. A packet is a mixture of frequencies, and since the equation is linear each frequency scatters on its own. So take a single one: $\Psi(t, r_*) = e^{-i\omega t}\,\psi(r_*)$, with $\omega$ real. The wave equation becomes an ordinary differential equation,</p>
+  <div class="eq">$$\frac{d^2\psi}{dr_*^2} + \left[\omega^2 - V(r)\right]\psi = 0.$$</div>
+  <p>Send in a wave of unit amplitude from far away. Part of it bounces back, part goes through into the hole, and nothing comes out of the horizon:</p>
+  <div class="eq">$$\psi \to \begin{cases} T\,e^{-i\omega r_*}, &amp; r_* \to -\infty \text{ (horizon)},\\[2pt] e^{-i\omega r_*} + R\,e^{+i\omega r_*}, &amp; r_* \to +\infty. \end{cases}$$</div>
+  <p>$R$ and $T$ are the reflection and transmission amplitudes. This is the textbook problem of a particle hitting a potential barrier in quantum mechanics, with the black hole's barrier in place of the usual square step.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Nothing is lost</h2>
+  <p>Whatever the shape of the barrier,</p>
+  <div class="eq">$$|R|^2 + |T|^2 = 1.$$</div>
+  <p>The energy that comes in either comes back or crosses the horizon. This is why the packets of Lesson 3 always added up to one hundred per cent.</p>
+  <details class="calc">
+    <summary>Why</summary>
+    <div>
+      <p>For two solutions $\psi_1$, $\psi_2$ of the same equation, the Wronskian $W = \psi_1\psi_2' - \psi_1'\psi_2$ does not depend on $r_*$: differentiate it and use the equation. Since $\omega$ and $V$ are real, $\psi^*$ is also a solution. At the horizon</p>
+      <div class="eq">$$W[\psi, \psi^*] = T e^{-i\omega r_*}\,(i\omega T^* e^{i\omega r_*}) - (-i\omega T e^{-i\omega r_*})\,T^* e^{i\omega r_*} = 2i\omega\,|T|^2.$$</div>
+      <p>Far away the same computation with $\psi = e^{-i\omega r_*} + R\,e^{i\omega r_*}$ gives $2i\omega\,(1 - |R|^2)$; the cross terms cancel. Equating the two gives $|R|^2 + |T|^2 = 1$.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Greybody factors</h2>
+  <p>The fraction that gets through, $\Gamma_\ell(\omega) = |T_\ell(\omega)|^2$, is called the <strong>greybody factor</strong>. The name comes from Hawking radiation. In 1974 Hawking showed that, once quantum mechanics is included, a black hole glows like a hot body at the temperature</p>
+  <div class="eq">$$T_H = \frac{\hbar c^3}{8\pi G M k_B} \approx 6\times10^{-8}\ \text{K}\,\frac{M_\odot}{M}.$$</div>
+  <p>The radiation is produced near the horizon and has to climb the same barrier on its way out. What reaches infinity is a black-body spectrum multiplied by $\Gamma_\ell(\omega)$: a grey body. Page used these factors in 1976 to compute how fast a black hole loses mass by radiating. For astrophysical black holes the temperature is absurdly low, but the barrier is the same for any wave, classical or quantum.</p>
+  <p>Computing $\Gamma_\ell$ takes a few lines: start with a purely ingoing wave at the horizon, integrate the equation outwards, and split the result far away into its incoming and outgoing parts. The figure does exactly that in your browser.</p>
+</section>
+
+<figure class="w" data-widget="greybody">
+  <figcaption><strong>How much gets through.</strong> Top, the greybody factors of the first four multipoles of a scalar field or of gravitational waves (the Regge–Wheeler barrier), with the WKB and Pöschl–Teller approximations if you want them. Bottom, the absorption cross-section of a massless scalar field, which adds all the multipoles up. Point at either plot to read the values.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Reading the curves</h2>
+  <ul>
+    <li>Each curve goes from 0 to 1 over a narrow range of frequencies, centred where $\omega^2$ reaches the top of the barrier. Below it the wave tunnels, and the tunnelling probability falls off exponentially.</li>
+    <li>Each step up in $\ell$ moves the curve to higher frequency by roughly $0.2/M$. For large $\ell$ the step tends to $1/\sqrt{27}\,M \approx 0.19/M$, the orbital frequency of the light ring: the light-ring rule of Lesson 6 again.</li>
+    <li>The approximations are good near the middle of each curve and poor far below it. There the wave tunnels through the long $1/r^2$ tail of the real barrier, which neither the parabola of WKB nor the Pöschl–Teller bump has.</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>The cross-section</h2>
+  <p>Add up all the multipoles of a plane wave and you get the area the black hole presents to it, its <strong>absorption cross-section</strong>,</p>
+  <div class="eq">$$\sigma(\omega) = \frac{\pi}{\omega^2}\sum_{\ell = 0}^{\infty} (2\ell + 1)\,\Gamma_\ell(\omega).$$</div>
+  <p>It has two clean limits, both visible in the figure.</p>
+  <ul>
+    <li><strong>Low frequency.</strong> When the wavelength is much larger than the hole, only $\ell = 0$ gets through and $\sigma \to 16\pi M^2$, exactly the area of the horizon. This holds for any spherical black hole, not just Schwarzschild (Das, Gibbons and Mathur, 1997).</li>
+    <li><strong>High frequency.</strong> When the wavelength is small, waves behave like light rays, and every ray with impact parameter below $b_c = 3\sqrt3\,M$ is captured (Lesson 2). So $\sigma \to \pi b_c^2 = 27\pi M^2$.</li>
+  </ul>
+  <p>In between, the curve wiggles around $27\pi M^2$, with peaks spaced by about $0.19/M$ in frequency (Sanchez, 1978). The spacing is again the orbital frequency of the light ring: the wiggles come from waves that go once around it before falling in (Décanini, Esposito-Farèse and Folacci, 2011).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>From scattering to ringing</h2>
+  <p>Scattering at real frequencies is not the end of the story. Imagine continuing $\omega$ into the complex plane. At special complex values the incoming part of the wave far away vanishes while the transmitted part does not, so the scattering amplitudes, divided by that incoming part, blow up. Those values are the quasinormal frequencies of Lesson 6: resonances of the barrier, the black-hole version of the resonances of an atom or of a guitar body. The greybody factor already knows about them, because it switches on near $\operatorname{Re}\omega$ of the fundamental mode.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$|R|^2 + |T|^2 = 1, \qquad \sigma = \frac{\pi}{\omega^2}\sum_\ell (2\ell + 1)\,|T_\ell|^2$$</div>
+  <p>Energy is conserved in the scattering, and the cross-section adds up what each multipole lets through. It tends to the horizon area at low frequency and to the capture area of light, $27\pi M^2$, at high frequency.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>A black hole reflects long waves and swallows short ones, with greybody factors that switch on near the top of the barrier and a cross-section that goes from the area of the horizon to the capture area of light.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>For the Pöschl–Teller barrier $V = V_0/\cosh^2(\alpha r_*)$ the transmission is known exactly:</p>
+  <div class="eq">$$|T|^2 = \frac{\sinh^2(\pi\omega/\alpha)}{\sinh^2(\pi\omega/\alpha) + \cosh^2\!\left(\pi\sqrt{V_0/\alpha^2 - 1/4}\right)}.$$</div>
+  <p>(a) Show that for a tall barrier, $V_0 \gg \alpha^2$, half the wave gets through when $\omega^2 \approx V_0 - \alpha^2/4$. (b) For the $\ell = 2$ gravitational barrier, Lesson 6 gives a Pöschl–Teller fundamental mode at $M\omega = 0.3783 - 0.0905\,i$. Compare its real part with the half-transmission frequency read from the figure.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) $|T|^2 = 1/2$ when $\sinh(\pi\omega/\alpha) = \cosh(\pi\sqrt{V_0/\alpha^2 - 1/4})$. For large arguments both functions are close to half an exponential, so the arguments are nearly equal:</p>
+      <div class="eq">$$\frac{\omega}{\alpha} \approx \sqrt{\frac{V_0}{\alpha^2} - \frac14} \quad\Longrightarrow\quad \omega^2 \approx V_0 - \frac{\alpha^2}{4}.$$</div>
+      <p>That is exactly $(\operatorname{Re}\omega)^2$ of the Pöschl–Teller quasinormal modes of Lesson 1: the barrier lets half through at the pitch of its own ringing.</p>
+      <p>(b) The figure gives $|T|^2 = 1/2$ at $M\omega \approx 0.377$ for $\ell = 2$, against $0.378$ from Pöschl–Teller and $0.374$ for the exact fundamental mode. Scattering at real frequencies and ringing at complex ones are two faces of the same barrier.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>S. W. Hawking, <a href="https://doi.org/10.1007/BF02345020" rel="noopener"><em>Particle creation by black holes</em></a>, Commun. Math. Phys. 43, 199 (1975).</li>
+    <li>D. N. Page, <a href="https://doi.org/10.1103/PhysRevD.13.198" rel="noopener"><em>Particle emission rates from a black hole: massless particles from an uncharged, nonrotating hole</em></a>, Phys. Rev. D 13, 198 (1976).</li>
+    <li>N. Sanchez, <a href="https://doi.org/10.1103/PhysRevD.18.1030" rel="noopener"><em>Absorption and emission spectra of a Schwarzschild black hole</em></a>, Phys. Rev. D 18, 1030 (1978).</li>
+    <li>S. R. Das, G. Gibbons and S. D. Mathur, <a href="https://doi.org/10.1103/PhysRevLett.78.417" rel="noopener"><em>Universality of low energy absorption cross sections for black holes</em></a>, Phys. Rev. Lett. 78, 417 (1997).</li>
+    <li>Y. Décanini, G. Esposito-Farèse and A. Folacci, <a href="https://doi.org/10.1103/PhysRevD.83.044032" rel="noopener"><em>Universality of high-energy absorption cross sections for black holes</em></a>, Phys. Rev. D 83, 044032 (2011).</li>
+    <li>S. Iyer and C. M. Will, <a href="https://doi.org/10.1103/PhysRevD.35.3621" rel="noopener"><em>Black-hole normal modes: a WKB approach</em></a>, Phys. Rev. D 35, 3621 (1987). The WKB transmission formula used in the figure.</li>
+  </ol>
+</section>

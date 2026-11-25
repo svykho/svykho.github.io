@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quasinormal modes · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 6 of a short course on black-hole perturbation theory. The black hole&#x27;s own frequencies: what they are, how to compute them and how to hear them.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Quasinormal modes · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 6 of a short course on black-hole perturbation theory. The black hole&#x27;s own frequencies: what they are, how to compute them and how to hear them.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/quasinormal-modes.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/quasinormal-modes.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 06 · Part II · Ringing black holes</span>
+        <h1 data-float>Quasinormal modes</h1>
+        <p class="lede" data-float>A black hole rings at a ladder of complex frequencies set only by its mass. What they are, how to compute them, and how to hear them.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>The definition</h2>
+  <p>Lesson 4 left us with one equation for each multipole,</p>
+  <div class="eq">$$\frac{d^2\Psi}{dr_*^2} + \left[\omega^2 - V(r)\right]\Psi = 0,$$</div>
+  <p>and Lesson 1 told us what to ask of it. A <strong>quasinormal mode</strong> is a solution that is purely ingoing at the horizon and purely outgoing at infinity:</p>
+  <div class="eq">$$\Psi \propto e^{-i\omega r_*} \quad (r_* \to -\infty), \qquad \Psi \propto e^{+i\omega r_*} \quad (r_* \to +\infty).$$</div>
+  <p>With the time dependence $e^{-i\omega t}$, the first is a wave moving into the hole and the second a wave moving away from it. Nothing comes in from outside, and nothing comes out of the horizon. Only a discrete set of complex frequencies $\omega_{\ell n}$ satisfies both conditions. For each $\ell$ they are labelled by the overtone number $n = 0, 1, 2, \dots$, in order of increasing damping, and each has a mirror partner $-\omega_{\ell n}^*$, the same mode turning the other way.</p>
+  <p>The frequencies depend on nothing but $\ell$, $n$ and the mass. Since $M$ is the only scale in the problem, $\omega \propto 1/M$, and we quote the dimensionless number $M\omega$. Axial and polar perturbations share the same spectrum (Lesson 4), so there is a single list.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>The spectrum</h2>
+  <p>Here it is, for the first three multipoles and eight overtones of each, computed to many digits with the method described further down.</p>
+</section>
+
+<figure class="w" data-widget="spectrum">
+  <figcaption><strong>The quasinormal spectrum of a Schwarzschild black hole.</strong> Each dot is a mode: higher means slower decay, further right means higher pitch. Point at a mode to read its frequency, and switch on the approximations to see where they work. The table lists the exact values.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the spectrum says</h2>
+  <ul>
+    <li>The pitch grows with $\ell$, roughly as $\operatorname{Re} M\omega \approx (\ell + \tfrac12)/\sqrt{27}$.</li>
+    <li>The fundamental modes of all multipoles decay at almost the same rate, $\operatorname{Im} M\omega \approx -0.09$. The amplitude drops by a factor $e$ in about $11M$.</li>
+    <li>Overtones die fast. The first overtone of $\ell = 2$ decays three times faster than the fundamental, the second more than five times faster.</li>
+    <li>Down the ladder the decay rate grows in steps that approach $1/4M$, while the pitch slowly drops. For very high overtones the pitch tends to $\ln 3/(8\pi M) \approx 0.044/M$, a limit found numerically by Nollert and derived by Motl.</li>
+  </ul>
+</section>
+
+<section class="ex" data-float>
+  <h2>Why the light ring</h2>
+  <p>Where does $(\ell + \tfrac12)/\sqrt{27}$ come from? Think of a wave with large $\ell$ as a beam of light. Lesson 4 showed that the potential peaks near $r = 3M$, the light ring, where light can circle the hole. That orbit is unstable: a ray that starts slightly off it spirals away, its distance from the orbit growing like $e^{\lambda t}$. For large $\ell$ a quasinormal mode is a wave trapped on the light ring and slowly leaking off it, and</p>
+  <div class="eq">$$\omega \approx \Omega_c\left(\ell + \tfrac12\right) - i\lambda\left(n + \tfrac12\right),$$</div>
+  <p>where $\Omega_c$ is the angular frequency of the circular light orbit and $\lambda$ its instability rate. For Schwarzschild both are equal to $1/(3\sqrt3\,M) = 1/(\sqrt{27}\,M)$. The pitch is the orbital frequency times the number of wavelengths that fit around the orbit; the damping is the rate at which the orbit sheds light. This picture (Cardoso and collaborators, 2009) holds well beyond Schwarzschild, and it ties the ringdown to the black-hole shadow seen by the Event Horizon Telescope, whose size is also set by the light ring.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Quick approximations</h2>
+  <p>The light-ring formula is only the first term of an expansion in large $\ell$, and for $\ell = 2$ it misses the pitch by almost 30 %. Two other quick estimates use the shape of the barrier near its top, where it looks like an upside-down parabola. Call $V_0$ its height and $V_0''$ its curvature in $r_*$.</p>
+  <ul>
+    <li><strong>Pöschl–Teller.</strong> Replace the barrier by the solvable bump of Lesson 1 with the same height and curvature, $\alpha^2 = -V_0''/2V_0$, and use its exact modes (Ferrari and Mashhoon, 1984).</li>
+    <li><strong>WKB.</strong> Match WKB solutions on either side of the barrier through its parabolic top. At first order this gives $\omega^2 = V_0 - i\left(n + \tfrac12\right)\sqrt{-2V_0''}$ (Schutz and Will, 1985). Higher orders (Iyer and Will, 1987, and later work) are much more accurate.</li>
+  </ul>
+  <p>For the fundamental modes, using the Regge–Wheeler barrier:</p>
+  <div class="scroll">
+    <table class="cmp">
+      <thead><tr><th scope="col"></th><th scope="col">Exact (Leaver)</th><th scope="col">Pöschl–Teller</th><th scope="col">WKB, first order</th><th scope="col">Light ring</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">ℓ = 2</th><td class="best">0.37367 − 0.08896i</td><td>0.3783 − 0.0905i</td><td>0.3988 − 0.0883i</td><td>0.4811 − 0.0962i</td></tr>
+        <tr><th scope="row">ℓ = 3</th><td class="best">0.59944 − 0.09270i</td><td>0.6024 − 0.0934i</td><td>0.6166 − 0.0923i</td><td>0.6736 − 0.0962i</td></tr>
+        <tr><th scope="row">ℓ = 4</th><td class="best">0.80918 − 0.09416i</td><td>0.8114 − 0.0945i</td><td>0.8223 − 0.0939i</td><td>0.8660 − 0.0962i</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>All of them improve as $\ell$ grows, and all of them fail for the overtones: switch them on in the spectrum above and watch them drift away from the exact values as $n$ increases. For accurate numbers we need something better.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Leaver's method</h2>
+  <p>In 1985 Edward Leaver found a way to compute quasinormal frequencies to any precision. The idea is to build the boundary conditions into the solution from the start and expand what remains in a power series:</p>
+  <div class="eq">$$\Psi = (r - 2M)^{-2iM\omega}\, r^{4iM\omega}\, e^{i\omega(r - 2M)} \sum_{k=0}^{\infty} a_k \left(\frac{r - 2M}{r}\right)^{k}.$$</div>
+  <p>The prefactor is ingoing at the horizon and outgoing at infinity. The coefficients $a_k$ obey a three-term recurrence, and the series converges all the way out to infinity only when $\omega$ is a quasinormal frequency. That condition can be written as the vanishing of a continued fraction, a function of $\omega$ whose zeros any root finder can locate.</p>
+  <details class="calc">
+    <summary>The full calculation</summary>
+    <div>
+      <p>Work in units with $2M = 1$, so that the frequencies come out as $2M\omega$, and write $\rho = -i\omega$. Putting the series into the wave equation gives</p>
+      <div class="eq">$$\alpha_k\, a_{k+1} + \beta_k\, a_k + \gamma_k\, a_{k-1} = 0, \qquad k = 0, 1, 2, \dots,$$</div>
+      <p>with $a_{-1} = 0$ and, for a field of spin $s$ and $\varepsilon = s^2 - 1$,</p>
+      <div class="eq">$$\begin{aligned} \alpha_k &amp;= k^2 + (2\rho + 2)\,k + 2\rho + 1, \\ \beta_k &amp;= -\left[2k^2 + (8\rho + 2)\,k + 8\rho^2 + 4\rho + \ell(\ell+1) - \varepsilon\right], \\ \gamma_k &amp;= k^2 + 4\rho\, k + 4\rho^2 - \varepsilon - 1. \end{aligned}$$</div>
+      <p>A three-term recurrence has two independent solutions. The one we need is the minimal solution, which decays fastest as $k \to \infty$ and makes the series converge at infinity. It exists exactly when</p>
+      <div class="eq">$$0 = \beta_0 - \cfrac{\alpha_0\,\gamma_1}{\beta_1 - \cfrac{\alpha_1\,\gamma_2}{\beta_2 - \cfrac{\alpha_2\,\gamma_3}{\beta_3 - \cdots}}}$$</div>
+      <p>For the overtone $n$ it is much better to invert the fraction $n$ times, which makes the wanted root the most stable one (Leaver, 1985). For this course we truncated the fraction at depth 4000, found the roots with a Newton-type solver working with 30 digits, and divided by two to get $M\omega$. The whole computation is about thirty lines of Python, and it agrees with the standard tables to every digit shown here.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Measure it yourself</h2>
+  <p>There is a third way to find the modes, the one Nature uses: hit the black hole and listen. The figure below solves the Regge–Wheeler equation (or the Zerilli equation, or those for a scalar or electromagnetic field) in time, in your browser, for a wave packet thrown at the hole, and records the wave far away. Then it fits a single damped sinusoid to a stretch of the signal $40M$ long, starting where you choose.</p>
+</section>
+
+<figure class="w" data-widget="ringdown">
+  <figcaption><strong>Measure it yourself.</strong> Top, the signal far from the black hole after a wave packet hits it, and a single damped sinusoid fitted inside the shaded window (on the logarithmic scale, its envelope); drag on either plot to move the window. Bottom, how far the fitted frequency is from the exact fundamental mode, depending on where the fit starts. Change $\ell$ or the field and the experiment runs again.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Too early, just right, too late</h2>
+  <p>The lower panel tells the story of a ringdown in a single curve.</p>
+  <ul>
+    <li><strong>Too early</strong>, near the peak, the fit is poor. The signal still contains the direct response to the packet and the overtones, which die quickly but are loud at first.</li>
+    <li><strong>In the middle</strong> there is a plateau where the fit agrees with Leaver's value to about one part in a thousand or better. Here the signal is a single quasinormal mode.</li>
+    <li><strong>Too late</strong>, the agreement gets worse again. The ringing has decayed below a slower signal that does not oscillate, the late-time <em>tail</em>, which falls off as a power of time rather than exponentially (Lesson 8).</li>
+  </ul>
+  <p>The packet oscillates, at frequency $0.4/M$. A smooth bump would also make the hole ring, but an oscillating packet carries little low-frequency content, and that keeps the tail weak. This effect explains why tails are so faint in many merger signals (León Vega and collaborators, 2026). Try the axial and polar perturbations with the same $\ell$: the signals look different, but the fitted frequencies agree, as Chandrasekhar's argument in Lesson 4 says they must.</p>
+  <p>How loudly each mode rings depends on the packet, not only on the hole: the black hole acts as a filter that keeps the part of the perturbation that overlaps with its spectrum (Svyatkovskyy Kholyavka and collaborators, 2026). That is the subject of Lesson 7.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>From M = 1 to hertz</h2>
+  <p>To turn $M\omega$ into something a detector measures, put back $G$ and $c$. The unit of time is $GM/c^3$, which is $4.93\ \mu\mathrm{s}$ for one solar mass, so</p>
+  <div class="eq">$$f = \frac{\operatorname{Re}(M\omega)}{2\pi}\,\frac{c^3}{GM}, \qquad \tau = \frac{1}{|\operatorname{Im}\,\omega|} = \frac{GM/c^3}{|\operatorname{Im}(M\omega)|}.$$</div>
+  <p>For a black hole of ten solar masses the fundamental $\ell = 2$ mode rings at $1.21$ kHz and decays in $0.55$ ms. Both scale with the mass: a black hole a million times heavier rings a million times lower, for a million times longer.</p>
+</section>
+
+<figure class="w" data-widget="mass">
+  <figcaption><strong>From M = 1 to hertz.</strong> The frequency and damping time of the fundamental mode for a black hole of the mass you choose, against the frequency bands of current and planned detectors; the small ticks are $\ell = 3$ and $4$. The examples are only illustrative: real black holes spin, which raises the frequency and makes the ringing last longer (Lesson 9).</figcaption>
+</figure>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$M\omega_{\ell n} \approx \frac{\ell + \frac12}{\sqrt{27}} - i\,\frac{n + \frac12}{\sqrt{27}}$$</div>
+  <p>The light-ring estimate of the quasinormal frequencies of a Schwarzschild black hole. The exact fundamental mode of $\ell = 2$ is $M\omega = 0.3737 - 0.0890\,i$.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>A Schwarzschild black hole rings at a discrete ladder of complex frequencies set only by its mass, the notes of waves trapped at the light ring, which Leaver's method computes exactly and which can be heard in any signal the hole emits.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>A ringdown is measured with frequency $f = 250$ Hz and damping time $\tau = 4$ ms, and assumed to be the fundamental $\ell = 2$ mode. (a) If the black hole did not spin, what mass would each of the two numbers give? (b) Are they consistent? (c) Compute the quality factor $Q = \pi f \tau$ and compare it with that of a non-spinning black hole.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) For $10\,M_\odot$ the mode has $f = 1207.5$ Hz and $\tau = 0.554$ ms, and $f \propto 1/M$, $\tau \propto M$. The frequency gives $M = 10 \times 1207.5/250 \approx 48\,M_\odot$; the damping time gives $M = 10 \times 4/0.554 \approx 72\,M_\odot$.</p>
+      <p>(b) No.</p>
+      <p>(c) $Q = \pi \times 250 \times 0.004 \approx 3.1$. For a non-spinning black hole, whatever its mass,</p>
+      <div class="eq">$$Q = \frac{\operatorname{Re}\omega}{2\,|\operatorname{Im}\omega|} = \frac{0.37367}{0.17792} \approx 2.10 .$$</div>
+      <p>The quality factor depends only on the shape of the spectrum, not on its scale, so a measured $Q$ above 2.1 says that the black hole cannot be a Schwarzschild one. It is spinning: spin makes the dominant mode ring longer. Measuring two numbers of one mode gives both the mass and the spin. That is black-hole spectroscopy, and Lesson 9 adds the spin.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>E. W. Leaver, <a href="https://doi.org/10.1098/rspa.1985.0119" rel="noopener"><em>An analytic representation for the quasi-normal modes of Kerr black holes</em></a>, Proc. R. Soc. Lond. A 402, 285 (1985).</li>
+    <li>B. F. Schutz and C. M. Will, <a href="https://doi.org/10.1086/184453" rel="noopener"><em>Black hole normal modes: a semianalytic approach</em></a>, Astrophys. J. Lett. 291, L33 (1985); S. Iyer and C. M. Will, <a href="https://doi.org/10.1103/PhysRevD.35.3621" rel="noopener"><em>Black-hole normal modes: a WKB approach</em></a>, Phys. Rev. D 35, 3621 (1987).</li>
+    <li>V. Cardoso, A. S. Miranda, E. Berti, H. Witek and V. T. Zanchin, <a href="https://doi.org/10.1103/PhysRevD.79.064016" rel="noopener"><em>Geodesic stability, Lyapunov exponents and quasinormal modes</em></a>, Phys. Rev. D 79, 064016 (2009).</li>
+    <li>H.-P. Nollert, <a href="https://doi.org/10.1103/PhysRevD.47.5253" rel="noopener"><em>Quasinormal modes of Schwarzschild black holes: the determination of quasinormal frequencies with very large imaginary parts</em></a>, Phys. Rev. D 47, 5253 (1993); L. Motl, <a href="https://arxiv.org/abs/gr-qc/0212096" rel="noopener"><em>An analytical computation of asymptotic Schwarzschild quasinormal frequencies</em></a>, Adv. Theor. Math. Phys. 6, 1135 (2003).</li>
+    <li>K. D. Kokkotas and B. G. Schmidt, <a href="https://doi.org/10.12942/lrr-1999-2" rel="noopener"><em>Quasi-normal modes of stars and black holes</em></a>, Living Rev. Relativ. 2, 2 (1999); E. Berti, V. Cardoso and A. O. Starinets, <a href="https://doi.org/10.1088/0264-9381/26/16/163001" rel="noopener"><em>Quasinormal modes of black holes and black branes</em></a>, Class. Quantum Grav. 26, 163001 (2009).</li>
+    <li>A. Svyatkovskyy Kholyavka, J. A. León Vega, S. Gómez Gómez, X. Jiménez Forteza and S. Datta, <a href="https://doi.org/10.1103/gptl-zzcn" rel="noopener"><em>Shaping black hole resonances I. Black hole ringdown as a spectral filtering process</em></a>, Phys. Rev. D 114, 064078 (2026).</li>
+    <li>J. A. León Vega, A. Svyatkovskyy Kholyavka, S. Datta and X. Jiménez Forteza, <a href="https://arxiv.org/abs/2606.02146" rel="noopener"><em>Spectral suppression of black hole ringdown tails</em></a>, arXiv:2606.02146 (2026).</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="scattering.html"><small>← Previous · 05</small><b>Scattering</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <div class="next"><a href="excitation.html"><small>Next · 07 →</small><b>What a black hole rings with</b></a></div>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<section class="ex" data-float>
+  <h2>Which notes, and how loud</h2>
+  <p>Lesson 6 found the notes a black hole can play. They depend only on the hole. But a bell struck at the rim sounds different from one struck in the middle: the same notes, different loudness. For a black hole the question is the same. Given a perturbation, a star collapsing, a companion falling in, a wave packet, how strongly is each mode excited?</p>
+  <p>The answer splits neatly into two factors, one that belongs to the black hole and one that belongs to the perturbation. To see it we need the tool that solves any linear wave problem at once: the Green's function.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>The Green's function</h2>
+  <p>Take the equation of Lessons 3 and 4, $-\partial_t^2\psi + \partial_{r_*}^2\psi - V\psi = 0$, with some initial shape $\psi_0(r_*)$ and velocity $\dot\psi_0(r_*)$. Transform it from time to frequency. Each frequency obeys an ordinary differential equation with a source made of the initial data, and it is solved by gluing together two special solutions:</p>
+  <ul>
+    <li>$\psi_{\text{in}}(\omega, r_*)$, purely ingoing at the horizon, $\psi_{\text{in}} \to e^{-i\omega r_*}$;</li>
+    <li>$\psi_{\text{up}}(\omega, r_*)$, purely outgoing at infinity, $\psi_{\text{up}} \to e^{+i\omega r_*}$.</li>
+  </ul>
+  <p>The signal is then an integral over frequencies,</p>
+  <div class="eq">$$\psi(t, r_*) = \frac{1}{2\pi}\int_{-\infty + ic}^{\infty + ic} d\omega\; e^{-i\omega t} \int dr_*'\; \frac{\psi_{\text{in}}(\omega, r_{*&lt;})\,\psi_{\text{up}}(\omega, r_{*&gt;})}{W(\omega)}\,\Big[i\omega\,\psi_0(r_*') - \dot\psi_0(r_*')\Big],$$</div>
+  <p>where $r_{*&lt;}$ and $r_{*&gt;}$ are the smaller and the larger of $r_*$ and $r_*'$, and $W = \psi_{\text{in}}\psi_{\text{up}}' - \psi_{\text{in}}'\psi_{\text{up}}$ is their Wronskian. The frequency integral runs a little above the real axis ($c &gt; 0$), which guarantees that nothing happens before $t = 0$.</p>
+  <details class="calc">
+    <summary>The full calculation</summary>
+    <div>
+      <p>Define $\hat\psi(\omega, r_*) = \int_0^\infty \psi(t, r_*)\,e^{i\omega t}\,dt$, which converges for $\operatorname{Im}\omega &gt; 0$. Integrating $\partial_t^2\psi$ by parts twice,</p>
+      <div class="eq">$$\int_0^\infty \partial_t^2\psi\,e^{i\omega t}\,dt = -\dot\psi_0 + i\omega\,\psi_0 - \omega^2\hat\psi,$$</div>
+      <p>so the wave equation becomes $\hat\psi'' + (\omega^2 - V)\hat\psi = i\omega\psi_0 - \dot\psi_0 \equiv S$. The Green's function of the operator on the left that is ingoing at the horizon and outgoing at infinity is $G(r_*, r_*') = \psi_{\text{in}}(r_{*&lt;})\,\psi_{\text{up}}(r_{*&gt;})/W$, and $\hat\psi = \int G\,S\,dr_*'$. Inverting the transform gives the formula above.</p>
+      <p>Far from the hole $\psi_{\text{in}} \to A_{\text{in}}(\omega)\,e^{-i\omega r_*} + A_{\text{out}}(\omega)\,e^{i\omega r_*}$, and comparing with $\psi_{\text{up}} = e^{i\omega r_*}$ gives $W = 2i\omega A_{\text{in}}$.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Closing the contour</h2>
+  <p>At late times the factor $e^{-i\omega t}$ decays in the lower half of the complex $\omega$ plane, so we push the contour down there. On its way it snags on three kinds of obstacle, and each one is a piece of the signal (Leaver, 1986).</p>
+</section>
+
+<figure class="w" data-widget="contour">
+  <figcaption><strong>Where the ringing comes from.</strong> The complex frequency plane for $\ell = 2$. The dots are the quasinormal frequencies, where the Wronskian vanishes; the zigzag is the branch cut along the negative imaginary axis. Push the contour down to see what each obstacle contributes. Point at a dot to read its frequency.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Three pieces</h2>
+  <ul>
+    <li><strong>Poles.</strong> $W(\omega) = 0$ means $\psi_{\text{in}}$ and $\psi_{\text{up}}$ are the same solution, ingoing at the horizon and outgoing at infinity: a quasinormal mode. Each pole adds a damped sinusoid, $e^{-i\omega_n t}$. Together they are the ringdown.</li>
+    <li><strong>The branch cut.</strong> The long $1/r^2$ tail of the potential makes $\psi_{\text{up}}$ a multivalued function of $\omega$, with a cut along the negative imaginary axis. Its contribution decays as a power of time, not exponentially. It is the late-time tail of Lesson 8.</li>
+    <li><strong>The large arc.</strong> At high frequencies the wave hardly notices the barrier. The arc gives the part of the signal that travels straight from the source to the observer, the <strong>prompt response</strong>. It matters only at early times.</li>
+  </ul>
+  <p>This is why the ringdown is a sum of modes only after a while: before, the prompt response is still arriving, and much later the tail takes over.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Excitation factors</h2>
+  <p>Picking up the residue at the pole $\omega_n$, the mode seen by an observer far away is</p>
+  <div class="eq">$$\psi_n(t, r_*) = C_n\, e^{-i\omega_n (t - r_*)}, \qquad C_n = B_n \int dr_*'\; \frac{\psi_{\text{in}}(\omega_n, r_*')}{A_{\text{out}}(\omega_n)}\,\Big[\dot\psi_0 - i\omega_n\psi_0\Big],$$</div>
+  <p>with</p>
+  <div class="eq">$$B_n = \frac{A_{\text{out}}}{2\omega}\left(\frac{dA_{\text{in}}}{d\omega}\right)^{-1}\Bigg|_{\omega = \omega_n}.$$</div>
+  <p>The two factors have very different characters. $B_n$, the <strong>excitation factor</strong>, depends only on the black hole: it measures how easily mode $n$ can be excited at all. The integral depends on the perturbation: it measures how much the initial data overlap with the shape of the mode. Excitation factors were computed by Leaver and Andersson for Schwarzschild, and by Berti and Cardoso for Kerr. For the first few overtones they grow with $n$, one of the reasons overtones can matter near the peak of the signal (Lesson 10).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>The black hole as a filter</h2>
+  <p>The overlap integral has a simple meaning when the perturbation starts far from the hole. There, at a quasinormal frequency $A_{\text{in}} = 0$, so $\psi_{\text{in}} \approx A_{\text{out}}\,e^{i\omega_n r_*}$. For a packet $g$ moving towards the hole, $\psi_0 = g$ and $\dot\psi_0 = g'$, and an integration by parts gives</p>
+  <div class="eq">$$C_n \approx -2i\omega_n B_n\,\tilde g(\omega_n), \qquad \tilde g(\omega) = \int g(r_*)\,e^{i\omega r_*}\,dr_* .$$</div>
+  <p>The amplitude of each mode is the black hole's factor times the <strong>spectrum of the perturbation, evaluated at the complex frequency of the mode</strong>. The black hole behaves like a filter: it keeps the part of the perturbation that overlaps with its own spectrum and throws the rest away. This view of the ringdown as a spectral filter is developed in <em>Shaping black hole resonances I</em> (Svyatkovskyy Kholyavka and collaborators, 2026); a companion paper studies how the amplitudes of the different modes, and the interference between them, change across families of perturbations.</p>
+  <p>The figure tests the formula. It throws wave packets of different frequencies at the hole, measures the amplitude of the fundamental mode in each simulation, and compares with the packet's spectrum at $\omega_{20}$, including the $1/r$ corrections to $\psi_{\text{in}}$ that the formula above drops.</p>
+</section>
+
+<figure class="w" data-widget="excite">
+  <figcaption><strong>The black hole as a filter.</strong> Top, the spectrum of a Gaussian wave packet with central frequency $\nu$, and the pitches of the first three $\ell = 2$ modes. Bottom, the amplitude of the fundamental mode against $\nu$: dots from simulations run in your browser, the curve from the packet's spectrum at the complex frequency of the mode, scaled once to match. Drag on the lower plot or use the slider.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li>The response peaks when the packet's frequency is close to the pitch of the mode, $\nu \approx \operatorname{Re}\omega_{20} = 0.374/M$, and falls off on either side over a range of about $1/\sigma$, where $\sigma$ is the length of the packet.</li>
+    <li>The simulations follow the prediction across the whole range. Only for the slowest packets do the dots sit slightly above the curve: there the fit is no longer looking at a pure mode, because a slowly varying packet also excites a stronger late-time tail (Lesson 8).</li>
+    <li>The same black hole, hit by different packets, rings with different loudness. Only the frequencies are fixed. That is why mode amplitudes carry information about the source, and why fitting them is delicate (Lesson 10).</li>
+  </ul>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$C_n \approx -2i\omega_n\,B_n\,\tilde g(\omega_n)$$</div>
+  <p>The amplitude of a mode is a property of the black hole, the excitation factor $B_n$, times the spectrum of the perturbation evaluated at the complex frequency of the mode.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>The Green's function splits any signal into a prompt response, a sum of quasinormal modes and a tail, and each mode is excited by the black hole's own factor times the perturbation's spectrum at the mode's complex frequency, so the hole acts as a filter.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>The packet in the figure is $g(r_*) = e^{-z^2/2\sigma^2}\cos(\nu z)$, with $z = r_* - 50M$ and $\sigma = 6M$. (a) Compute $\tilde g(\omega)$. (b) Show that, when $\nu$ is not small, $|\tilde g(\omega_n)| \propto \exp\!\left[-\sigma^2(\operatorname{Re}\omega_n - \nu)^2/2\right]$, and deduce the packet frequency that excites the mode most. (c) How far from that frequency does the amplitude halve?</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) Write the cosine as two exponentials and use the Gaussian integral:</p>
+      <div class="eq">$$\tilde g(\omega) = \sqrt{\frac{\pi}{2}}\,\sigma\, e^{50 i\omega M}\left[e^{-\sigma^2(\omega - \nu)^2/2} + e^{-\sigma^2(\omega + \nu)^2/2}\right].$$</div>
+      <p>(b) For $\nu$ well away from zero, the second term is negligible near $\omega_n$. With $\omega_n = \omega_R + i\omega_I$,</p>
+      <div class="eq">$$\left|e^{-\sigma^2(\omega_n - \nu)^2/2}\right| = e^{-\sigma^2(\omega_R - \nu)^2/2}\; e^{\sigma^2\omega_I^2/2}.$$</div>
+      <p>The second factor and $|e^{50i\omega_n M}|$ do not depend on $\nu$, so the amplitude is largest at $\nu = \operatorname{Re}\omega_n$, here $0.374/M$.</p>
+      <p>(c) It halves when $\sigma^2(\nu - \omega_R)^2/2 = \ln 2$, that is $|\nu - \omega_R| = \sqrt{2\ln 2}/\sigma \approx 0.20/M$. The curve in the figure is slightly lopsided because of the neglected second term and of the $1/r$ corrections, but its width is about this.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>E. W. Leaver, <a href="https://doi.org/10.1103/PhysRevD.34.384" rel="noopener"><em>Spectral decomposition of the perturbation response of the Schwarzschild geometry</em></a>, Phys. Rev. D 34, 384 (1986).</li>
+    <li>N. Andersson, <a href="https://doi.org/10.1103/PhysRevD.55.468" rel="noopener"><em>Evolving test fields in a black-hole geometry</em></a>, Phys. Rev. D 55, 468 (1997).</li>
+    <li>E. Berti and V. Cardoso, <a href="https://doi.org/10.1103/PhysRevD.74.104020" rel="noopener"><em>Quasinormal ringing of Kerr black holes: the excitation factors</em></a>, Phys. Rev. D 74, 104020 (2006).</li>
+    <li>H.-P. Nollert and R. H. Price, <a href="https://doi.org/10.1063/1.532698" rel="noopener"><em>Quantifying excitations of quasinormal mode systems</em></a>, J. Math. Phys. 40, 980 (1999).</li>
+    <li>A. Svyatkovskyy Kholyavka, J. A. León Vega, S. Gómez Gómez, X. Jiménez Forteza and S. Datta, <a href="https://doi.org/10.1103/gptl-zzcn" rel="noopener"><em>Shaping black hole resonances I. Black hole ringdown as a spectral filtering process</em></a>, Phys. Rev. D 114, 064078 (2026).</li>
+    <li>A. Svyatkovskyy Kholyavka, S. Datta, J. A. León Vega and X. Jiménez Forteza, <a href="https://arxiv.org/abs/2611.13075" rel="noopener"><em>Spectroscopic landscapes and interference in black hole ringdown</em></a>, arXiv:2611.13075 (2026).</li>
+  </ol>
+</section>

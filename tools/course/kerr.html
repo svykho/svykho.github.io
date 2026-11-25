@@ -1,0 +1,101 @@
+<section class="ex" data-float>
+  <h2>Black holes spin</h2>
+  <p>Stars rotate, and binaries orbit, so the black holes they leave behind spin. The remnant of GW150914 spins at about 70 % of the maximum allowed. A spinning black hole is described by the solution Roy Kerr found in 1963, with two parameters: the mass $M$ and the angular momentum $J = aM$. We use the dimensionless spin</p>
+  <div class="eq">$$\chi = \frac{a}{M} = \frac{J}{M^2}, \qquad 0 \le \chi &lt; 1.$$</div>
+  <p>At $\chi = 0$ Kerr is Schwarzschild. As $\chi$ approaches 1 the hole becomes <em>extremal</em>, and many of its properties change dramatically. Spin is the second and last number that matters: by the no-hair theorem of Lesson 0, $M$ and $\chi$ fix everything.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>What spin changes</h2>
+  <ul>
+    <li><strong>The horizon shrinks</strong>, from $2M$ to $r_+ = M + \sqrt{M^2 - a^2}$, and it rotates, with angular velocity $\Omega_H = a/(r_+^2 + a^2)$.</li>
+    <li><strong>An ergoregion appears</strong> outside the horizon, out to $r = M + \sqrt{M^2 - a^2\cos^2\theta}$, which is $2M$ at the equator. Inside it spacetime itself is dragged around so strongly that nothing can stand still, not even light: every observer is forced to co-rotate with the hole.</li>
+    <li><strong>Orbits split in two.</strong> Light and matter moving with the rotation can orbit closer than those moving against it. The light ring, at $3M$ for Schwarzschild, moves in to $M$ for co-rotating light and out to $4M$ for counter-rotating light as $\chi \to 1$. The ISCO moves from $6M$ to $M$ and to $9M$.</li>
+  </ul>
+</section>
+
+<figure class="w" data-widget="kerrgeo">
+  <figcaption><strong>A spinning black hole.</strong> A slice along the spin axis, drawn in Boyer–Lindquist coordinates as if they were ordinary spherical ones. The black disc is the horizon, the dashed circle inside it the inner horizon, the shaded region the ergoregion. On the equator, the light rings and innermost stable orbits for motion with the rotation (right) and against it (left).</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Perturbing Kerr</h2>
+  <p>Kerr is not spherically symmetric, so spherical harmonics no longer separate the angles from the radius, and the metric perturbations do not obey any simple equation. For several years it was not clear that perturbation theory of spinning black holes could be done at all. Saul Teukolsky solved the problem in 1973 by working not with the metric but with a single number built from the curvature, the Weyl scalar $\psi_4$, which far from the hole is directly the gravitational wave,</p>
+  <div class="eq">$$\psi_4 \propto \ddot h_+ - i\,\ddot h_\times .$$</div>
+  <p>Its equation, the <strong>Teukolsky equation</strong>, separates into an angular equation, solved by spin-weighted spheroidal harmonics, and a radial one. The modes are labelled by three numbers: $\ell$ and $n$ as before, and now $m$, which matters, because a mode turning with the hole differs from one turning against it.</p>
+  <details class="calc">
+    <summary>The radial equation</summary>
+    <div>
+      <p>With $\psi_4 = \rho^4 \sum R(r)\,S(\theta)\,e^{-i\omega t + im\phi}$ (where $\rho = -1/(r - ia\cos\theta)$) and spin weight $s = -2$, the radial function obeys</p>
+      <div class="eq">$$\Delta^{-s}\frac{d}{dr}\left(\Delta^{s+1}\frac{dR}{dr}\right) + \left(\frac{K^2 - 2is(r - M)K}{\Delta} + 4is\omega r - \lambda\right)R = 0,$$</div>
+      <p>with $\Delta = r^2 - 2Mr + a^2$, $K = (r^2 + a^2)\,\omega - am$, and $\lambda$ the separation constant fixed by the angular equation, which depends on $a\omega$. The effective potential is complex and long-ranged, awkward for numerical work. Sasaki and Nakamura (1982) found a transformation to an equation with a real, short-range potential, the one solved by the <a href="../sasaki-nakamura.html">Sasaki–Nakamura simulator</a> in the Lab. Leaver's method of Lesson 6 works for Kerr too: two continued fractions, one for the angular equation and one for the radial, solved together. That is how the frequencies below were computed.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>The spectrum of a spinning hole</h2>
+  <p>For Schwarzschild the frequency of a mode does not depend on $m$: the five modes $m = -2, \dots, 2$ of $\ell = 2$ sit on top of each other. Spin splits them, as a magnetic field splits the spectral lines of an atom in the Zeeman effect.</p>
+</section>
+
+<figure class="w" data-widget="kerrqnm">
+  <figcaption><strong>Spin splits the spectrum.</strong> Top, the fundamental $\ell = 2$ modes in the complex plane: all five start together at $\chi = 0$ and separate as the spin grows; the dots mark the spin you choose. Bottom, the quality factor of each mode, the number of oscillations it lasts, against the spin; drag along it to change the spin. The dotted line is the Schwarzschild value, 2.1. Frequencies from Leaver's method, computed for this course.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>Co-rotating modes</strong> ($m &gt; 0$) rise in pitch and live longer as the spin grows. The $\ell = m = 2$ mode, the loudest in most mergers, goes from $M\omega = 0.374$ to $0.871$ at $\chi = 0.99$, and its quality factor from 2.1 to almost 15.</li>
+    <li><strong>Counter-rotating modes</strong> ($m &lt; 0$) drop in pitch, by up to a fifth for $m = -2$, and keep almost the same damping.</li>
+    <li>The light-ring picture of Lesson 6 still explains it: co-rotating waves are trapped on the inner, faster light ring, counter-rotating ones on the outer, slower one.</li>
+    <li>As $\chi \to 1$ the $\ell = m$ modes approach the frequency $m\,\Omega_H$, and their damping goes to zero: an extremal black hole would ring almost forever.</li>
+  </ul>
+  <p>This is what makes spectroscopy work. The frequency and the damping time of a single mode are two numbers, and they fix the two parameters $M$ and $\chi$. A second mode then tests the no-hair theorem.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Superradiance</h2>
+  <p>A spinning black hole can give energy back. Send in a wave with frequency $\omega$ and azimuthal number $m$. If</p>
+  <div class="eq">$$0 &lt; \omega &lt; m\,\Omega_H,$$</div>
+  <p>the wave crosses the horizon "backwards" as seen by an observer turning with it, and the reflected wave comes out stronger than the incoming one: $|R|^2 &gt; 1$ in the language of Lesson 5. The extra energy comes from the rotation of the hole, which slows down slightly. This is <strong>superradiance</strong>, the wave version of the Penrose process, in which a particle splits inside the ergoregion and one half escapes with more energy than the original had.</p>
+  <p>If something reflects the amplified wave back, a mirror, or the mass of the field itself, the process repeats and grows exponentially: Press and Teukolsky's "black-hole bomb". For hypothetical light bosons, such as axions, the mass acts as the mirror, and a spinning black hole would grow a cloud of them while spinning down. The spins of observed black holes therefore constrain particle physics, a lively research topic.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$0 &lt; \omega &lt; m\,\Omega_H, \qquad \Omega_H = \frac{a}{r_+^2 + a^2}$$</div>
+  <p>The condition for superradiance: waves turning with the hole and slower than its horizon are amplified when they scatter.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Spin shrinks the horizon, adds an ergoregion, splits orbits and quasinormal modes according to their sense of rotation, and lets waves extract rotational energy, while the Teukolsky equation keeps perturbation theory possible.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>Go back to the exercise of Lesson 6: a ringdown with $f = 250$ Hz and $\tau = 4$ ms, assumed to be the $\ell = m = 2$ fundamental mode. (a) Use its quality factor and the lower panel of the figure to find the spin. (b) Read off $M\omega$ at that spin and find the mass. (c) Check that $\tau$ comes out right.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) $Q = \pi f\tau = 3.14$. The $m = 2$ curve passes $Q = 3.10$ at $\chi = 0.65$ and $Q = 3.30$ at $\chi = 0.70$, so $\chi \approx 0.66$.</p>
+      <p>(b) At $\chi = 0.66$, $M\omega \approx 0.516 - 0.082\,i$. Then</p>
+      <div class="eq">$$M = \frac{\operatorname{Re}(M\omega)}{2\pi f}\,\frac{c^3}{G} = \frac{0.516}{2\pi \times 250\ \text{Hz} \times 4.93\ \mu\text{s}}\,M_\odot \approx 67\,M_\odot .$$</div>
+      <p>(c) $\tau = (GM/c^3)/|\operatorname{Im} M\omega|$, which gives $67 \times 4.93\ \mu\text{s}/0.082 \approx 4.0$ ms. The two numbers are consistent, which was not the case without spin: one mode gives the mass and the spin, and a second mode would test the theory.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>R. P. Kerr, <a href="https://doi.org/10.1103/PhysRevLett.11.237" rel="noopener"><em>Gravitational field of a spinning mass as an example of algebraically special metrics</em></a>, Phys. Rev. Lett. 11, 237 (1963).</li>
+    <li>J. M. Bardeen, W. H. Press and S. A. Teukolsky, <a href="https://doi.org/10.1086/151796" rel="noopener"><em>Rotating black holes: locally nonrotating frames, energy extraction, and scalar synchrotron radiation</em></a>, Astrophys. J. 178, 347 (1972).</li>
+    <li>S. A. Teukolsky, <a href="https://doi.org/10.1086/152444" rel="noopener"><em>Perturbations of a rotating black hole. I. Fundamental equations for gravitational, electromagnetic, and neutrino-field perturbations</em></a>, Astrophys. J. 185, 635 (1973).</li>
+    <li>M. Sasaki and T. Nakamura, <a href="https://doi.org/10.1143/PTP.67.1788" rel="noopener"><em>Gravitational radiation from a Kerr black hole. I. Formulation and a method for numerical analysis</em></a>, Prog. Theor. Phys. 67, 1788 (1982).</li>
+    <li>E. W. Leaver, <a href="https://doi.org/10.1098/rspa.1985.0119" rel="noopener"><em>An analytic representation for the quasi-normal modes of Kerr black holes</em></a>, Proc. R. Soc. Lond. A 402, 285 (1985).</li>
+    <li>E. Berti, V. Cardoso and C. M. Will, <a href="https://doi.org/10.1103/PhysRevD.73.064030" rel="noopener"><em>On gravitational-wave spectroscopy of massive black holes with the space interferometer LISA</em></a>, Phys. Rev. D 73, 064030 (2006). Tables and fits of Kerr frequencies.</li>
+    <li>W. H. Press and S. A. Teukolsky, <a href="https://doi.org/10.1038/238211a0" rel="noopener"><em>Floating orbits, superradiant scattering and the black-hole bomb</em></a>, Nature 238, 211 (1972).</li>
+    <li>R. Brito, V. Cardoso and P. Pani, <a href="https://doi.org/10.1007/978-3-030-46622-0" rel="noopener"><em>Superradiance: new frontiers in black hole physics</em></a>, Lect. Notes Phys. 971, Springer (2020).</li>
+  </ol>
+</section>

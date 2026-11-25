@@ -6,6 +6,7 @@
   var POS = "255,154,86";
   var NEG = "110,168,247";
   var REST = "140,188,255";
+  var PULSE_RGB = "255,178,122";
   var TAU = Math.PI * 2;
 
   var views = Array.prototype.map.call(document.querySelectorAll("canvas[data-preview]"), function (c) {
@@ -167,6 +168,78 @@
       ctx.ellipse(cx, cy, S, 0.3 * S, 0, 0, TAU);
       ctx.strokeStyle = "rgba(237,239,243,.85)";
       ctx.lineWidth = 1.1;
+      ctx.stroke();
+    },
+
+    /* the course: a black hole rings with one damped note, drawn next to its
+       ladder of quasinormal frequencies (exact l = 2, 3, 4 values) */
+    qnm: function (v, t) {
+      var ctx = v.ctx;
+      var u = ((t % 8) + 8) % 8;
+      var reveal = Math.min(1, u / 4.5);
+      var x0 = v.w * 0.03;
+      var x1 = v.w * 0.6;
+      var cy = v.h * 0.5;
+      var A = v.h * 0.34;
+      var T = 50;
+      var N = 220;
+      var pos = new Path2D();
+      var neg = new Path2D();
+      var prev = null;
+      for (var i = 0; i <= N * reveal; i += 1) {
+        var tau = (T * i) / N;
+        var y = Math.exp(-0.089 * tau) * Math.cos(0.3737 * tau);
+        var p = [x0 + ((x1 - x0) * i) / N, cy - A * y, y];
+        if (prev) {
+          var P = p[2] + prev[2] >= 0 ? pos : neg;
+          P.moveTo(prev[0], prev[1]);
+          P.lineTo(p[0], p[1]);
+        }
+        prev = p;
+      }
+      ctx.lineWidth = 1.3;
+      ctx.strokeStyle = "rgba(" + POS + ",.95)";
+      ctx.stroke(pos);
+      ctx.strokeStyle = "rgba(" + NEG + ",.95)";
+      ctx.stroke(neg);
+      ctx.beginPath();
+      ctx.moveTo(x0, cy);
+      ctx.lineTo(x1, cy);
+      ctx.strokeStyle = "rgba(237,239,243,.12)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      var px0 = v.w * 0.68;
+      var px1 = v.w * 0.97;
+      var py0 = v.h * 0.14;
+      var py1 = v.h * 0.9;
+      var X = function (re) { return px0 + (re / 0.9) * (px1 - px0); };
+      var Y = function (im) { return py0 + (-im / 1.75) * (py1 - py0); };
+      ctx.beginPath();
+      ctx.moveTo(px0, py0);
+      ctx.lineTo(px1, py0);
+      ctx.moveTo(px0, py0);
+      ctx.lineTo(px0, py1);
+      ctx.strokeStyle = "rgba(237,239,243,.16)";
+      ctx.stroke();
+      var ladder = {
+        2: [[0.3737, -0.089], [0.3467, -0.2739], [0.3011, -0.4783], [0.2515, -0.7051], [0.2075, -0.9468], [0.1693, -1.1956], [0.1333, -1.4479], [0.0928, -1.7038]],
+        3: [[0.5994, -0.0927], [0.5826, -0.2813], [0.5517, -0.4791], [0.512, -0.6903], [0.4702, -0.9156], [0.4314, -1.1522], [0.3977, -1.3959], [0.369, -1.6438]],
+        4: [[0.8092, -0.0942], [0.7966, -0.2843], [0.7727, -0.4799], [0.7398, -0.6839], [0.7015, -0.8982], [0.6616, -1.123], [0.6231, -1.3567], [0.5879, -1.5972]],
+      };
+      [4, 3, 2].forEach(function (l) {
+        ladder[l].forEach(function (w, n) {
+          ctx.beginPath();
+          ctx.arc(X(w[0]), Y(w[1]), n === 0 ? 2.6 : 2, 0, TAU);
+          ctx.fillStyle = "rgba(" + REST + "," + (l === 2 ? 0.95 : l === 3 ? 0.6 : 0.38) * (1 - n * 0.06) + ")";
+          ctx.fill();
+        });
+      });
+      var glow = Math.exp(-0.089 * T * reveal);
+      ctx.beginPath();
+      ctx.arc(X(0.3737), Y(-0.089), 3 + 7 * (1 - glow) * (reveal < 1 ? 1 : 0), 0, TAU);
+      ctx.strokeStyle = "rgba(" + PULSE_RGB + "," + (reveal < 1 ? 0.8 * glow + 0.15 : 0.25) + ")";
+      ctx.lineWidth = 1;
       ctx.stroke();
     },
   };

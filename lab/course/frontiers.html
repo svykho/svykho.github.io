@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frontiers · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 11 of a short course on black-hole perturbation theory. Nonlinear modes, echoes, exotic compact objects and tests of gravity.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Frontiers · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 11 of a short course on black-hole perturbation theory. Nonlinear modes, echoes, exotic compact objects and tests of gravity.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/frontiers.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/frontiers.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 11 · Part III · Beyond</span>
+        <h1 data-float>Frontiers</h1>
+        <p class="lede" data-float>Nonlinear modes, the fragile spectrum, echoes from objects without horizons and tests of gravity: where black-hole perturbation theory is heading.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>Where the field is going</h2>
+  <p>The previous lessons covered what is now textbook material. This one is a tour of open questions, where black-hole perturbation theory meets real data and where nobody yet knows all the answers. Four of them: what happens beyond linear order, how stable the spectrum is, whether the objects we see really have horizons, and how to use ringing to test general relativity itself.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Beyond linear order</h2>
+  <p>Everything so far was linear: double the perturbation and the signal doubles. Einstein's equations are not linear, and near the peak of a merger the perturbation is not small. At second order the modes talk to each other. Write the metric as $g = g_{\text{Kerr}} + \epsilon\,h^{(1)} + \epsilon^2 h^{(2)}$. The second-order piece obeys the same wave equation as the first, with a source made of the first-order solution multiplied by itself,</p>
+  <div class="eq">$$\mathcal{L}\big[h^{(2)}\big] = \mathcal{Q}\big[h^{(1)}, h^{(1)}\big].$$</div>
+  <p>If $h^{(1)}$ contains modes $e^{-i\omega_a t}$ and $e^{-i\omega_b t}$, the source contains $e^{-i(\omega_a + \omega_b)t}$, and $h^{(2)}$ responds at that frequency: a <strong>quadratic quasinormal mode</strong>. Its frequency is not in the linear spectrum, it decays as fast as its two parents together, and its amplitude grows as the product of theirs. The strongest is the square of the loudest mode, $(\ell, m) = (2, 2)$, which appears in the $(4, 4)$ part of the signal at twice its frequency.</p>
+  <p>Quadratic modes were seen in numerical simulations of mergers in 2014 (London, Shoemaker and Healy) and measured carefully in 2023, independently by two groups (Cheung and collaborators; Mitman and collaborators). They matter for spectroscopy twice over: they are a new test of general relativity, since their amplitudes are fixed by those of the linear modes, and if they are ignored they can masquerade as linear overtones in the fits of Lesson 10.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>How stable is the spectrum?</h2>
+  <p>In 1996 Hans-Peter Nollert noticed something unsettling. Change the potential barrier very slightly, for instance by adding small steps to it, and the overtones move far away, into a completely different pattern. The fundamental mode barely changes; the higher overtones are destroyed. In 2021 Jaramillo, Panosso Macedo and Al Sheikh made this precise with the <em>pseudospectrum</em>, a tool from the mathematics of non-self-adjoint operators: the operator whose eigenvalues are the quasinormal frequencies is not self-adjoint, because energy leaks out, and its eigenvalues can be extremely sensitive to small changes. A year later Cheung and collaborators showed that even the fundamental mode can be moved by a small enough bump placed far enough away, a result they called "the elephant and the flea".</p>
+  <p>Real black holes are surrounded by matter, so their potentials always differ slightly from the ideal one. Does spectroscopy then make sense at all? The answer, so far, is yes: the <em>signal</em> is stable even when the <em>spectrum</em> is not. A small change far from the hole cannot affect the signal until a wave has had time to travel there and back. The early ringing is the same; only the late signal, already very faint, is different. The figure below shows exactly this mechanism, with a reflecting surface instead of a bump.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Echoes</h2>
+  <p>Every argument for black holes in nature is indirect. What if the dark, compact objects we observe had no horizon, but a surface just outside where the horizon would be? Quantum-gravity models of this kind, often called <em>exotic compact objects</em>, have been proposed, with the surface perhaps a Planck length above the would-be horizon.</p>
+  <p>Cardoso, Franzin and Pani pointed out in 2016 that the ringdown would barely notice. The ringing is produced at the light ring, at the top of the barrier, far from the surface. The first part of the signal is therefore identical to that of a black hole. But the half of the wave that went inwards is no longer lost: it bounces off the surface, comes back to the barrier, and part of it leaks out, again and again, as a train of <strong>echoes</strong>, separated by the time a wave takes to cross the cavity between the barrier and the surface twice:</p>
+  <div class="eq">$$\Delta t \approx 2\left(r_*^{\text{peak}} - r_*^{\text{surface}}\right).$$</div>
+  <p>The tortoise coordinate makes the delay long even for a surface absurdly close to the horizon. Near $r = 2M$, $r_* \approx 2M\ln(r/2M - 1)$, so the delay grows only logarithmically as the surface approaches the horizon, and a surface at a Planck length is not hopelessly far away in time.</p>
+  <details class="calc">
+    <summary>How close is the surface?</summary>
+    <div>
+      <p>Put the surface at $r_0 = 2M(1 + \varepsilon)$ with $\varepsilon \ll 1$. Then</p>
+      <div class="eq">$$r_*^{\text{surface}} = r_0 + 2M\ln\!\left(\frac{r_0}{2M} - 1\right) \approx 2M\,(1 + \ln\varepsilon),$$</div>
+      <p>and the proper distance from the would-be horizon to the surface, along a radial line, is</p>
+      <div class="eq">$$\delta = \int_{2M}^{r_0}\frac{dr}{\sqrt{1 - 2M/r}} \approx 2\sqrt{2M\,(r_0 - 2M)} = 4M\sqrt{\varepsilon}.$$</div>
+      <p>A surface a proper distance $\delta$ above the horizon therefore has $\varepsilon = (\delta/4M)^2$, and the echo delay is</p>
+      <div class="eq">$$\Delta t \approx 2r_*^{\text{peak}} - 4M\left(1 + 2\ln\frac{\delta}{4M}\right) \approx 8M\ln\frac{4M}{\delta}.$$</div>
+      <p>The logarithm turns the enormous ratio between a black hole and the Planck length into a modest number, a few hundred $M$. In the figure, $r - 2M$ ranges from $10^{-5}M$ to $10^{-33}M$ while the delay changes only from 45 to $305M$.</p>
+    </div>
+  </details>
+</section>
+
+<figure class="w" data-widget="echoes">
+  <figcaption><strong>Echoes.</strong> The same wave packet as in Lesson 10, thrown at an object that has a partially reflecting surface where the black hole would have its horizon. Grey, the signal of the black hole; white, that of the object. The dashed lines mark multiples of the round-trip time. Move the surface and change its reflectivity; on a logarithmic scale the faint late echoes become visible. Computed in your browser.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>What the figure shows</h2>
+  <ul>
+    <li><strong>The start is a black hole's.</strong> Until the first echo arrives, the white curve lies exactly on the grey one, however reflective the surface.</li>
+    <li><strong>The echoes arrive on time.</strong> The first one comes $132M$ after the main peak for a surface at $r_* = -60M$, against $125M$ predicted. The small difference is because the main signal bounces off the barrier a little outside its peak, and so takes a shorter path.</li>
+    <li><strong>Later echoes are weaker and lower in pitch.</strong> The first echo is made of the frequencies that crossed the barrier, so it can be almost as loud as the main signal: this packet sits above the top of the barrier and mostly went in. At each later visit the barrier lets out the highest frequencies first, so each echo is weaker than the one before, by a factor of about 5 at first and about 2 later on, and its pitch drifts down.</li>
+    <li><strong>A small reflectivity changes everything, slowly.</strong> With a reflectivity of 5 % the first echo is 6 % of the main signal. The quasinormal frequencies of this object have nothing to do with those of the black hole: they are long-lived modes of the cavity, spaced in frequency by $2\pi/\Delta t$. Yet the early signal is unchanged. This is the stability of the signal, despite the instability of the spectrum.</li>
+  </ul>
+  <p>Searches for echoes in LIGO and Virgo data have so far found no convincing evidence. The absence of echoes constrains how reflective such surfaces can be, and therefore how much a compact object can differ from a black hole near its horizon.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Wormholes</h2>
+  <p>A wormhole, a tunnel between two regions of spacetime, can imitate a black hole in the same way. Morris and Thorne showed in 1988 that a traversable wormhole needs matter with negative energy to hold it open, so it is not expected in ordinary astrophysics. But Damour and Solodukhin noticed in 2007 that a wormhole whose throat sits just outside where a horizon would be is an excellent foil: from outside it looks and rings like a black hole, and only waves that cross the throat and return reveal the difference, as delayed echoes. The <a href="../wormhole.html">wormhole simulator</a> in the Lab lets you watch a wave cross such a throat.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Testing gravity with ringing</h2>
+  <p>In general relativity the mass and the spin fix every quasinormal frequency (Lesson 0). In another theory of gravity the barrier is different, and so are the frequencies. Measuring the frequency and damping of one mode fixes the mass and the spin; every further mode is a test. This is the logic of the GW250114 analysis of Lesson 10.</p>
+  <p>To turn a measurement into a constraint, one needs to know how the frequencies change when the barrier changes. Just as in quantum mechanics, a small change in the potential shifts each frequency by an amount proportional to the change, and the coefficients can be computed once and for all (Cardoso and collaborators, 2019). A measured deviation, or its absence, then translates into bounds on the parameters of the alternative theory.</p>
+  <details class="calc">
+    <summary>Perturbing the potential</summary>
+    <div>
+      <p>Let $\psi_n$ be a quasinormal mode of the potential $V$, and change it to $V + \delta V$. Multiply the equation for the new mode by $\psi_n$, the old one by the new mode, subtract and integrate. To first order in $\delta V$,</p>
+      <div class="eq">$$\delta\omega_n = \frac{\displaystyle\int \delta V\,\psi_n^2\,dr_*}{\displaystyle 2\omega_n\int \psi_n^2\,dr_*}.$$</div>
+      <p>It is the formula of first-order perturbation theory in quantum mechanics, with one difference: $\psi_n^2$, not $|\psi_n|^2$, because the problem is not self-adjoint. A quasinormal mode behaves as $e^{\pm i\omega_n r_*}$ at the two ends, and with $\operatorname{Im}\omega_n &lt; 0$ it grows exponentially at both, so the integrals diverge and have to be defined by continuing $r_*$ into the complex plane. If $\delta V$ is written as a sum of powers, $\delta V = \sum_k \alpha_k\,(2M/r)^k/(2M)^2$, the shift becomes $\delta\omega_n = \sum_k \alpha_k\,e_{n,k}$, with numbers $e_{n,k}$ tabulated by Cardoso and collaborators.</p>
+    </div>
+  </details>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$\Delta t \approx 2\left(r_*^{\text{peak}} - r_*^{\text{surface}}\right) \approx 8M\ln\frac{4M}{\delta}$$</div>
+  <p>The delay of the echoes of an object with a surface a proper distance $\delta$ outside its would-be horizon. The logarithm makes even a Planck-scale surface observable in principle.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Modes multiply at second order, the overtones are sensitive to tiny changes in the barrier while the early signal is not, a surface instead of a horizon would show up as delayed echoes, and every extra mode measured is a new test of general relativity.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>(a) The fundamental $\ell = 2$ mode of a non-spinning black hole is $M\omega = 0.3737 - 0.0890\,i$. Find the frequency and the quality factor of its quadratic mode, and compare with the fundamental $\ell = 4$ mode, $M\omega = 0.8092 - 0.0942\,i$. (b) A black hole of $30\,M_\odot$ is replaced by an object with a reflecting surface one Planck length, $1.6\times10^{-35}$ m, of proper distance above its would-be horizon. Using $GM_\odot/c^2 = 1.48$ km and $r_*^{\text{peak}} = 2.4M$, find the echo delay in units of $M$ and in seconds.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) The quadratic mode has $M\omega = 2 \times (0.3737 - 0.0890\,i)$, that is $0.7473 - 0.1779\,i$. Its quality factor is $0.7473/(2 \times 0.1779) = 2.1$, the same as that of its parent, since both parts of the frequency double. The linear $\ell = 4$ mode has a higher pitch, $0.809$, and lives twice as many cycles, $Q = 4.3$. The two are easy to tell apart in a fit, provided the quadratic mode is included.</p>
+      <p>(b) $M = 30 \times 1.48$ km $= 44.3$ km, so $4M = 1.77\times10^{5}$ m, $\delta/4M = 9.1\times10^{-41}$ and $\varepsilon = (\delta/4M)^2 = 8.3\times10^{-81}$. Then</p>
+      <div class="eq">$$r_*^{\text{surface}} = 2M\,(1 + \ln\varepsilon) = 2M\,(1 - 184.4) \approx -367M, \qquad \Delta t \approx 2\,(2.4 + 367)\,M \approx 738M.$$</div>
+      <p>With $GM/c^3 = 30 \times 4.93\ \mu\text{s} = 0.148$ ms, $\Delta t \approx 0.11$ s: an echo every tenth of a second, well within reach of a detector, if the reflectivity were large enough.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Where to go from here</h2>
+  <p>This is the end of the course. If you want to go on, the reviews below are good next steps, roughly in order of difficulty: Kokkotas and Schmidt for a first overview of quasinormal modes, Berti, Cardoso and Starinets for a complete one, Pound and Wardell (Lesson 10) for perturbation theory with sources and the self-force, Cardoso and Pani for exotic compact objects, and Chandrasekhar's book (Lesson 3) for the full mathematical theory. The simulators in the <a href="../../lab.html">Lab</a> solve the equations of this course in your browser, with more freedom than the figures here.</p>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>L. London, D. Shoemaker and J. Healy, <a href="https://doi.org/10.1103/PhysRevD.90.124032" rel="noopener"><em>Modeling ringing gravitational waves from binary black holes: nonlinear modes</em></a>, Phys. Rev. D 90, 124032 (2014).</li>
+    <li>M. H.-Y. Cheung, V. Baibhav, E. Berti, V. Cardoso and collaborators, <a href="https://doi.org/10.1103/PhysRevLett.130.081401" rel="noopener"><em>Nonlinear effects in black hole ringdown</em></a>, Phys. Rev. Lett. 130, 081401 (2023).</li>
+    <li>K. Mitman, M. Lagos, L. C. Stein, S. Ma and collaborators, <a href="https://doi.org/10.1103/PhysRevLett.130.081402" rel="noopener"><em>Nonlinearities in black hole ringdowns</em></a>, Phys. Rev. Lett. 130, 081402 (2023).</li>
+    <li>H.-P. Nollert, <a href="https://doi.org/10.1103/PhysRevD.53.4397" rel="noopener"><em>About the significance of quasinormal modes of black holes</em></a>, Phys. Rev. D 53, 4397 (1996).</li>
+    <li>J. L. Jaramillo, R. Panosso Macedo and L. Al Sheikh, <a href="https://doi.org/10.1103/PhysRevX.11.031003" rel="noopener"><em>Pseudospectrum and black hole quasinormal mode instability</em></a>, Phys. Rev. X 11, 031003 (2021).</li>
+    <li>M. H.-Y. Cheung, K. Destounis, R. Panosso Macedo, E. Berti and V. Cardoso, <a href="https://doi.org/10.1103/PhysRevLett.128.111103" rel="noopener"><em>Destabilizing the fundamental mode of black holes: the elephant and the flea</em></a>, Phys. Rev. Lett. 128, 111103 (2022).</li>
+    <li>V. Cardoso, E. Franzin and P. Pani, <a href="https://doi.org/10.1103/PhysRevLett.116.171101" rel="noopener"><em>Is the gravitational-wave ringdown a probe of the event horizon?</em></a>, Phys. Rev. Lett. 116, 171101 (2016).</li>
+    <li>V. Cardoso and P. Pani, <a href="https://doi.org/10.1007/s41114-019-0020-4" rel="noopener"><em>Testing the nature of dark compact objects: a status report</em></a>, Living Rev. Relativ. 22, 4 (2019).</li>
+    <li>LIGO Scientific and Virgo Collaborations, <a href="https://doi.org/10.1103/PhysRevD.103.122002" rel="noopener"><em>Tests of general relativity with binary black holes from the second LIGO–Virgo gravitational-wave transient catalog</em></a>, Phys. Rev. D 103, 122002 (2021). Includes a search for echoes.</li>
+    <li>M. S. Morris and K. S. Thorne, <a href="https://doi.org/10.1119/1.15620" rel="noopener"><em>Wormholes in spacetime and their use for interstellar travel: a tool for teaching general relativity</em></a>, Am. J. Phys. 56, 395 (1988).</li>
+    <li>T. Damour and S. N. Solodukhin, <a href="https://doi.org/10.1103/PhysRevD.76.024016" rel="noopener"><em>Wormholes as black hole foils</em></a>, Phys. Rev. D 76, 024016 (2007).</li>
+    <li>V. Cardoso, M. Kimura, A. Maselli, E. Berti and collaborators, <a href="https://doi.org/10.1103/PhysRevD.99.104077" rel="noopener"><em>Parametrized black hole quasinormal ringdown: decoupled equations for nonrotating black holes</em></a>, Phys. Rev. D 99, 104077 (2019).</li>
+    <li>K. D. Kokkotas and B. G. Schmidt, <a href="https://doi.org/10.12942/lrr-1999-2" rel="noopener"><em>Quasi-normal modes of stars and black holes</em></a>, Living Rev. Relativ. 2, 2 (1999).</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="sources.html"><small>← Previous · 10</small><b>Sources and real ringdowns</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <span class="next"></span>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

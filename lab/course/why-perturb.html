@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why perturb a black hole · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 0 of a short course on black-hole perturbation theory. What a ringdown is, why small deformations are enough to describe it, and how the course is organised.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Why perturb a black hole · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 0 of a short course on black-hole perturbation theory. What a ringdown is, why small deformations are enough to describe it, and how the course is organised.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/why-perturb.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/why-perturb.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 00 · Part I · Foundations</span>
+        <h1 data-float>Why perturb a black hole</h1>
+        <p class="lede" data-float>A black hole that has just formed rings like a struck bell. Why that ringing can be described by small deformations, and what this course will build.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>A bell made of spacetime</h2>
+  <p>On 14 September 2015 the two LIGO detectors recorded a signal that lasted about a fifth of a second. Two black holes, each about thirty times the mass of the Sun, had spiralled around each other, merged and settled down into a single, bigger black hole. The last few milliseconds of the signal are a short, fading tone, like a bell struck once. That tone is the <strong>ringdown</strong>, and this course is about it.</p>
+  <p>The newly formed black hole is born distorted. It cannot stay that way: in general relativity a black hole has no way to hold on to bumps, and it sheds them as gravitational waves. The waves it emits have frequencies and damping times fixed by the black hole itself, not by how it was formed. Listening to them tells us what the black hole is.</p>
+</section>
+
+<figure class="w" data-widget="chirp">
+  <figcaption><strong>Inspiral, merger, ringdown.</strong> A cartoon of the signal from two black holes of equal mass, built by hand and not a real waveform. Point at it to see which part is which and what describes it. The dashed curve is the fundamental mode of the final black hole, computed in Lesson 9; change the mass to see the signal in real units.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Three acts, three tools</h2>
+  <p>The signal of a merger has three parts, and each is understood with a different tool.</p>
+  <ul>
+    <li><strong>Inspiral.</strong> While the black holes are far apart they move slowly compared with light, and gravity is weak between them. Newton's laws, corrected step by step in powers of $v/c$ (post-Newtonian theory), describe the orbit and the slowly rising chirp.</li>
+    <li><strong>Merger.</strong> In the last orbits nothing is small any more. Only a full numerical solution of Einstein's equations on a supercomputer can follow it. That became possible in 2005 (Pretorius).</li>
+    <li><strong>Ringdown.</strong> Once a single horizon has formed, the remnant is a black hole plus a small distortion. Small is the key word. Small distortions obey linear equations, and linear equations can be solved with pencil, paper and a modest computer. That is <strong>black-hole perturbation theory</strong>.</li>
+  </ul>
+  <p>Perturbation theory is not only for the ringdown. It also describes a small body falling into a much bigger black hole, which future detectors such as LISA will hear for years, and it is surprisingly accurate even for equal masses, once the merger is over (Price and Pullin, 1994).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Why small is enough</h2>
+  <p>The strategy is the one used for a pendulum, a guitar string or an atom. Take something whose exact state you know, here a black hole sitting still, and push it a little. Write the new spacetime as the old one plus a small correction,</p>
+  <div class="eq">$$g_{\mu\nu} = g^{\text{BH}}_{\mu\nu} + h_{\mu\nu}, \qquad |h_{\mu\nu}| \ll 1,$$</div>
+  <p>and keep only terms linear in $h$. Einstein's equations, which are famously nonlinear, become linear wave equations for $h$ on the fixed background of the black hole. Linear equations can be split into independent pieces, each with its own frequency, exactly as the sound of a bell can be split into its notes. Those notes are the <strong>quasinormal modes</strong>.</p>
+  <details class="calc">
+    <summary>How small is small?</summary>
+    <div>
+      <p>The ringdown of GW150914 had a strain of about $10^{-21}$ at Earth, but that number mostly measures the distance to the source, not the size of the distortion. What matters is how far the remnant is from a still black hole when the ringdown starts. Comparisons with numerical simulations show that a sum of modes describes the signal well from around its peak onwards, provided enough modes are included (Lesson 10), and the description only gets better as the distortion decays. The quadratic terms we drop are small corrections that can be added later (Lesson 11).</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>A black hole has no hair</h2>
+  <p>Here is the reason the ringdown is so valuable. In general relativity a black hole that has settled down is described by just two numbers, its mass $M$ and its spin $\chi$ (a third, electric charge, is negligible for astrophysical black holes). Everything else about the star or the binary that formed it is radiated away or swallowed. This is the <strong>no-hair theorem</strong>.</p>
+  <p>So every note in the ringdown is a function of the same two numbers. Measure one note, its frequency and its damping time, and you get $M$ and $\chi$. Measure a second note, and it must agree with the first. If it does not, either the object is not a black hole of general relativity, or general relativity is wrong. This test is called <strong>black-hole spectroscopy</strong>, by analogy with the spectral lines that identify atoms (Dreyer and collaborators, 2004; Berti, Cardoso and Will, 2006).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>How the course is organised</h2>
+  <p>The course has three parts. <a href="leaky-oscillators.html">Part I</a> collects the tools: what it means for an open system to ring, the parts of the Schwarzschild black hole we need, and the simplest wave equation on it, for a scalar field. <a href="gravitational-perturbations.html">Part II</a> does the real thing for a non-spinning black hole: gravitational perturbations, scattering, the quasinormal modes, how strongly each one is excited, and the slow tail that comes after them. <a href="kerr.html">Part III</a> adds spin, sources and the open problems.</p>
+  <p>Each lesson tells the story first and keeps the full calculation folded away. The figures are live: they solve the equations in your browser, so you can change the inputs and see what happens. We use units in which $G = c = 1$ and measure everything in units of the black-hole mass $M$, so times and lengths are multiples of $M$ and frequencies are multiples of $1/M$. Lesson 6 shows how to turn them back into seconds and hertz.</p>
+  <p>You will need calculus, a little linear algebra and the idea of a wave. General relativity helps but is not required: the lessons say what is needed when it is needed.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$g_{\mu\nu} = g^{\text{BH}}_{\mu\nu} + h_{\mu\nu}$$</div>
+  <p>A black hole plus a small distortion. Keeping only terms linear in $h$ turns Einstein's equations into wave equations that we can solve.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>A black hole formed in a merger rings at frequencies set only by its mass and spin, and because the distortion is small we can compute those frequencies with linear perturbation theory and use them to test what black holes are.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>In units where $G = c = 1$ the mass of the Sun is a length and a time. (a) Compute $GM_\odot/c^2$ in kilometres and $GM_\odot/c^3$ in microseconds. (b) The fundamental mode of a black hole has $M\omega \approx 0.5$ for typical spins. Estimate its frequency in hertz for a black hole of $60\,M_\odot$.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) With $G = 6.674\times10^{-11}\ \mathrm{m^3\,kg^{-1}\,s^{-2}}$, $M_\odot = 1.989\times10^{30}$ kg and $c = 2.998\times10^{8}$ m/s,</p>
+      <div class="eq">$$\frac{GM_\odot}{c^2} \approx 1.48\ \text{km}, \qquad \frac{GM_\odot}{c^3} \approx 4.93\ \mu\text{s}.$$</div>
+      <p>(b) For $M = 60\,M_\odot$ the unit of time is $60 \times 4.93\ \mu\text{s} \approx 0.30$ ms, so $\omega \approx 0.5/(0.30\ \text{ms}) \approx 1.7\times10^{3}\ \text{s}^{-1}$ and</p>
+      <div class="eq">$$f = \frac{\omega}{2\pi} \approx 270\ \text{Hz},$$</div>
+      <p>right in the most sensitive band of ground-based detectors. The figure above gives the exact value for spin 0.7.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>B. P. Abbott et al. (LIGO Scientific and Virgo Collaborations), <a href="https://doi.org/10.1103/PhysRevLett.116.061102" rel="noopener"><em>Observation of gravitational waves from a binary black hole merger</em></a>, Phys. Rev. Lett. 116, 061102 (2016).</li>
+    <li>C. V. Vishveshwara, <a href="https://doi.org/10.1038/227936a0" rel="noopener"><em>Scattering of gravitational radiation by a Schwarzschild black-hole</em></a>, Nature 227, 936 (1970). The first sighting of the ringing.</li>
+    <li>F. Pretorius, <a href="https://doi.org/10.1103/PhysRevLett.95.121101" rel="noopener"><em>Evolution of binary black-hole spacetimes</em></a>, Phys. Rev. Lett. 95, 121101 (2005).</li>
+    <li>R. H. Price and J. Pullin, <a href="https://doi.org/10.1103/PhysRevLett.72.3297" rel="noopener"><em>Colliding black holes: the close limit</em></a>, Phys. Rev. Lett. 72, 3297 (1994).</li>
+    <li>O. Dreyer, B. Kelly, B. Krishnan, L. S. Finn, D. Garrison and R. Lopez-Aleman, <a href="https://doi.org/10.1088/0264-9381/21/4/003" rel="noopener"><em>Black-hole spectroscopy: testing general relativity through gravitational-wave observations</em></a>, Class. Quantum Grav. 21, 787 (2004).</li>
+    <li>E. Berti, V. Cardoso and C. M. Will, <a href="https://doi.org/10.1103/PhysRevD.73.064030" rel="noopener"><em>On gravitational-wave spectroscopy of massive black holes with the space interferometer LISA</em></a>, Phys. Rev. D 73, 064030 (2006).</li>
+    <li>E. Berti, V. Cardoso and A. O. Starinets, <a href="https://doi.org/10.1088/0264-9381/26/16/163001" rel="noopener"><em>Quasinormal modes of black holes and black branes</em></a>, Class. Quantum Grav. 26, 163001 (2009). A thorough review of everything in this course.</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <span class="prev"></span>
+      <a class="all" href="./">All lessons</a>
+      <div class="next"><a href="leaky-oscillators.html"><small>Next · 01 →</small><b>Leaky oscillators</b></a></div>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

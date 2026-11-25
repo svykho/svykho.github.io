@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Just enough Schwarzschild · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 2 of a short course on black-hole perturbation theory. The metric, the horizon, the light ring and the tortoise coordinate.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Just enough Schwarzschild · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 2 of a short course on black-hole perturbation theory. The metric, the horizon, the light ring and the tortoise coordinate.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/schwarzschild.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/schwarzschild.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 02 · Part I · Foundations</span>
+        <h1 data-float>Just enough Schwarzschild</h1>
+        <p class="lede" data-float>The few facts about the simplest black hole that the rest of the course needs: the horizon, the light ring and a coordinate that sends the horizon to minus infinity.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<section class="ex" data-float>
+  <h2>The metric</h2>
+  <p>A black hole that does not spin and carries no charge is described by the solution Karl Schwarzschild found in 1916, weeks after Einstein published his equations. Its line element is</p>
+  <div class="eq">$$ds^2 = -f(r)\,dt^2 + \frac{dr^2}{f(r)} + r^2\left(d\theta^2 + \sin^2\theta\, d\phi^2\right), \qquad f(r) = 1 - \frac{2M}{r}.$$</div>
+  <p>It tells you the distance $ds$ between two nearby events. Far away, where $f \to 1$, it is flat spacetime in spherical coordinates. The coordinates mean what you would hope: $t$ is the time measured by an observer far away, and $r$ is defined so that a sphere at radius $r$ has area $4\pi r^2$. It is not the distance to the centre.</p>
+  <p>Schwarzschild is not just one solution among many. Birkhoff's theorem says that it is the only spherically symmetric solution of Einstein's equations in vacuum. Outside any spherical star, collapsing or not, spacetime is Schwarzschild. So a black hole cannot radiate gravitational waves in the spherical, $\ell = 0$, pattern; conservation of momentum rules out $\ell = 1$ as well, and the gravitational ringing starts at $\ell = 2$ (Lesson 4).</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>The horizon</h2>
+  <p>At $r = 2M$ the function $f$ vanishes. In ordinary units this radius is $2GM/c^2$, about 3 km for the mass of the Sun. Something singular seems to happen there, but it is only a bad choice of coordinates: an astronaut falling in notices nothing special, and other coordinates (Finkelstein, 1958) cover the region smoothly. The real singularity is at $r = 0$.</p>
+  <p>What $r = 2M$ is, is a point of no return. Inside it every path into the future, even one of light, moves to smaller $r$. Nothing that crosses it can send a signal back out. This surface is the <strong>event horizon</strong>.</p>
+  <p>Seen from far away, the horizon acts like a perfect absorber. A clock held at radius $r$ ticks slower than a distant one by the factor $\sqrt{f}$, and light climbing out loses energy by the same factor. A source lowered towards the horizon looks redder and dimmer, and seems to freeze just outside. We will need this picture: in perturbation theory the horizon is the place where waves go in and never come back.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>The tortoise coordinate</h2>
+  <p>Follow light moving radially. Setting $ds^2 = 0$ with fixed angles gives $dt = \pm\, dr/f$. Near the horizon $f \to 0$ and $dr/dt \to 0$: in the time $t$ of a distant observer, light never quite reaches $r = 2M$. That suggests a new radial coordinate in which light always moves at the same speed,</p>
+  <div class="eq">$$\frac{dr_*}{dr} = \frac{1}{f(r)} \quad\Longrightarrow\quad r_* = r + 2M \ln\left(\frac{r}{2M} - 1\right).$$</div>
+  <p>Radial light rays are now simply $t \pm r_* = \text{constant}$, straight lines at 45 degrees. Far away $r_* \approx r$. Near the hole $r_*$ goes to $-\infty$: the horizon is pushed infinitely far away, because that is how long light takes to get there by the distant clock. It is known as the <strong>tortoise coordinate</strong>, after Zeno's tortoise, which can never be caught.</p>
+</section>
+
+<figure class="w" data-widget="rulers">
+  <figcaption><strong>Two rulers.</strong> Light pulses sent towards the hole every $3M$ of time. Below, on a ruler in $r_*$, they move evenly at the speed of light. Above, the same pulses on a ruler in $r$: they slow down and pile up at the horizon, which they never reach on this clock. Switch to light climbing out to see the reverse.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Why it matters for waves</h2>
+  <p>In Lessons 3 and 4 every wave equation on the black hole will take the form</p>
+  <div class="eq">$$\left[-\frac{\partial^2}{\partial t^2} + \frac{\partial^2}{\partial r_*^2} - V(r)\right]\Psi = 0,$$</div>
+  <p>a wave on an infinite line, $-\infty &lt; r_* &lt; \infty$, with a potential that vanishes at both ends. The tortoise coordinate turns a problem with a horizon into a problem we already know how to think about: a string with a bump in the middle (Lesson 1). The horizon becomes one end of the string, where waves leave and never return.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Light can orbit</h2>
+  <p>Now let light move sideways. Conservation of energy and angular momentum turn the motion of a light ray into that of a particle in one dimension,</p>
+  <div class="eq">$$\left(\frac{dr}{d\lambda}\right)^2 + L^2\,\frac{f(r)}{r^2} = E^2,$$</div>
+  <p>where $\lambda$ labels the points of the ray. Everything depends on the ratio $b = L/E$, the <strong>impact parameter</strong>: how far from the centre the ray would pass if there were no gravity. The ray comes in until $f/r^2$ reaches $1/b^2$ and bounces back out. But $f/r^2$ has a maximum, $1/(27M^2)$ at $r = 3M$. If $b$ is smaller than</p>
+  <div class="eq">$$b_c = 3\sqrt{3}\,M \approx 5.196\,M,$$</div>
+  <p>the ray clears the top and falls in. If $b$ is just above it, the ray circles the hole a few times before escaping. Exactly at $b_c$ it would circle forever at $r = 3M$, the <strong>light ring</strong> or photon sphere.</p>
+</section>
+
+<figure class="w" data-widget="light">
+  <figcaption><strong>Light around the hole.</strong> Rays coming in from the right with the impact parameter you choose. Left, the paths, with the horizon in black and the light ring dashed. Right, the potential $f/r^2$ and the level $1/b^2$; the dot marks the closest approach. Graze the light ring to see a ray wind around it before it leaves.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>An unstable orbit</h2>
+  <p>The light ring sits on top of a hill, so it is unstable. A ray that starts slightly off it moves away exponentially fast. Two numbers characterise it, and both will reappear in the ringdown (Lesson 6):</p>
+  <div class="eq">$$\Omega_c = \frac{1}{3\sqrt{3}\,M}, \qquad \lambda = \frac{1}{3\sqrt{3}\,M}.$$</div>
+  <p>$\Omega_c$ is how fast light goes round the ring, as seen from far away. $\lambda$ is how fast a small deviation grows: after a time $t$ it has been multiplied by $e^{\lambda t}$. For Schwarzschild the two happen to be equal. The light ring also sets the size of a black hole's shadow, the dark patch the Event Horizon Telescope photographed at the centres of M87 and of our Galaxy: its radius on the sky is $b_c$, not $2M$.</p>
+  <details class="calc">
+    <summary>The calculation</summary>
+    <div>
+      <p>Write $U(r) = f/r^2 = 1/r^2 - 2M/r^3$. Then $U'(r) = -2/r^3 + 6M/r^4$ vanishes at $r = 3M$, where $U = 1/(27M^2)$ and</p>
+      <div class="eq">$$U''(3M) = \frac{6}{r^4} - \frac{24M}{r^5}\bigg|_{3M} = -\frac{2}{81M^4}.$$</div>
+      <p>For a ray with $b = b_c$ near the ring, $r = 3M + \delta$, the radial equation becomes $(d\delta/d\lambda)^2 = -\tfrac12 L^2 U''(3M)\,\delta^2$, so $d\delta/d\lambda = \pm L\,\delta/(9M^2)$. The distant clock runs as $dt/d\lambda = E/f = 3E$ at $r = 3M$, so</p>
+      <div class="eq">$$\frac{d\delta}{dt} = \pm\frac{L}{27M^2E}\,\delta = \pm\frac{b_c}{27M^2}\,\delta = \pm\frac{\delta}{3\sqrt3\,M}.$$</div>
+      <p>The angular velocity is</p>
+      <div class="eq">$$\Omega_c = \frac{d\phi}{dt} = \frac{L/r^2}{E/f} = \frac{b_c f}{r^2} = \frac{3\sqrt3\,M}{27M^2} = \frac{1}{3\sqrt3\,M}.$$</div>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Orbits of stars and the ISCO</h2>
+  <p>Massive bodies feel a similar effective potential, with an extra term from their rest mass. Circular orbits exist down to $r = 3M$, but only those with $r \ge 6M$ are stable. The innermost one, at $r = 6M$, is the <strong>innermost stable circular orbit</strong>, or ISCO. Inside it, the slightest nudge sends a body plunging into the hole. The ISCO marks the inner edge of accretion discs, and in a binary it marks roughly where the slow inspiral ends and the fast plunge begins. Spin moves both the light ring and the ISCO, a lot (Lesson 9).</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$r_* = r + 2M\ln\left(\frac{r}{2M} - 1\right)$$</div>
+  <p>The tortoise coordinate. Light moves through it at constant speed, and it sends the horizon to $r_* = -\infty$.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Outside a non-spinning black hole spacetime is Schwarzschild, with a one-way horizon at $2M$ that the tortoise coordinate moves to minus infinity, and an unstable ring of light at $3M$ whose orbital frequency and instability rate will set the ringing.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>A flash of light is sent radially inwards from the light ring, $r = 3M$. (a) How long, by the clock of a distant observer, does it take to reach $r = 2.01M$? And $r = 2.0001M$? (b) For a black hole of $10\,M_\odot$, what is the first answer in milliseconds? (c) How much extra time does each factor of 100 closer to the horizon cost?</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>(a) Radial light moves at unit speed in $r_*$, so $\Delta t = \Delta r_*$. With $M = 1$, $r_*(3) = 3 + 2\ln 0.5 = 1.614$, $r_*(2.01) = 2.01 + 2\ln 0.005 = -8.587$ and $r_*(2.0001) = -17.807$, so</p>
+      <div class="eq">$$\Delta t = 10.20\,M \quad\text{and}\quad \Delta t = 19.42\,M.$$</div>
+      <p>(b) For $10\,M_\odot$ the unit of time is $49.3\ \mu$s, so $10.20\,M \approx 0.50$ ms.</p>
+      <p>(c) Near the horizon $r_* \approx 2M\ln(r/2M - 1)$, so dividing $r - 2M$ by 100 adds $2M\ln 100 \approx 9.2\,M$. The journey to the horizon itself takes forever, but most of the light is lost after a few tens of $M$: this is why a black hole looks black so quickly.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>K. Schwarzschild, <em>Über das Gravitationsfeld eines Massenpunktes nach der Einsteinschen Theorie</em>, Sitzungsber. Preuss. Akad. Wiss. Berlin, 189 (1916); English translation, <a href="https://arxiv.org/abs/physics/9905030" rel="noopener"><em>On the gravitational field of a mass point according to Einstein's theory</em></a>, arXiv:physics/9905030.</li>
+    <li>D. Finkelstein, <a href="https://doi.org/10.1103/PhysRev.110.965" rel="noopener"><em>Past-future asymmetry of the gravitational field of a point particle</em></a>, Phys. Rev. 110, 965 (1958).</li>
+    <li>S. M. Carroll, <a href="https://arxiv.org/abs/gr-qc/9712019" rel="noopener"><em>Lecture notes on general relativity</em></a>, arXiv:gr-qc/9712019 (1997). Chapter 7 covers everything here and more.</li>
+    <li>V. Cardoso, A. S. Miranda, E. Berti, H. Witek and V. T. Zanchin, <a href="https://doi.org/10.1103/PhysRevD.79.064016" rel="noopener"><em>Geodesic stability, Lyapunov exponents and quasinormal modes</em></a>, Phys. Rev. D 79, 064016 (2009).</li>
+    <li>Event Horizon Telescope Collaboration, <a href="https://doi.org/10.3847/2041-8213/ab0ec7" rel="noopener"><em>First M87 Event Horizon Telescope results. I. The shadow of the supermassive black hole</em></a>, Astrophys. J. Lett. 875, L1 (2019).</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="leaky-oscillators.html"><small>← Previous · 01</small><b>Leaky oscillators</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <div class="next"><a href="scalar-field.html"><small>Next · 03 →</small><b>A scalar field first</b></a></div>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

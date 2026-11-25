@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gravitational perturbations · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Lesson 4 of a short course on black-hole perturbation theory. Polar and axial deformations, gauge freedom and the Regge–Wheeler and Zerilli equations.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Gravitational perturbations · Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Lesson 4 of a short course on black-hole perturbation theory. Polar and axial deformations, gauge freedom and the Regge–Wheeler and Zerilli equations.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/gravitational-perturbations.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/gravitational-perturbations.html">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="./">← Course contents</a>
+        <span class="label" data-float>Lesson 04 · Part II · Ringing black holes</span>
+        <h1 data-float>Gravitational perturbations</h1>
+        <p class="lede" data-float>Shake the geometry of a black hole a little, and Einstein's equations reduce to one wave equation for each multipole.</p>
+      </div>
+    </div>
+
+    <article class="lesson">
+<aside class="aside" data-float>
+  <span class="label">What we need from Lessons 2 and 3</span>
+  <p>Those lessons are still being written. Here we only use their results:</p>
+  <ul>
+    <li>The Schwarzschild metric, with $f = 1 - 2M/r$ and the horizon at $r = 2M$:
+      <div class="eq">$$ds^2 = -f\,dt^2 + \frac{dr^2}{f} + r^2\left(d\theta^2 + \sin^2\theta\,d\phi^2\right).$$</div></li>
+    <li>The tortoise coordinate, which sends the horizon to $r_* = -\infty$ and is close to $r$ far away:
+      <div class="eq">$$r_* = r + 2M\ln\left(\frac{r}{2M} - 1\right), \qquad \frac{dr_*}{dr} = \frac1f .$$</div></li>
+    <li>A massless scalar field, $\Phi = \sum_{\ell m} r^{-1}\psi_{\ell m}(t, r)\,Y_{\ell m}$, obeys for each $\ell$ the wave equation of Lesson 1:
+      <div class="eq">$$-\frac{\partial^2\psi}{\partial t^2} + \frac{\partial^2\psi}{\partial r_*^2} - V\psi = 0, \qquad V = f\left[\frac{\ell(\ell+1)}{r^2} + \frac{2M}{r^3}\right].$$</div></li>
+  </ul>
+</aside>
+
+<section class="ex" data-float>
+  <h2>Small ripples on a fixed background</h2>
+  <p>Gravity is the geometry of spacetime, so to disturb a black hole is to deform its geometry. Write the metric as Schwarzschild plus a small correction,</p>
+  <div class="eq">$$g_{\mu\nu} = g^{\rm Schw}_{\mu\nu} + h_{\mu\nu}, \qquad |h_{\mu\nu}| \ll 1,$$</div>
+  <p>put it into Einstein's equations in vacuum, $R_{\mu\nu} = 0$, and keep only the terms linear in $h$. What comes out, $\delta R_{\mu\nu}[h] = 0$, is a set of ten linear partial differential equations for the ten components of $h$, each a function of $t$, $r$, $\theta$ and $\phi$. That sounds hopeless, but the word <em>linear</em> saves us: solutions can be added, so we can study one simple piece at a time and build everything else by superposition.</p>
+  <p>Symmetry tells us which pieces to use. The black hole does not change in time, so every component can be taken proportional to $e^{-i\omega t}$. It is spherically symmetric, so the angular dependence can be expanded in spherical harmonics $Y_{\ell m}(\theta, \phi)$, and different $(\ell, m)$ never mix. Finally, no direction is special, so the equations cannot depend on $m$: we may set $m = 0$ and lose nothing.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Two ways to deform a sphere</h2>
+  <p>There is one subtlety. A spherical harmonic is a function on the sphere, but $h_{\mu\nu}$ is a tensor. Its components $h_{tt}$, $h_{tr}$ and $h_{rr}$ behave like functions on the sphere; $h_{t\theta}$, $h_{t\phi}$, $h_{r\theta}$ and $h_{r\phi}$ behave like a vector on it; and $h_{\theta\theta}$, $h_{\theta\phi}$ and $h_{\phi\phi}$ like a tensor. Vector fields on a sphere come in two kinds: gradients, $\nabla_A Y_{\ell m}$, and curls, $\epsilon_A{}^B\nabla_B Y_{\ell m}$, which are the gradients turned through 90°. So every perturbation splits into two families.</p>
+  <ul>
+    <li><strong>Polar</strong>, or even, perturbations are built from $Y_{\ell m}$ and its gradients. Under a reflection through the centre they change by $(-1)^\ell$, like $Y_{\ell m}$ itself. They stretch and squeeze.</li>
+    <li><strong>Axial</strong>, or odd, perturbations are built from the curls. They change by $(-1)^{\ell+1}$. They twist.</li>
+  </ul>
+  <p>Reflection through the centre is a symmetry of the black hole, so the two families never mix, and we can treat them one at a time.</p>
+</section>
+
+<figure class="w" data-widget="deform">
+  <figcaption><strong>Two ways to deform a sphere.</strong> A sphere around the black hole, deformed by a single multipole with $m = 0$. A polar perturbation moves the surface in and out, $R = 1 + \epsilon\,P_\ell(\cos\theta)\cos\omega t$. An axial one leaves the shape alone and turns each circle of latitude about the axis, by an angle proportional to $P_\ell'(\cos\theta)$. Orange and blue mark the two directions of the displacement.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>Why gravitational waves start at ℓ = 2</h2>
+  <p>The lowest multipoles are special. A perturbation with $\ell = 0$ only changes the mass of the hole. A polar perturbation with $\ell = 1$ moves the hole, and an axial one sets it spinning slowly. None of these radiates, because mass, momentum and angular momentum are conserved. Gravitational waves start at $\ell = 2$, the quadrupole.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Choosing a gauge</h2>
+  <p>Not all ten components are physical. Relabelling the points of spacetime by a tiny amount, $x^\mu \to x^\mu + \xi^\mu$, changes $h_{\mu\nu}$ by $\nabla_\mu\xi_\nu + \nabla_\nu\xi_\mu$ but describes exactly the same geometry. This is a gauge freedom, like the one in electromagnetism, and Regge and Wheeler (1957) used it to set as many components to zero as possible. For each $(\ell, m)$, what remains of the axial family is two functions of $r$,</p>
+  <div class="eq">$$h_{tA} = h_0(r)\,X_A\,e^{-i\omega t}, \qquad h_{rA} = h_1(r)\,X_A\,e^{-i\omega t}, \qquad X_A = \epsilon_A{}^B\nabla_B Y_{\ell m},$$</div>
+  <p>with $A = \theta, \phi$. The polar family keeps four,</p>
+  <div class="eq">$$h_{tt} = f H_0\, Y, \qquad h_{tr} = H_1\, Y, \qquad h_{rr} = \frac{H_2}{f}\, Y, \qquad h_{AB} = r^2 K\,\Omega_{AB}\, Y,$$</div>
+  <p>each multiplied by $e^{-i\omega t}$, where $Y = Y_{\ell m}$ and $\Omega_{AB}$ is the metric of the unit sphere. Instead of fixing a gauge one can work with gauge-invariant combinations from the start, as Martel and Poisson (2005) explain clearly. The equations that come out are the same.</p>
+</section>
+
+<section class="ex" data-float>
+  <h2>Axial: the Regge–Wheeler equation</h2>
+  <p>Insert the axial ansatz into $\delta R_{\mu\nu} = 0$. Three equations survive, and only two of them are independent. Remarkably, they combine into a single second-order equation for one function, $\Psi = f h_1/r$:</p>
+  <div class="eq">$$\frac{d^2\Psi}{dr_*^2} + \left[\omega^2 - V_{\rm RW}(r)\right]\Psi = 0, \qquad V_{\rm RW} = f\left(\frac{\ell(\ell+1)}{r^2} - \frac{6M}{r^3}\right).$$</div>
+  <p>This is the <strong>Regge–Wheeler equation</strong>. Put back the time dependence and it is exactly the bump-on-a-line equation of Lesson 1, with the tortoise coordinate $r_*$ in place of $x$. Everything an axial perturbation with a given $\ell$ can do is contained in this one function of two variables.</p>
+  <details class="calc">
+    <summary>The full calculation</summary>
+    <div>
+      <p>With the time dependence $e^{-i\omega t}$ and the ansatz above, the $(\theta\phi)$ and $(r\phi)$ components of $\delta R_{\mu\nu} = 0$ read</p>
+      <div class="eq">$$i\omega\, h_0 = -f\,\frac{d}{dr}\left(f h_1\right),$$</div>
+      <div class="eq">$$-i\omega\left(\frac{dh_0}{dr} - \frac{2h_0}{r}\right) + \left[\omega^2 - \frac{(\ell-1)(\ell+2)\,f}{r^2}\right]h_1 = 0 .$$</div>
+      <p>The $(t\phi)$ component follows from these two. Because $f\,d/dr = d/dr_*$, the first equation says $i\omega h_0 = -d(r\Psi)/dr_*$. Write the bracket in the second as $r^2\,d(h_0/r^2)/dr$, use the first equation to eliminate $h_0$, and multiply by $f/r$:</p>
+      <div class="eq">$$\omega^2\Psi - \frac{(\ell-1)(\ell+2)\,f}{r^2}\,\Psi + r\,\frac{d}{dr_*}\left[\frac{1}{r^2}\,\frac{d(r\Psi)}{dr_*}\right] = 0 .$$</div>
+      <p>Expand the last term using $dr/dr_* = f$. The first-derivative terms cancel and it becomes $d^2\Psi/dr_*^2 + r f\,\frac{d}{dr}\!\left(f/r^2\right)\Psi$. Since $r f\,\frac{d}{dr}(f/r^2) = f\left(-2/r^2 + 6M/r^3\right)$, the potential terms add up to $f\left[(\ell-1)(\ell+2) + 2\right]/r^2 - 6Mf/r^3$, and $(\ell-1)(\ell+2) + 2 = \ell(\ell+1)$. That is the Regge–Wheeler equation. The component equations take a few lines to obtain with any computer-algebra system; we checked them that way.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Polar: the Zerilli equation</h2>
+  <p>The polar family has four functions and the algebra is much longer, but the result has the same form. Zerilli (1970) found the combination of $K$ and $H_1$ that obeys</p>
+  <div class="eq">$$\frac{d^2 Z}{dr_*^2} + \left[\omega^2 - V_{\rm Z}(r)\right]Z = 0,$$</div>
+  <div class="eq">$$V_{\rm Z} = f\,\frac{2\lambda^2(\lambda+1)\,r^3 + 6\lambda^2 M r^2 + 18\lambda M^2 r + 18M^3}{r^3\,(\lambda r + 3M)^2}, \qquad \lambda = \frac{(\ell-1)(\ell+2)}{2}.$$</div>
+  <p>This potential looks nothing like Regge–Wheeler's, and yet the two give exactly the same quasinormal frequencies, and let through exactly the same fraction of a wave of any frequency. Chandrasekhar explained why: both potentials are built from one and the same function.</p>
+  <details class="calc">
+    <summary>The full calculation: why the two agree</summary>
+    <div>
+      <p>Let $\mu^2 = (\ell-1)(\ell+2) = 2\lambda$ and define</p>
+      <div class="eq">$$F = \frac{f}{r\,(\mu^2 r + 6M)}, \qquad \beta = 6M, \qquad \kappa = \mu^2(\mu^2+2).$$</div>
+      <p>Then both potentials follow from $F$:</p>
+      <div class="eq">$$V_{\rm Z} = \beta^2F^2 + \kappa F + \beta\,\frac{dF}{dr_*}, \qquad V_{\rm RW} = \beta^2F^2 + \kappa F - \beta\,\frac{dF}{dr_*}.$$</div>
+      <p>Potentials of this form are partners: if $\Psi$ solves the Regge–Wheeler equation, then</p>
+      <div class="eq">$$Z = \left(\kappa + 2\beta^2 F\right)\Psi + 2\beta\,\frac{d\Psi}{dr_*}$$</div>
+      <p>solves the Zerilli equation with the same $\omega$. Near the horizon and far away $F \to 0$, and on a wave that leaves the region, $d/dr_*$ acts as $\pm i\omega$, so there $Z$ is just a constant multiple of $\Psi$. An outgoing wave goes to an outgoing wave, so a quasinormal mode of one equation is a quasinormal mode of the other, at the same frequency. We checked both identities, and the map, with computer algebra.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ex" data-float>
+  <h2>Reading the potential</h2>
+  <p>All the linear dynamics of the black hole is now hidden in a one-dimensional potential. It vanishes at both ends: at the horizon, $r_* \to -\infty$, because $f \to 0$, and far away because it falls off like $\ell(\ell+1)/r^2$. In between there is a single barrier, peaked close to $r = 3M$. That radius is the <strong>light ring</strong>, the circle on which light can orbit the hole, though not stably.</p>
+</section>
+
+<figure class="w" data-widget="potential">
+  <figcaption><strong>The potentials.</strong> Effective potentials for gravitational (Regge–Wheeler and Zerilli), scalar and electromagnetic waves, in units of $1/M^2$. On the tortoise axis the horizon is infinitely far to the left. Point at the plot to read the values.</figcaption>
+</figure>
+
+<section class="ex" data-float>
+  <h2>A leaky resonator, again</h2>
+  <p>The barrier is open on both sides. What gets through it from outside falls into the hole, and what bounces off escapes to infinity. That is the leaky resonator of Lesson 1, and it tells us what to expect before computing anything: complex frequencies with a real part of the order of $\sqrt{V_{\max}}$, about $0.39/M$ for $\ell = 2$, and decay rates set by how sharp the barrier is. Lesson 6 finds $M\omega = 0.374 - 0.089\,i$.</p>
+  <p>The other massless fields fit the same pattern. For spin $s = 0$ (scalar), $s = 1$ (electromagnetic) and $s = 2$ (axial gravitational) the potential is</p>
+  <div class="eq">$$V_s = f\left[\frac{\ell(\ell+1)}{r^2} + \frac{(1-s^2)\,2M}{r^3}\right],$$</div>
+  <p>and for large $\ell$ they all approach the same shape, $\ell(\ell+1)\,f/r^2$, whatever the spin.</p>
+</section>
+
+<section class="key" data-float>
+  <span class="label">Key equation</span>
+  <div class="eq">$$-\frac{\partial^2\Psi}{\partial t^2} + \frac{\partial^2\Psi}{\partial r_*^2} - V(r)\,\Psi = 0$$</div>
+  <p>Every linear perturbation of a Schwarzschild black hole, for each multipole and parity, obeys this one-dimensional wave equation. Only the potential changes.</p>
+</section>
+
+<section class="one" data-float>
+  <span class="label">In one sentence</span>
+  <p>Ten coupled equations for the deformed geometry reduce to one wave equation per multipole and parity, with a potential barrier peaked near the light ring, and the polar and axial barriers ring at exactly the same frequencies.</p>
+</section>
+
+<section class="exercise" data-float>
+  <span class="label">Exercise</span>
+  <p>Show that for large $\ell$ the potentials peak at the light ring, $r = 3M$, with height $V_{\max} \approx \ell(\ell+1)/27M^2$. Then use the figure to see how good the estimate is for $\ell = 2$ and for $\ell = 6$.</p>
+  <details class="sol">
+    <summary>Show the solution</summary>
+    <div>
+      <p>For large $\ell$ the term $\ell(\ell+1)/r^2$ dominates, so $V \approx \ell(\ell+1)\,(r - 2M)/r^3$. Its derivative is proportional to</p>
+      <div class="eq">$$\frac{d}{dr}\,\frac{r-2M}{r^3} = \frac{1}{r^3} - \frac{3(r-2M)}{r^4} = \frac{6M - 2r}{r^4},$$</div>
+      <p>which vanishes at $r = 3M$. There $V = \ell(\ell+1)\,M/27M^3 = \ell(\ell+1)/27M^2$.</p>
+      <p>For $\ell = 2$ the estimate gives $0.222$, while the Regge–Wheeler barrier actually peaks at $0.151$, at $r = 3.28M$: not good. For $\ell = 6$ it gives $1.556$ against $1.482$, at $r = 3.03M$, within 5 %. The light ring takes over as $\ell$ grows, which is the idea behind the light-ring estimate of the frequencies in Lesson 6.</p>
+    </div>
+  </details>
+</section>
+
+<section class="reading" data-float>
+  <span class="label">Further reading</span>
+  <ol>
+    <li>T. Regge and J. A. Wheeler, <a href="https://doi.org/10.1103/PhysRev.108.1063" rel="noopener"><em>Stability of a Schwarzschild singularity</em></a>, Phys. Rev. 108, 1063 (1957). Where it all started.</li>
+    <li>F. J. Zerilli, <a href="https://doi.org/10.1103/PhysRevLett.24.737" rel="noopener"><em>Effective potential for even-parity Regge–Wheeler gravitational perturbation equations</em></a>, Phys. Rev. Lett. 24, 737 (1970).</li>
+    <li>S. Chandrasekhar, <em>The Mathematical Theory of Black Holes</em>, Oxford University Press (1983). The complete treatment, including the relation between the two potentials.</li>
+    <li>K. Martel and E. Poisson, <a href="https://doi.org/10.1103/PhysRevD.71.104003" rel="noopener"><em>Gravitational perturbations of the Schwarzschild spacetime: a practical covariant and gauge-invariant formalism</em></a>, Phys. Rev. D 71, 104003 (2005).</li>
+    <li>M. Maggiore, <em>Gravitational Waves, Vol. 2: Astrophysics and Cosmology</em>, Oxford University Press (2018). A textbook account of black-hole perturbation theory.</li>
+  </ol>
+</section>
+    </article>
+
+    <nav class="lesson-nav" aria-label="Lessons">
+      <div class="prev"><a href="scalar-field.html"><small>← Previous · 03</small><b>A scalar field first</b></a></div>
+      <a class="all" href="./">All lessons</a>
+      <div class="next"><a href="scattering.html"><small>Next · 05 →</small><b>Scattering</b></a></div>
+    </nav>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

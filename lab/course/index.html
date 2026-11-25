@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="A short introductory course on black-hole perturbation theory: quasinormal modes, the Regge–Wheeler and Zerilli equations and the ringdown, with interactive figures.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Black-hole perturbation theory · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="A short introductory course on black-hole perturbation theory: quasinormal modes, the Regge–Wheeler and Zerilli equations and the ringdown, with interactive figures.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://svykho.github.io/lab/course/">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab/course/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/lab.css">
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/course.js" defer></script>
+</head>
+<body class="course" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../../about.html">About</a><a href="../../research.html">Research</a><a href="../../lab.html" aria-current="true">Lab</a><a href="../../cv.html">CV</a><a href="../../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="../../lab.html">← Black Hole Lab</a>
+        <span class="label" data-float>Course</span>
+        <h1 data-float>Black-hole perturbation theory</h1>
+        <p class="lede" data-float>From a leaky oscillator to the ringing of real black holes, in twelve short lessons.</p>
+      </div>
+    </div>
+
+    <section class="row course-intro" data-float>
+      <h2 class="label">How it works</h2>
+      <div class="body t">
+        <p>When a black hole is disturbed, by a merger or by anything that falls in, it rings like a bell and settles down. Black-hole perturbation theory is the art of describing that ringing with small deformations of the geometry, and it is how we read the end of every gravitational-wave signal.</p>
+        <p>Each lesson tells the story first, with a figure you can play with, and keeps the full calculation folded away until you want it. Every number on these pages was computed for the course, most of them live in your browser. Start with <a href="why-perturb.html">Why perturb a black hole</a>, or jump to any lesson below.</p>
+        <dl class="facts">
+          <div><dt>You need</dt><dd>Waves, complex numbers and some calculus. General relativity helps but is not required.</dd></div>
+          <div><dt>Units</dt><dd><i>G</i> = <i>c</i> = 1, with lengths and times measured in units of the black-hole mass <i>M</i>.</dd></div>
+          <div><dt>Each lesson</dt><dd>A story, live figures, the full calculation, one exercise and further reading.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="row" data-float>
+      <h2 class="label">Part I · Foundations</h2>
+      <div class="body">
+        <ol class="lessons">
+          <li><a href="why-perturb.html"><span class="n">00</span><h3>Why perturb a black hole</h3><span class="tag">Read →</span><p>What a ringdown is, why small deformations are enough to describe it, and how the course is organised.</p></a></li>
+          <li><a href="leaky-oscillators.html"><span class="n">01</span><h3>Leaky oscillators</h3><span class="tag">Read →</span><p>Ringing that fades: complex frequencies, open systems and a bump you can solve exactly.</p></a></li>
+          <li><a href="schwarzschild.html"><span class="n">02</span><h3>Just enough Schwarzschild</h3><span class="tag">Read →</span><p>The metric, the horizon, the light ring and the tortoise coordinate.</p></a></li>
+          <li><a href="scalar-field.html"><span class="n">03</span><h3>A scalar field first</h3><span class="tag">Read →</span><p>Separate a wave equation on a black hole and meet the effective potential.</p></a></li>
+        </ol>
+      </div>
+    </section>
+    <section class="row" data-float>
+      <h2 class="label">Part II · Ringing black holes</h2>
+      <div class="body">
+        <ol class="lessons">
+          <li><a href="gravitational-perturbations.html"><span class="n">04</span><h3>Gravitational perturbations</h3><span class="tag">Read →</span><p>Polar and axial deformations, gauge freedom and the Regge–Wheeler and Zerilli equations.</p></a></li>
+          <li><a href="scattering.html"><span class="n">05</span><h3>Scattering</h3><span class="tag">Read →</span><p>Reflection and transmission by the potential barrier, and what greybody factors measure.</p></a></li>
+          <li><a href="quasinormal-modes.html"><span class="n">06</span><h3>Quasinormal modes</h3><span class="tag">Read →</span><p>The black hole's own frequencies: what they are, how to compute them and how to hear them.</p></a></li>
+          <li><a href="excitation.html"><span class="n">07</span><h3>What a black hole rings with</h3><span class="tag">Read →</span><p>The Green's function, excitation factors and which modes a given perturbation excites.</p></a></li>
+          <li><a href="tails.html"><span class="n">08</span><h3>Late-time tails</h3><span class="tag">Read →</span><p>Why the ringing gives way to a slow power-law decay, and why it is often so weak.</p></a></li>
+        </ol>
+      </div>
+    </section>
+    <section class="row" data-float>
+      <h2 class="label">Part III · Beyond</h2>
+      <div class="body">
+        <ol class="lessons">
+          <li><a href="kerr.html"><span class="n">09</span><h3>Spinning black holes</h3><span class="tag">Read →</span><p>Kerr, the Teukolsky and Sasaki–Nakamura equations, mode labels and superradiance.</p></a></li>
+          <li><a href="sources.html"><span class="n">10</span><h3>Sources and real ringdowns</h3><span class="tag">Read →</span><p>Falling particles, fitting real signals and choosing when the ringdown starts.</p></a></li>
+          <li><a href="frontiers.html"><span class="n">11</span><h3>Frontiers</h3><span class="tag">Read →</span><p>Nonlinear modes, echoes, exotic compact objects and tests of gravity.</p></a></li>
+        </ol>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>
