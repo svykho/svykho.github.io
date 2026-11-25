@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sasaki–Nakamura simulator · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Interactive view of a particle falling into a Kerr black hole, along its rotation axis or plunging from the innermost stable orbit, in the equatorial plane or tilted from it, with the gravitational waves computed with the generalized Sasaki–Nakamura equation.">
+  <meta name="theme-color" content="#07090e">
+  <link rel="canonical" href="https://uib-perturbation-theory.github.io/lab/sasaki-nakamura.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/lab.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="../assets/js/site.js" defer></script>
+  <script type="module" src="../assets/lab/sn/sn-sim.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="sim" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../about.html">About</a><a href="../research.html">Research</a><a href="../lab.html" aria-current="true">Lab</a><a href="../cv.html">CV</a><a href="../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="../lab.html">← Black Hole Lab</a>
+        <h1 data-float>Sasaki–Nakamura simulator</h1>
+        <p class="lede" data-float>A small body falls into a Kerr black hole: from rest along the
+      rotation axis, or spiralling in from the innermost stable orbit, in
+      the equatorial plane or tilted from it. On its way in it sends out gravitational waves, and the black
+      hole then rings at its quasinormal frequencies. The waves come from
+      the generalized Sasaki–Nakamura equation; the trajectory is computed
+      in your browser.</p>
+      </div>
+    </div>
+
+    <div class="rw-wrap">
+    <div class="rw-app" data-sn>
+
+      <div class="rw-stage">
+        <canvas class="rw-canvas" aria-label="Three-dimensional view of the particle falling into the black hole and of the waves it emits"></canvas>
+        <div class="rw-labels" aria-hidden="true">
+          <span class="rw-label" data-label="bh" hidden>Black hole</span>
+          <span class="rw-label" data-label="ring" hidden>Light ring</span>
+          <span class="rw-label" data-label="isco" hidden>ISCO</span>
+          <span class="rw-label" data-label="particle" hidden>Particle</span>
+          <span class="rw-label" data-label="obs" hidden>Observer</span>
+        </div>
+        <div class="rw-time" aria-live="off">t = 0.0 M</div>
+        <div class="rw-status">Loading…</div>
+        <div class="rw-legend"><span><span data-show="axis">Ψ</span><span data-show="plunge incl" hidden>h₊</span> &lt; 0</span><span class="rw-legend-bar"></span><span><span data-show="axis">Ψ</span><span data-show="plunge incl" hidden>h₊</span> &gt; 0</span></div>
+        <div class="rw-hint">drag to rotate · scroll to zoom</div>
+      </div>
+
+      <div class="rw-trace">
+        <div class="rw-trace-head">
+          <span class="rw-trace-title">
+            <span data-show="axis">Ψ at the observer</span>
+            <span data-show="plunge incl" hidden>r h₊ / μ at the observer</span>
+            <span class="rw-key"><i></i><span data-show="axis">GSN waveform</span><span data-show="plunge" hidden>waveform</span><span data-show="incl" hidden>h₊</span></span>
+            <span class="rw-key" data-show="incl" hidden><i class="ref"></i>h×</span>
+            <span class="rw-key" data-qnm-key><i class="dash"></i>fit, n = 0 + tail</span>
+            <span class="rw-key" data-tail-key><i class="dots"></i>tail</span>
+          </span>
+          <span class="rw-trace-tools">
+            <span class="rw-trace-scale" role="group" aria-label="Quasinormal-mode fit">
+              <span class="rw-tool-label">QNM</span>
+              <button type="button" data-qnm="-1" aria-pressed="false">Off</button>
+              <button type="button" data-qnm="0" aria-pressed="true">n = 0</button>
+              <button type="button" data-qnm="3" aria-pressed="false"><span data-show="axis plunge">n ≤ 3</span><span data-show="incl" hidden>n ≤ 1</span></button>
+            </span>
+            <span class="rw-trace-scale" role="group" aria-label="Vertical scale">
+              <button type="button" data-scale="lin" aria-pressed="true">Linear</button>
+              <button type="button" data-scale="log" aria-pressed="false">log |<span data-show="axis">Ψ</span><span data-show="plunge incl" hidden>h₊</span>|</button>
+            </span>
+          </span>
+        </div>
+        <canvas aria-label="Wave recorded by the observer; click to jump in time"></canvas>
+      </div>
+
+      <aside class="rw-panel" aria-label="Simulation controls">
+        <h2>Controls</h2>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Black hole</p>
+          <div class="rw-field">
+            <label for="sn-spin">Spin <output data-out="spin"></output></label>
+            <input id="sn-spin" type="range" min="0" max="0.9" step="0.1" value="0" data-param="spin">
+          </div>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Trajectory</p>
+          <div class="rw-seg rw-seg-wide" role="group" aria-label="Trajectory">
+            <button type="button" data-mode="axis" aria-pressed="true">Along the axis</button>
+            <button type="button" data-mode="plunge" aria-pressed="false">Equatorial plunge</button>
+            <button type="button" data-mode="incl" aria-pressed="false">Inclined plunge</button>
+          </div>
+          <p class="rw-field-note" data-show="axis">
+            Falls from rest at infinity (E = 1) along the rotation axis.
+          </p>
+          <p class="rw-field-note" data-show="plunge" hidden>
+            Spirals in from the innermost stable circular orbit (ISCO) in the
+            equatorial plane, moving with the rotation of the hole.
+          </p>
+          <p class="rw-field-note" data-show="incl" hidden>
+            Spirals in from the innermost stable spherical orbit (ISSO): the
+            orbit is tilted from the equator and the particle also moves up
+            and down. <span data-incl-spins></span>
+          </p>
+          <div class="rw-field" data-show="incl" hidden style="margin-top:.8rem">
+            <label for="sn-iota">Inclination ι <output data-out="iota"></output></label>
+            <input id="sn-iota" type="range" min="0" max="180" step="30" value="60" data-param="iota">
+          </div>
+          <p class="rw-field-note" data-show="incl" hidden>
+            0° moves with the rotation in the equatorial plane, 90° passes over
+            the poles, 180° moves against the rotation.
+          </p>
+          <div data-show="incl" hidden style="margin-top:.6rem">
+            <p class="rw-field-note" style="margin:0">Up-and-down motion at t = 0</p>
+            <div class="rw-seg" role="group" aria-label="Phase of the polar motion at t = 0">
+              <button type="button" data-phase="0" aria-pressed="true">Top</button>
+              <button type="button" data-phase="1" aria-pressed="false">Down</button>
+              <button type="button" data-phase="2" aria-pressed="false">Bottom</button>
+              <button type="button" data-phase="3" aria-pressed="false">Up</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Observer</p>
+          <div class="rw-field">
+            <label for="sn-obs"><span>Position r*<sub>obs</sub></span> <output data-out="sObs"></output></label>
+            <input id="sn-obs" type="range" min="20" max="100" step="5" value="60" data-param="sObs">
+          </div>
+          <div class="rw-field" data-show="incl" hidden>
+            <label for="sn-thobs">Angle from the spin axis <output data-out="thetaObs"></output></label>
+            <input id="sn-thobs" type="range" min="0" max="180" step="5" value="60" data-param="thetaObs">
+          </div>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">View</p>
+          <div class="rw-seg" role="group" aria-label="How the radiation is drawn">
+            <button type="button" data-view="sheet" aria-pressed="true">Sheet</button>
+            <button type="button" data-view="volume" aria-pressed="false">Volume</button>
+          </div>
+          <p class="rw-field-note">
+            Volume draws h₊ in all directions around the hole as a glowing
+            cloud: orange where h₊ &gt; 0, blue where h₊ &lt; 0, on a linear
+            scale.
+          </p>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Playback</p>
+          <div class="rw-buttons">
+            <button type="button" class="primary" data-action="play">Pause</button>
+            <button type="button" data-action="restart">Restart</button>
+            <button type="button" data-action="view">Reset view</button>
+          </div>
+          <div class="rw-field" style="margin-top:.8rem">
+            <label for="sn-speed">Speed <output data-out="speed"></output></label>
+            <input id="sn-speed" type="range" min="4" max="60" step="1" value="20" data-param="speed">
+          </div>
+          <label class="rw-check"><input type="checkbox" data-param="log" checked> Compressed heights (shows the faint ringing)</label>
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="rw-panels">
+
+      <figure class="rw-card" data-sn-spectrum>
+        <div class="rw-card-head">
+          <div>
+            <h3>Spectrum</h3>
+            <p data-show="axis">
+              Frequency content |X(ω)| of the wave. It falls off steeply
+              above the quasinormal frequencies.
+            </p>
+            <p data-show="plunge" hidden>
+              Frequency content |h̃(ω)| of the ℓ = m = 2 strain. The spike is
+              the long, nearly circular phase on the ISCO; the plunge fills
+              the band up to the quasinormal frequency, above which the
+              spectrum falls off steeply.
+            </p>
+            <p data-show="incl" hidden>
+              Frequency content |h̃₊(ω)| of the wave at the observer. Several
+              m contribute, so the ringing is spread over the ℓ = 2
+              frequencies of all five m (and fainter ℓ = 3, 4).
+            </p>
+          </div>
+        </div>
+        <div class="rw-card-keys">
+          <span class="rw-key"><i></i>this spin</span>
+          <span class="rw-key" data-ref-key hidden><i class="ref"></i>a = 0, for comparison</span>
+          <span class="rw-key"><i class="dash"></i>quasinormal frequencies</span>
+          <span class="rw-key" data-show="plunge" hidden><i class="orbit"></i>twice the ISCO orbital frequency</span>
+        </div>
+        <canvas aria-label="Spectrum of the wave with the quasinormal frequencies marked"></canvas>
+        <p class="rw-readout" data-readout></p>
+      </figure>
+
+      <figure class="rw-card" data-sn-qnm>
+        <div class="rw-card-head">
+          <div>
+            <h3>Quasinormal frequencies</h3>
+            <p>
+              The ℓ = 2, <span data-show="axis">m = 0</span><span data-show="plunge" hidden>m = 2</span><span data-show="incl" hidden>m = −2 … 2</span>
+              modes from a = 0 to 0.99. Each dot is one of the spins of the
+              simulator; click one to use it.
+            </p>
+          </div>
+        </div>
+        <div class="rw-card-keys">
+          <span class="rw-key"><i class="dot"></i>a = 0, 0.1, …, 0.9</span>
+          <span class="rw-key"><i class="dot pick"></i>current spin</span>
+        </div>
+        <canvas aria-label="Quasinormal frequencies in the complex plane as the spin changes; click a dot to choose that spin"></canvas>
+        <p class="rw-readout" data-readout></p>
+      </figure>
+
+    </div>
+
+    <p class="rw-note" data-show="axis">
+      The sheet is a slice through the black hole that contains the rotation
+      axis, along which the particle falls. Its height is the outgoing wave
+      Ψ(t − r*) times its angular pattern, roughly sin²θ, drawn against the
+      tortoise coordinate r*, so the waves travel at constant speed. The wave
+      vanishes along the axis, so the observer sits in the equatorial
+      direction. Units: G = c = M = 1.
+    </p>
+    <p class="rw-note" data-show="plunge" hidden>
+      The sheet is the equatorial plane of the black hole, in which the
+      particle spirals in; the hole rotates anticlockwise as seen from above.
+      Its height is the strain h₊ radiated in that plane, proportional to
+      Re[h₂₂(t − r*) e<sup>2iφ</sup>], drawn against the tortoise coordinate r*, so
+      the waves travel at constant speed. The two spiral arms are the
+      ℓ = m = 2 pattern, which turns with the orbit. Compressed heights
+      compress the size of h₂₂ and keep its phase. Units: G = c = M = 1.
+    </p>
+    <p class="rw-note" data-show="incl" hidden>
+      The particle now moves in three dimensions, on a tilted orbit that
+      precesses around the spin axis; the dashed orange line is its path. The
+      sheet is still the equatorial plane, with height the strain h₊ radiated
+      in that plane, the sum of the modes ℓ = 2 to 4 with every m. The
+      observer floats at the chosen angle from the spin axis, and the trace
+      shows the wave in that direction, which mixes the modes differently.
+      The dashed circles mark the ISSO and the photon orbit with the same
+      inclination. Compressed heights compress the overall size and keep the
+      pattern. Units: G = c = M = 1.
+    </p>
+
+    <article class="rw-explain">
+<section class="ex" data-float>
+<h2>The theory behind this</h2>
+
+      <p>
+        The simulator follows a body of mass $\mu \ll M$ on one of three
+        geodesics of a Kerr black hole of mass $M$ and spin $a$: a fall from
+        rest along the rotation axis, a plunge from the innermost stable
+        circular orbit in the equatorial plane, and a plunge from the
+        innermost stable spherical orbit, tilted from that plane. Since
+        $\mu \ll M$, the body
+        is a small perturbation and its waves can be computed on the fixed
+        Kerr background.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The fall along the axis</h3>
+      <p>
+        The body starts at rest very far away, so its energy per unit mass is
+        $E = 1$. With $\Delta = r^2 - 2Mr + a^2$, in Boyer–Lindquist
+        coordinates,
+      </p>
+      <div class="paper-equation">
+        $$
+        \frac{dr}{d\tau} = -\frac{\sqrt{2Mr\,(r^2 + a^2)}}{r^2 + a^2},
+        \qquad
+        \frac{dt}{d\tau} = \frac{r^2 + a^2}{\Delta}.
+        $$
+      </div>
+      <p>
+        Because the motion is along the axis, the problem is axisymmetric and
+        only modes with $m = 0$ are excited. The simulator shows the
+        strongest one, $\ell = 2$.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The Sasaki–Nakamura equation</h3>
+      <p>
+        Gravitational waves on Kerr are described by the Teukolsky equation
+        for the Weyl scalar $\psi_4$. After separating variables, its radial
+        part has a long-range potential, and for a body that comes in from
+        infinity the source grows without bound at large $r$, which makes it
+        hard to integrate. Sasaki and Nakamura found a change of variables
+        to a function $X$ that obeys an equation with short-range
+        potentials,
+      </p>
+      <div class="paper-equation">
+        $$
+        \frac{d^2 X}{dr_*^2} - \mathcal F(r)\,\frac{dX}{dr_*} - \mathcal U(r)\,X = \mathcal S,
+        \qquad
+        \frac{dr_*}{dr} = \frac{r^2 + a^2}{\Delta}.
+        $$
+      </div>
+      <p>
+        The functions $\mathcal F$ and $\mathcal U$ depend on the frequency
+        $\omega$, on $a$ and on the eigenvalue of the spheroidal harmonics.
+        Far from the hole the solutions behave as $e^{\pm i\omega r_*}$, like
+        free waves. For $a = 0$ the equation becomes the Regge–Wheeler
+        equation, which our <a href="regge-wheeler.html">Regge–Wheeler
+        simulator</a> solves. We use its generalized form (GSN)
+        due to Lo, which works for any spin weight of the field.
+      </p>
+      <p>
+        For each frequency, the outgoing amplitude $X(\omega)$ at infinity is
+        an integral of the solution that is purely ingoing at the horizon
+        against the source of the falling body, divided by a Wronskian. The
+        source carries a factor $e^{i\omega v(r)}$ that follows the body,
+        with $v = t + r_*$ its advanced time.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>From frequencies to the waveform</h3>
+      <p>
+        The signal at the observer is
+      </p>
+      <div class="paper-equation">
+        $$
+        \Psi(u) = \frac{1}{\pi}\,\mathrm{Re}\int_0^\infty X(\omega)\,e^{-i\omega u}\,d\omega,
+        \qquad u = t - r_*.
+        $$
+      </div>
+      <p>
+        Far from the hole, $\Psi$ differs from the strain of the
+        gravitational wave only by a known factor at each frequency, so it
+        carries the same information.
+      </p>
+      <p>
+        The waveforms of the fall along the axis were computed by the group for
+        $a = 0, 0.1, \dots, 0.9$, following the set-up of the GSN plunge
+        paper and the <code>GeneralizedSasakiNakamura.jl</code> code. As a
+        check, the frequency of the ringing read off from them agrees with
+        that of Kerr's fundamental mode to better than one per cent.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The fall in the animation</h3>
+      <p>
+        The time origin is the one of the waveforms: the body crosses the
+        horizon at advanced time $v = 0$. Along its path,
+      </p>
+      <div class="paper-equation">
+        $$
+        \frac{dv}{dr} = -\frac{r^2 + a^2}{2r\,(1 + s)},
+        \qquad
+        s = \sqrt{\frac{r^2 + a^2}{2r}},
+        \qquad
+        t_{\rm p}(r) = v(r) - r_*(r),
+        $$
+      </div>
+      <p>
+        which your browser integrates from the horizon outwards. The
+        animation starts when the body is at $r = 40\,M$. The sheet shows
+        $\Psi(t - r_*)$, the wave that will reach a distant observer, only
+        where it already exists: outside the body, since the waves move
+        outwards faster than it falls, and outside the light ring, the
+        unstable photon orbit near $r = 3M$ from which the ringing leaks
+        out. In the tortoise coordinate the body reaches the edge of the
+        drawn hole in a finite time. In the coordinate time $t$ it never
+        quite crosses the horizon, but its light becomes exponentially
+        redshifted.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The ringdown and the tail</h3>
+      <p>
+        After the peak, the wave contains damped oscillations at the
+        quasinormal frequencies $\omega_n$ of the Kerr black hole. The
+        frequencies are those tabulated by Berti, Cardoso and Starinets. For
+        $m = 0$ they depend only mildly on the spin, as the panel of
+        quasinormal frequencies above shows.
+      </p>
+      <p>
+        On top of the ringing there is a tail that does not oscillate. It
+        comes from the branch cut of $X(\omega)$ along the negative imaginary
+        frequency axis,
+        $\Psi_{\rm tail}(u) = \frac{1}{\pi}\int_0^\infty \mathrm{Im}\,X(-i\gamma)\,e^{-\gamma u}\,d\gamma$.
+        For a body that falls from infinity it is large, about 15% of the
+        peak $10\,M$ after it, and it decays only as a power of $u$. It is
+        the source of the uneven zero crossings of the wave, and at late
+        times it is all that is left.
+      </p>
+      <p>
+        The dashed blue curve on the observer panel is a least-squares fit,
+        done in your browser, of
+      </p>
+      <div class="paper-equation">
+        $$
+        \Psi(u) \simeq \sum_n 2\,\mathrm{Re}\!\left[C_n\, e^{-i\omega_n \tau}\right] + \sum_{k=1}^{5} b_k\, e^{-\gamma_k \tau},
+        \qquad \tau = u - u_{\rm peak},
+        $$
+      </div>
+      <p>
+        with $n = 0, \dots, 3$, the frequencies $\omega_n$ fixed to the Kerr
+        values and only the amplitudes $C_n$ and $b_k$ free. The fit starts
+        $5\,M$ after the peak and runs up to $110\,M$ after it. The
+        exponentials, with fixed rates $\gamma_k$ between $0.005$ and $0.25$,
+        stand in for the tail integral, which is itself a sum of decaying
+        exponentials; their sum is the dotted grey curve. With all four modes
+        the fit matches the wave to better than $10^{-3}$ of the peak. The
+        $n = 0$ button keeps only the fundamental mode and the tail: close to
+        the peak this misses the overtones, which decay faster, so it is only
+        drawn from $25\,M$ after the peak, once they have died out.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The spectrum</h3>
+      <p>
+        At low frequencies $|X(\omega)|$ grows roughly as $\omega^{-1/3}$, the
+        imprint of the slow, Newtonian part of the fall. Above the
+        quasinormal frequencies it drops exponentially, as Davis, Ruffini,
+        Press and Price first found in 1971 for a body falling into a
+        Schwarzschild black hole. A faster spin raises the quasinormal
+        frequencies and makes the hole ring for longer.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The plunge from the innermost stable orbit</h3>
+      <p>
+        In the second trajectory the body moves in the equatorial plane, in
+        the same sense as the hole rotates. Circular orbits there are stable
+        down to the innermost stable circular orbit (ISCO), at $r = 6M$ for
+        $a = 0$ and closer to the horizon for faster spins. The body starts
+        on it and keeps the energy $E$ and angular momentum $L$ per unit
+        mass of that orbit. With $P = E(r^2 + a^2) - aL$,
+      </p>
+      <div class="paper-equation">
+        $$
+        \frac{dr}{dt} = -\frac{\sqrt{R}}{T},
+        \qquad
+        \frac{d\varphi}{dt} = \frac{aP/\Delta - (aE - L)}{T},
+        $$
+        $$
+        R = P^2 - \Delta\left[r^2 + (L - aE)^2\right],
+        \qquad
+        T = \frac{(r^2 + a^2)\,P}{\Delta} - a\,(aE - L).
+        $$
+      </div>
+      <p>
+        $R$ has a triple root at the ISCO, so the body takes an infinite time
+        to leave it: it circles slowly inwards for ever before it plunges.
+        Your browser integrates these equations, with $t = 0$ and
+        $\varphi = 0$ when the body crosses the light ring of the plunge, the
+        prograde circular photon orbit at
+        $r = 2M\left[1 + \cos\left(\tfrac{2}{3}\arccos(-a/M)\right)\right]$.
+        The animation starts at $t = -200\,M$. Close to the horizon the hole
+        drags the body around with it: $d\varphi/dt$ tends to the angular
+        velocity of the horizon, $\Omega_H = a/(2Mr_+)$, while in the tortoise
+        coordinate the body keeps falling at the speed of light.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>Waves from the plunge</h3>
+      <p>
+        The plunge is not axisymmetric, and the strongest waves have
+        $\ell = 2$ and $m = \pm 2$. For each frequency the amplitude of the
+        outgoing wave is an integral along the orbit,
+      </p>
+      <div class="paper-equation">
+        $$
+        Z_\omega = \frac{1}{2i\omega\,B^{\rm inc}_\omega}\int dt\;
+        e^{i(\omega t - 2\varphi(t))}\, I_\omega\big(r(t)\big),
+        $$
+      </div>
+      <p>
+        where $I_\omega$ combines the solution of the radial Teukolsky
+        equation that is purely ingoing at the horizon, and its first two
+        derivatives, with the projections of the body's stress–energy tensor
+        on the Kinnersley tetrad (Sasaki and Tagoshi), and $B^{\rm inc}$ is
+        the incidence amplitude of that solution. The radial solutions were
+        computed with <code>GeneralizedSasakiNakamura.jl</code>, which solves
+        the GSN equation and transforms its solution into the Teukolsky
+        function. The $\ell = m = 2$ mode of the strain, and the strain in
+        the equatorial plane, are
+      </p>
+      <div class="paper-equation">
+        $$
+        r\,h_{22}(u) = -2\int d\omega\,\frac{Z_\omega}{\omega^2}\,e^{-i\omega u},
+        \qquad
+        h_+ = 2\sqrt{\frac{5}{64\pi}}\;\mathrm{Re}\!\left[h_{22}\,e^{2i\varphi}\right],
+        \qquad
+        h_\times = 0,
+        $$
+      </div>
+      <p>
+        since for an orbit in the equatorial plane $h_{2,-2} = h_{22}^*$. The
+        observer panel shows $r h_+/\mu$ in that plane. As checks, for
+        circular orbits the amplitudes agree with the point-particle routine
+        of the same code to one part in $10^7$, and early in the animation
+        the wave of the plunge has the amplitude of the circular orbit the
+        body is on to $0.2\%$. Because the body has been circling for ever,
+        its source is switched on smoothly between $t = -480\,M$ and
+        $-360\,M$, early enough that the transient has died away before the
+        part of the wave shown.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The ringdown of the plunge</h3>
+      <p>
+        The ringing is at the $m = 2$ quasinormal frequencies, which grow
+        strongly with the spin: the light ring moves closer to the horizon
+        and turns faster. Its frequency and decay rate agree with Kerr's
+        fundamental mode to better than one per cent for all the spins. Just
+        after the peak, though, the wave is not yet a sum of modes, since the
+        body still radiates as it is dragged around near the horizon. The fit
+        on the observer panel therefore starts $15\,M$ after the peak of
+        $|dh_{22}/du|$, which marks the plunge better than the peak of $|h_{22}|$,
+        and uses the modes $n = 0, \dots, 3$ with no tail, which is small
+        here. It matches the wave to better than $10^{-3}$ of the peak; the
+        fundamental mode alone is drawn from $30\,M$ after the peak.
+      </p>
+      <p>
+        The spectrum of the plunge has a spike at twice the orbital
+        frequency of the ISCO, where the body spends most of its time; its
+        height grows with the length of that phase, which here is set by the
+        switch-on. The plunge fills the band from there up to the
+        quasinormal frequency, above which the spectrum falls off
+        exponentially, as for the fall along the axis.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>Tilted orbits</h3>
+      <p>
+        Off the equatorial plane a geodesic of Kerr has a third constant of
+        motion besides $E$ and $L$, the Carter constant $Q$, and there are
+        spherical orbits, which stay at a fixed $r$ while the body swings up
+        and down in latitude and the orbital plane precesses around the spin
+        axis. In the third trajectory the body starts on the innermost stable
+        one, the ISSO. Its tilt is the inclination $\iota$, with
+        $x = \cos\iota$ positive for orbits that go round with the hole: the
+        body reaches latitudes $\pm\iota$, so $|\cos\theta| \le z_- = \sin\iota$.
+        For $a = 0$ the inclination is only a rotation and the ISSO is the ISCO
+        at $6M$; for $a = 0.9\,M$ its radius goes from $2.32\,M$ at
+        $\iota = 0^\circ$ to $8.72\,M$ at $\iota = 180^\circ$.
+      </p>
+      <p>
+        With the Mino time $\lambda$, defined by $dt/d\lambda = \Sigma\,dt/d\tau$ with
+        $\Sigma = r^2 + a^2\cos^2\theta$,
+        the radial and polar motions separate. Writing
+        $z = \cos\theta = z_-\cos\chi$,
+      </p>
+      <div class="paper-equation">
+        $$
+        \left(\frac{dr}{d\lambda}\right)^2 = R(r) = P^2 - \Delta\left[r^2 + (L - aE)^2 + Q\right],
+        \qquad
+        \frac{d\chi}{d\lambda} = \sqrt{\frac{Q}{z_-^2} - a^2(1 - E^2)\,z_-^2\cos^2\chi},
+        $$
+        $$
+        \frac{dt}{d\lambda} = \frac{(r^2 + a^2)\,P}{\Delta} + aL - a^2E\,(1 - z^2),
+        \qquad
+        \frac{d\varphi}{d\lambda} = \frac{aP}{\Delta} - aE + \frac{L}{1 - z^2}.
+        $$
+      </div>
+      <p>
+        At the ISSO $R$ again has a triple root. Your browser finds $E$, $L$
+        and $Q$ by solving $R = R' = R'' = 0$ together with the condition
+        that fixes the inclination, and then integrates the plunge in $t$,
+        with $t = 0$ and $\varphi = 0$ when the body crosses the prograde
+        photon orbit, as before. Where the body is in its up-and-down motion
+        at that moment is the phase $\chi_0$: at the top of its swing, on the
+        way down, at the bottom or on the way up. The last two are the mirror
+        images of the first two in the equatorial plane, which turns
+        $h_{\ell m}$ into $(-1)^\ell\,h_{\ell,-m}^*$, so only two phases were
+        computed. At $\iota = 90^\circ$ the body has $L = 0$ and passes over
+        the poles.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>Waves from a tilted plunge</h3>
+      <p>
+        Now every $m$ is excited, and the body moves through the angular
+        pattern of each mode. The amplitudes become
+      </p>
+      <div class="paper-equation">
+        $$
+        Z_{\ell m\omega} = \frac{1}{2i\omega\,B^{\rm inc}_{\ell m\omega}}\int dt\;
+        e^{i(\omega t - m\varphi(t))}\, I_{\ell m\omega}\big(r(t), \theta(t)\big),
+        $$
+      </div>
+      <p>
+        where the source $I_{\ell m\omega}$ now carries the spin-weighted
+        spheroidal harmonic ${}_{-2}S_{\ell m}(\theta; a\omega)$ and its first
+        two derivatives along $\theta(t)$, and terms with the polar velocity
+        that vanish in the equatorial plane. We use the source for generic
+        orbits of Sasaki and Tagoshi, in the form given by Drasco and Hughes
+        with the corrections of their 2014 erratum. A radial solution at
+        $(\ell, m, \omega)$ also gives the one at $(\ell, -m, -\omega)$ by
+        complex conjugation, so each solve serves two modes. To let the
+        observer move, the spheroidal harmonics are expanded in spherical
+        ones, ${}_{-2}S_{\ell m} = \sum_{\ell'} b^{\ell m}_{\ell'}(a\omega)\,{}_{-2}Y_{\ell' m}$, and
+      </p>
+      <div class="paper-equation">
+        $$
+        r\,h_{\ell' m}(u) = -2\sum_{\ell}\int d\omega\,\frac{Z_{\ell m\omega}}{\omega^2}\,
+        b^{\ell m}_{\ell'}(a\omega)\,e^{-i\omega u},
+        \qquad
+        h_+ - i h_\times = \sum_{\ell' m} h_{\ell' m}(u)\;{}_{-2}Y_{\ell' m}(\theta, \varphi),
+        $$
+      </div>
+      <p>
+        with $\ell, \ell' = 2, 3, 4$ and every $m$. Your browser does the last
+        sum for the direction of the observer, and the sheet shows the same
+        sum in the equatorial plane. On the spin axis only $m = 2$ (above) or
+        $m = -2$ (below) reaches the observer, since ${}_{-2}Y_{\ell m}$
+        vanishes there for every other $m$. The frequency integrals run up to
+        $|\omega| = 2.5/M$ in steps of $0.003/M$ and are rolled off smoothly
+        above $1.6$ times the fundamental quasinormal frequency of each mode.
+        The source is switched on as the body starts to leave the ISSO, and
+        never later than $t = -480\,M$, over at least $120\,M$ and almost three
+        orbits, so that the transient has gone before the part of the wave
+        shown.
+      </p>
+      <p>
+        As checks, for $\iota = 0^\circ$ the amplitudes agree with those of the
+        equatorial plunge to $10^{-9}$ (the waves differ by up to $0.5\%$ at
+        high spin, because the equatorial plunge takes the spheroidal mode
+        $\ell = m = 2$ as if it were a spherical one); the source reproduces
+        the amplitudes of the spherical-orbit routine of
+        <code>GeneralizedSasakiNakamura.jl</code>, including $m \le 0$ and the
+        harmonics of the polar motion; at $a = 0$ the power in each $\ell$
+        does not depend on the inclination, as it must for a rotated orbit,
+        to a few parts in $10^{6}$ of its peak ($6 \times 10^{-5}$ for the
+        polar orbit that crosses a pole during the plunge, where the source
+        is taken just off the axis); and the mirror symmetry holds to
+        $10^{-13}$. The ISSO and the orbital frequencies agree with
+        <code>KerrGeodesics.jl</code> to twelve digits or better. At $a = 0$
+        exactly, the radial solver returns no incidence amplitude for
+        $\ell = 4$ below $|\omega| \approx 0.15/M$; there we use its solutions
+        at $a = 10^{-5} M$, which agree with those at $a = 0$, where both
+        exist, to $2 \times 10^{-6}$.
+      </p>
+      <p>
+        The ringing now mixes many modes. The counter-rotating ones, with
+        $m &lt; 0$ in the plane at the bottom of the page, are excited strongly
+        when the orbit goes against the rotation, and the observer sees each
+        $m$ with a different weight. The fit on the observer panel uses the
+        fundamental modes of $\ell = 2$ and $3$ with every $m$ (and adds the
+        first overtones of $\ell = 2$ for "n ≤ 1"), starting $15\,M$ after the
+        peak of the total flux $\sum_{\ell m} |dh_{\ell m}/du|^2$, which does not
+        depend on the observer. It matches the wave to about $10^{-3}$ of its
+        peak.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The volume view</h3>
+      <p>
+        The sheet shows the wave in one plane. The volume view shows it in
+        every direction at once: at each point around the hole, at distance
+        $r_*$ and angles $(\theta, \varphi)$, it evaluates
+      </p>
+      <div class="paper-equation">
+        $$
+        h_+ = \mathrm{Re}\sum_{\ell m} h_{\ell m}(t - r_*)\;{}_{-2}Y_{\ell m}(\theta, \varphi),
+        $$
+      </div>
+      <p>
+        with the same modes as the observer, and draws it as a glowing cloud,
+        orange where $h_+ &gt; 0$ and blue where $h_+ &lt; 0$, more opaque where
+        $|h_+|$ is large. As on the sheet the $1/r$ fall-off is left out, so a
+        wave keeps its brightness as it travels out. Your browser tabulates
+        the angular sums on a grid in $r_*$ and $\theta$ every frame and
+        marches along each line of sight through a ball around the hole,
+        adding up colour and opacity. The scale is linear in $h_+$: the
+        compressed heights of the sheet would make the long, steady parts of
+        the signal fill the ball. In the fall along the axis the pattern is
+        $\Psi\,\sin^2\theta$ around the line of fall; in the equatorial plunge
+        it is the $\ell = 2$, $m = \pm 2$ pair, a double spiral that is
+        strongest along the spin axis; in the tilted plunge every $m$ adds its
+        own twist.
+      </p>
+</section>
+<div class="ex" data-float>
+<p class="rw-refs">
+        M. Sasaki and T. Nakamura, Prog. Theor. Phys. 67, 1788 (1982) ·
+        R. K. L. Lo, generalized Sasaki–Nakamura formalism and
+        <code>GeneralizedSasakiNakamura.jl</code>
+        (<a href="https://arxiv.org/abs/2306.16469" rel="noopener">arXiv:2306.16469</a>) ·
+        plunge waveforms with the GSN method
+        (<a href="https://arxiv.org/abs/2511.08673" rel="noopener">arXiv:2511.08673</a>) ·
+        E. Berti, V. Cardoso and A. O. Starinets, Class. Quantum Grav. 26,
+        163001 (2009) · M. Davis, R. Ruffini, W. H. Press and R. H. Price,
+        Phys. Rev. Lett. 27, 1466 (1971) · J. M. Bardeen, W. H. Press and
+        S. A. Teukolsky, Astrophys. J. 178, 347 (1972) · M. Sasaki and
+        H. Tagoshi, Living Rev. Relativ. 6, 6 (2003) · Y. Mino, Phys. Rev. D
+        67, 084027 (2003) · S. A. Hughes, Phys. Rev. D 61, 084004 (2000) ·
+        S. Drasco and S. A. Hughes, Phys. Rev. D 73, 024027 (2006); erratum
+        Phys. Rev. D 90, 109905 (2014) · L. C. Stein and N. Warburton,
+        Phys. Rev. D 101, 064007 (2020). See also the
+        <a href="regge-wheeler.html">Regge–Wheeler simulator</a> and the
+        <a href="wormhole.html">wormhole simulator</a>.
+      </p>
+</div>
+</article>
+    <p class="credit">Part of the Black Hole Lab of the <a href="https://uib-perturbation-theory.github.io/" rel="noopener">Strong Gravity Group</a> at the UIB. <a href="https://uib-perturbation-theory.github.io/lab/sasaki-nakamura.html" rel="noopener">Original page</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -2,219 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background-color: #0b0b0b;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-    }
-
-    nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 2rem;
-      margin-bottom: 40px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: #f39c12;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      margin-top: 25px;
-      margin-bottom: 10px;
-      color: #ccc;
-    }
-
-    .content {
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-    }
-
-    .text {
-      flex: 1.2;
-    }
-
-    .image {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .image img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .caption {
-      margin-top: 10px;
-      font-style: italic;
-      color: #aaa;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    ul {
-      font-size: 1rem;
-    }
-
-    li {
-      margin-bottom: 16px;
-    }
-
-    a {
-      color: #f39c12;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .supervisors {
-      color: #aaa;
-      font-size: 0.95rem;
-      display: block;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        flex-direction: column;
-      }
-
-      nav {
-        justify-content: center;
-        font-size: 1rem;
-      }
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Papers, theses, talks and simulators on black hole ringdown, quasinormal modes and late-time tails.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Research · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Papers, theses, talks and simulators on black hole ringdown, quasinormal modes and late-time tails.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/research.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/research.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
 </head>
+<body class="" data-sky="lattice">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-<body>
-
-<div class="container">
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="research.html">Research</a>
-    <a href="cv.html">CV</a>
-    <a href="gallery.html">Gallery</a>
-  </nav>
-
-  <h1>Research</h1>
-
-  <div class="content">
-
-    <div class="text">
-
-      <h2>Theses</h2>
-      <ul>
-        <li>
-          <em>Bachelor's Thesis:</em> Simulation of the diffuse emission of the Galaxy in the context of the LiteBIRD mission.
-          <span class="supervisors">
-            Supervisor: Marcos López-Caniego Alcarria (European Space Agency)
-          </span>
-          <a href="files/21944796_tfg_AlejandroSvyatkovskyyKholyavka-2.pdf" target="_blank">[PDF]</a>
-        </li>
-
-        <li>
-          <em>Master's Thesis:</em> Multimessenger signatures of particle acceleration by black holes.
-          <span class="supervisors">
-            Supervisor: Rafael Alves Batista (Instituto de Física Teórica (UAM-CSIC) and Institut d'Astrophysique de Paris)
-          </span>
-          <a href="files/Svyatkovskyy_Kholyavka_Alejandro_TFM.pdf" target="_blank">[PDF]</a>
-        </li>
-
-        <li>
-          <em>Master's Thesis:</em> Probing the black hole ringdown through numerical perturbation theory.
-          <span class="supervisors">
-            Supervisors: Xisco Jiménez Forteza (University of the Balearic Islands), Sayak Datta (Gran Sasso Science Institute)
-          </span>
-          <a href="files/" target="_blank">[PDF]</a>
-        </li>
-      </ul>
-
-      <h2>Publications</h2>
-      <ul>
-        <li>
-          <em>Spectral suppression of black hole ringdown tails.</em>
-          <span class="supervisors">
-            Jose Antonio León Vega, <strong>Alejandro Svyatkovskyy Kholyavka</strong>, Sayak Datta, Xisco Jiménez Forteza.
-            arXiv:2606.02146 [gr-qc], 2026.
-          </span>
-          <a href="https://arxiv.org/abs/2606.02146" target="_blank">[arXiv]</a>
-        </li>
-
-        <li>
-          <em>Shaping black hole resonances I. Black hole ringdown as a spectral filtering process.</em>
-          <span class="supervisors">
-            <strong>Alejandro Svyatkovskyy Kholyavka</strong>, Jose Antonio León Vega, Samuel Gómez Gómez, Xisco Jiménez Forteza, Sayak Datta.
-            arXiv:2605.24704 [gr-qc], 2026.
-          </span>
-          <a href="https://arxiv.org/abs/2605.24704" target="_blank">[arXiv]</a>
-        </li>
-      </ul>
-
-      <h2>Presentations</h2>
-      <ul>
-        <li>
-          <strong>December 1, 2025:</strong> Gravity Days @ UIB (2nd edition), University of the Balearic Islands (Spain) —
-          <a href="files/gravity_days_2025.pdf" target="_blank">[slides]</a>
-        </li>
-      
-        <li>
-          <strong>December 19, 2025:</strong> XVIII Black Holes Workshop, Instituto Superior Técnico (Portugal) —
-          <a href="files/black_holes_workshop_2025.pdf" target="_blank">[slides]</a>
-        </li>
-      </ul>
-
-    </div>
-
-    <div class="image">
-      <img src="images/bg-blackhole2.png" alt="Black hole perturbation">
-      <div class="caption">
-        A visual intuition of black hole perturbations — slightly dramatized.
-      </div>
-    </div>
-
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html">About</a><a href="research.html" aria-current="page">Research</a><a href="lab.html">Lab</a><a href="cv.html">CV</a><a href="gallery.html">Gallery</a></nav>
   </div>
+</header>
 
-</div>
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h1 data-float>Research</h1>
+        <p class="lede" data-float>What a black hole rings with depends on how you hit it.</p>
+      </div>
+      <figure class="boxer" data-float="1.5">
+        <img src="assets/img/boxer.webp" width="720" height="498" alt="A stick figure punching a black hole, which sends out ripples">
+        <figcaption>A visual intuition of black hole perturbations, slightly dramatized.</figcaption>
+      </figure>
+    </div>
 
+    <section class="row" id="papers">
+      <h2 class="label">Papers</h2>
+      <div class="body">
+        <article class="entry" data-float><p class="meta">arXiv:2611.13075 · 2026</p><h3><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances-ii.html" rel="noopener">Shaping black hole resonances II. Spectroscopic landscapes and interference in black hole ringdown</a></h3><p class="who"><strong>Alejandro Svyatkovskyy Kholyavka</strong>, Sayak Datta, Jose Antonio León Vega, Xisco Jiménez Forteza</p><p class="what">A map of how strongly each mode rings across the width and frequency of the perturbation, and of how the positive- and negative-frequency parts of a real source interfere.</p><div class="links"><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances-ii.html" rel="noopener">Overview</a><a href="https://arxiv.org/abs/2611.13075" rel="noopener">arXiv</a></div></article>
+        <article class="entry" data-float><p class="meta">arXiv:2606.02146 · 2026</p><h3><a href="https://uib-perturbation-theory.github.io/papers/spectral-suppression-tails.html" rel="noopener">Spectral suppression of black hole ringdown tails</a></h3><p class="who">Jose Antonio León Vega, <strong>Alejandro Svyatkovskyy Kholyavka</strong>, Sayak Datta, Xisco Jiménez Forteza</p><p class="what">Why Price-law tails are so weak or absent in many merger waveforms: oscillatory perturbations deplete the low-frequency content that feeds them.</p><div class="links"><a href="https://uib-perturbation-theory.github.io/papers/spectral-suppression-tails.html" rel="noopener">Overview</a><a href="https://arxiv.org/abs/2606.02146" rel="noopener">arXiv</a></div></article>
+        <article class="entry" data-float><p class="meta">Phys. Rev. D 114, 064078 · 2026</p><h3><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances.html" rel="noopener">Shaping black hole resonances I. Black hole ringdown as a spectral filtering process</a></h3><p class="who"><strong>Alejandro Svyatkovskyy Kholyavka</strong>, Jose Antonio León Vega, Samuel Gómez Gómez, Xisco Jiménez Forteza, Sayak Datta</p><p class="what">A black hole behaves as a resonant spectral filter: it selects the part of a perturbation that overlaps with its quasinormal-mode spectrum.</p><div class="links"><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances.html" rel="noopener">Overview</a><a href="https://doi.org/10.1103/gptl-zzcn" rel="noopener">Journal</a><a href="https://arxiv.org/abs/2605.24704" rel="noopener">arXiv</a></div></article>
+      </div>
+    </section>
+
+    <section class="row" id="lab">
+      <h2 class="label">Interactive</h2>
+      <div class="body">
+        <article class="entry" data-float>
+          <h3><a href="lab.html">Black Hole Lab</a></h3>
+          <p class="what">Three simulators that run in your browser: send a pulse at a black hole, watch a body plunge into a spinning one, or push a wave through a wormhole.</p>
+          <div class="links"><a href="lab/regge-wheeler.html">Regge–Wheeler</a><a href="lab/sasaki-nakamura.html">Sasaki–Nakamura</a><a href="lab/wormhole.html">Wormhole</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="row" id="talks">
+      <h2 class="label">Talks</h2>
+      <div class="body">
+        <article class="entry" data-float><p class="meta">December 19, 2025</p><h3>XVIII Black Holes Workshop</h3><p class="who">Instituto Superior Técnico, Portugal</p></article>
+        <article class="entry" data-float><p class="meta">December 1, 2025</p><h3>Gravity Days @ UIB, 2nd edition</h3><p class="who">University of the Balearic Islands, Spain</p></article>
+      </div>
+    </section>
+
+    <section class="row" id="theses">
+      <h2 class="label">Theses</h2>
+      <div class="body">
+        <article class="entry" data-float><p class="meta">Master's thesis · UIB</p><h3><a href="https://uib-perturbation-theory.github.io/assets/theses/probing-black-hole-ringdown-through-numerical-perturbation-theory.pdf">Probing the black hole ringdown through numerical perturbation theory</a></h3><p class="who">Supervisors: Xisco Jiménez Forteza (University of the Balearic Islands), Sayak Datta (Gran Sasso Science Institute)</p><div class="links"><a href="https://uib-perturbation-theory.github.io/assets/theses/probing-black-hole-ringdown-through-numerical-perturbation-theory.pdf">PDF</a></div></article>
+        <article class="entry" data-float><p class="meta">Master's thesis · UAM</p><h3><a href="files/Svyatkovskyy_Kholyavka_Alejandro_TFM.pdf">Multimessenger signatures of particle acceleration by black holes</a></h3><p class="who">Supervisor: Rafael Alves Batista (Instituto de Física Teórica UAM-CSIC and Institut d'Astrophysique de Paris)</p><div class="links"><a href="files/Svyatkovskyy_Kholyavka_Alejandro_TFM.pdf">PDF</a></div></article>
+        <article class="entry" data-float><p class="meta">Bachelor's thesis · UEM</p><h3><a href="files/21944796_tfg_AlejandroSvyatkovskyyKholyavka-2.pdf">Simulation of the diffuse emission of the Galaxy in the context of the LiteBIRD mission</a></h3><p class="who">Supervisor: Marcos López-Caniego Alcarria (European Space Agency)</p><div class="links"><a href="files/21944796_tfg_AlejandroSvyatkovskyyKholyavka-2.pdf">PDF</a></div></article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
 </body>
 </html>

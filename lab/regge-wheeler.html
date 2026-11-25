@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regge–Wheeler simulator · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Interactive simulation of an oscillating Gaussian pulse scattering off a Schwarzschild black hole, solved in your browser with the Regge–Wheeler equation.">
+  <meta name="theme-color" content="#07090e">
+  <link rel="canonical" href="https://uib-perturbation-theory.github.io/lab/regge-wheeler.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/lab.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="../assets/js/site.js" defer></script>
+  <script type="module" src="../assets/lab/rw/rw-sim.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body class="sim" data-sky="still">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="../about.html">About</a><a href="../research.html">Research</a><a href="../lab.html" aria-current="true">Lab</a><a href="../cv.html">CV</a><a href="../gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <a class="back" href="../lab.html">← Black Hole Lab</a>
+        <h1 data-float>Regge–Wheeler simulator</h1>
+        <p class="lede" data-float>A Gaussian pulse of gravitational waves falls onto a Schwarzschild black
+      hole. Part of it is reflected by the potential barrier and rings at the
+      quasinormal frequencies; the rest falls through the horizon. The
+      equation is solved live in your browser.</p>
+      </div>
+    </div>
+
+    <div class="rw-wrap">
+    <div class="rw-app" data-rw>
+
+      <div class="rw-stage">
+        <canvas class="rw-canvas" aria-label="Three-dimensional view of the perturbation around the black hole"></canvas>
+        <div class="rw-labels" aria-hidden="true">
+          <span class="rw-label" data-label="bh">Black hole</span>
+          <span class="rw-label" data-label="peak">Potential peak</span>
+          <span class="rw-label" data-label="pulse">Pulse start</span>
+          <span class="rw-label" data-label="obs">Observer</span>
+        </div>
+        <div class="rw-time" aria-live="off">t = 0.0 M</div>
+        <div class="rw-status">Loading…</div>
+        <div class="rw-legend"><span>Ψ &lt; 0</span><span class="rw-legend-bar"></span><span>Ψ &gt; 0</span></div>
+        <div class="rw-hint">drag to rotate · scroll to zoom</div>
+      </div>
+
+      <div class="rw-trace">
+        <div class="rw-trace-head">
+          <span class="rw-trace-title">
+            <span>Ψ at the observer</span>
+            <span class="rw-key"><i></i>simulation</span>
+            <span class="rw-key" data-qnm-key><i class="dash"></i>QNM prediction, n = 0</span>
+          </span>
+          <span class="rw-trace-tools">
+            <span class="rw-trace-scale" role="group" aria-label="Quasinormal-mode prediction">
+              <span class="rw-tool-label">QNM</span>
+              <button type="button" data-qnm="-1" aria-pressed="false">Off</button>
+              <button type="button" data-qnm="0" aria-pressed="true">n = 0</button>
+              <button type="button" data-qnm="3" aria-pressed="false">n ≤ 3</button>
+            </span>
+            <span class="rw-trace-scale" role="group" aria-label="Vertical scale">
+              <button type="button" data-scale="lin" aria-pressed="true">Linear</button>
+              <button type="button" data-scale="log" aria-pressed="false">log |Ψ|</button>
+            </span>
+          </span>
+        </div>
+        <canvas aria-label="Signal recorded by the observer; click to jump in time"></canvas>
+      </div>
+
+      <aside class="rw-panel" aria-label="Simulation controls">
+        <h2>Controls</h2>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Pulse</p>
+          <div class="rw-field">
+            <label for="rw-sigma">Width σ <output data-out="sigma"></output></label>
+            <input id="rw-sigma" type="range" min="1" max="10" step="0.1" value="6" data-param="sigma">
+          </div>
+          <div class="rw-field">
+            <label for="rw-nu">Carrier frequency ν <output data-out="nu"></output></label>
+            <input id="rw-nu" type="range" min="0" max="1" step="0.01" value="0.45" data-param="nu">
+          </div>
+          <div class="rw-field">
+            <label for="rw-s0">Starting position r*₀ <output data-out="s0"></output></label>
+            <input id="rw-s0" type="range" min="40" max="200" step="5" value="100" data-param="s0">
+          </div>
+          <div class="rw-field">
+            <label>Multipole <output>ℓ = 2</output></label>
+            <!-- l = 3 and 4 work in the code; the buttons are hidden for now. -->
+            <div class="rw-seg" role="group" aria-label="Multipole" hidden>
+              <button type="button" data-l="2" aria-pressed="true">2</button>
+              <button type="button" data-l="3" aria-pressed="false">3</button>
+              <button type="button" data-l="4" aria-pressed="false">4</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Observer</p>
+          <div class="rw-field">
+            <label for="rw-obs"><span>Position r*<sub>obs</sub></span> <output data-out="sObs"></output></label>
+            <input id="rw-obs" type="range" min="20" max="200" step="5" value="100" data-param="sObs">
+          </div>
+        </div>
+
+        <div class="rw-group">
+          <p class="rw-group-title">Playback</p>
+          <div class="rw-buttons">
+            <button type="button" class="primary" data-action="play">Pause</button>
+            <button type="button" data-action="restart">Restart</button>
+            <button type="button" data-action="view">Reset view</button>
+          </div>
+          <div class="rw-field" style="margin-top:.8rem">
+            <label for="rw-speed">Speed <output data-out="speed"></output></label>
+            <input id="rw-speed" type="range" min="4" max="60" step="1" value="20" data-param="speed">
+          </div>
+          <label class="rw-check"><input type="checkbox" data-param="log" checked> Compressed heights (shows the faint ringing)</label>
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="rw-panels">
+
+      <figure class="rw-card" data-rw-map>
+        <div class="rw-card-head">
+          <div>
+            <h3>Which pulses excite the ringing</h3>
+            <p>
+              Excitation coefficient |C<sub>n</sub>| of quasinormal mode n for every
+              width σ and carrier frequency ν. Click anywhere to run that pulse.
+            </p>
+          </div>
+          <span class="rw-trace-scale" role="group" aria-label="Mode shown in the map">
+            <button type="button" data-map-n="0" aria-pressed="true">n = 0</button>
+            <button type="button" data-map-n="1" aria-pressed="false">1</button>
+            <button type="button" data-map-n="2" aria-pressed="false">2</button>
+            <button type="button" data-map-n="3" aria-pressed="false">3</button>
+          </span>
+        </div>
+        <canvas aria-label="Map of the excitation coefficient over pulse width and carrier frequency; click to choose a pulse"></canvas>
+        <p class="rw-readout" data-readout></p>
+      </figure>
+
+      <figure class="rw-card" data-rw-spectrum>
+        <div class="rw-card-head">
+          <div>
+            <h3>Spectrum</h3>
+            <p>
+              Frequency content of the initial pulse and of the signal the
+              observer records after the pulse has passed.
+            </p>
+          </div>
+        </div>
+        <div class="rw-card-keys">
+          <span class="rw-key"><i class="pulse"></i>initial pulse</span>
+          <span class="rw-key"><i></i>scattered signal</span>
+          <span class="rw-key"><i class="dash"></i>quasinormal frequencies</span>
+        </div>
+        <canvas aria-label="Spectrum of the initial pulse and of the scattered signal, with the quasinormal frequencies marked"></canvas>
+        <p class="rw-readout" data-readout></p>
+      </figure>
+
+    </div>
+
+    <p class="rw-note">
+      The sheet is a slice through the black hole that contains the symmetry
+      axis. Its height is the Regge–Wheeler function Ψ(t, r*) times the angular
+      pattern P<sub>ℓ</sub>(cos θ), drawn against the tortoise coordinate r*, so
+      the waves travel at constant speed. The observer sits on the axis. Units:
+      G = c = M = 1.
+    </p>
+
+    <article class="rw-explain">
+<section class="ex" data-float>
+<h2>The theory behind this</h2>
+</section>
+<section class="ex" data-float>
+<h3>The equation</h3>
+      <p>
+        Small odd-parity perturbations of a Schwarzschild black hole of mass M
+        are described, for each multipole ℓ, by a single function Ψ(t, r*)
+        that obeys the Regge–Wheeler equation
+      </p>
+      <div class="paper-equation">
+        $$
+        \left(-\frac{\partial^2}{\partial t^2} + \frac{\partial^2}{\partial r_*^2} - V_\ell(r)\right)\Psi = 0,
+        \qquad
+        V_\ell(r) = \left(1 - \frac{2M}{r}\right)\left(\frac{\ell(\ell+1)}{r^2} - \frac{6M}{r^3}\right).
+        $$
+      </div>
+      <p>
+        The tortoise coordinate $r_* = r + 2M \ln(r/2M - 1)$ sends the horizon
+        to $r_* \to -\infty$. In this coordinate the waves move at the speed
+        of light everywhere, and the black hole is just a potential barrier
+        with its peak near $r = 3M$, that is, $r_* \approx 1.6M$. To go back from
+        $r_*$ to $r$ the code uses the Lambert W function,
+        $r = 2M\,[1 + W(e^{r_*/2M - 1})]$.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The initial pulse</h3>
+      <p>
+        At $t = 0$ the field is an oscillating Gaussian centred at $r_{*0}$
+        that moves towards the black hole:
+      </p>
+      <div class="paper-equation">
+        $$
+        \Psi(0, r_*) = e^{-(r_* - r_{*0})^2/2\sigma^2}\cos\!\big(\nu\,(r_* - r_{*0})\big),
+        \qquad
+        \partial_t \Psi(0, r_*) = \partial_{r_*}\Psi(0, r_*).
+        $$
+      </div>
+      <p>
+        The width σ and the carrier frequency ν set which frequencies the
+        pulse carries. Its spectrum, the orange curve in the right-hand panel,
+        is
+        $|\tilde\Psi_0(\omega)| = \tfrac{\sqrt{2\pi}}{2}\,\sigma\,\big[e^{-\sigma^2(\omega-\nu)^2/2} + e^{-\sigma^2(\omega+\nu)^2/2}\big]$.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The numerical method</h3>
+      <p>
+        The solver is a JavaScript translation of the code used in the
+        <em>Shaping black hole resonances</em> papers and runs in a background
+        thread of your browser (a Web Worker). It agrees with the original
+        Python code to single precision.
+      </p>
+      <ul>
+        <li>
+          Grid: $r_* \in [-400.2,\,1500]\,M$ with 8,942 points and spacing
+          $\Delta r_* = 1700/7999\,M \approx 0.21\,M$. This is the papers'
+          grid on $[-200, 1500]\,M$, extended to the left with the same
+          spacing.
+        </li>
+        <li>
+          Fourth-order finite differences in $r_*$, with one-sided stencils at
+          the two ends of the grid.
+        </li>
+        <li>
+          Time integration with the classical fourth-order Runge–Kutta method,
+          $\Delta t = 0.1\,\Delta r_*$: 32,937 steps up to $t = 700\,M$.
+        </li>
+        <li>
+          The potential is switched off smoothly near the horizon, between
+          $r = 2.01M$ and $2.2M$, and far away, between $r = 500M$ and
+          $1000M$.
+        </li>
+        <li>
+          No boundary conditions are imposed. The grid is large enough that
+          nothing reflected at its ends comes back to the observer before
+          $t = 700\,M$.
+        </li>
+        <li>
+          The observer's signal is read with fourth-order Lagrange
+          interpolation between the four nearest grid points.
+        </li>
+      </ul>
+</section>
+<section class="ex" data-float>
+<h3>The quasinormal-mode prediction</h3>
+      <p>
+        At late times the signal is a sum of damped oscillations at the
+        quasinormal frequencies $\omega_n$ of the black hole. The papers give
+        the amplitude of each one in closed form, from the excitation factors
+        $B_n$ of the black hole and the overlap $T_n$ of the pulse with the mode:
+      </p>
+      <div class="paper-equation">
+        $$
+        \Psi_{\rm QNM}(t) = \sum_n 2\,\mathrm{Re}\!\left[C_n\, e^{-i\omega_n (t - r_*^{\rm obs} - r_{*0})}\right],
+        \qquad C_n = B_n T_n,
+        $$
+        $$
+        T_n = -i\sqrt{2\pi}\,\sigma\,\omega_n\left[e^{-\sigma^2(\omega_n - \nu)^2/2} + e^{-\sigma^2(\omega_n + \nu)^2/2}\right].
+        $$
+      </div>
+      <p>
+        The factor 2 accounts for the mirror modes $-\omega_n^*$. The
+        frequencies and the excitation factors $B_n$ are those tabulated by
+        Berti and Cardoso (2006). The map shows $|C_n|$. A narrow pulse
+        carries a broad range of frequencies and excites the mode moderately
+        for any ν. A wide pulse excites it strongly when its carrier
+        frequency is close to $\mathrm{Re}\,\omega_n$ (the dashed line on
+        the map) and hardly at all otherwise.
+      </p>
+      <p>
+        The dashed blue curve on the observer panel is $\Psi_{\rm QNM}$,
+        drawn from the peak of the scattered signal onwards. The formula only
+        describes the late part of the signal. For the fundamental mode
+        $n = 0$ of $\ell = 2$ it matches the simulation to a few per cent
+        once the ringing dominates. It is less accurate where $|C_n|$ is
+        strongly suppressed. For overtones of wide pulses the factor
+        $e^{\sigma^2(\mathrm{Im}\,\omega_n)^2/2}$ makes the predicted
+        amplitudes very large, and they only describe the signal much later.
+        For this reason the $n \le 3$ curve starts once the overtones have
+        decayed below the peak of the signal.
+      </p>
+</section>
+<section class="ex" data-float>
+<h3>The spectrum</h3>
+      <p>
+        The white curve is the Fourier transform of the observer's signal from
+        the moment the incident pulse has passed until the end of the run.
+        The ratio of the two curves is close to the reflectivity of the
+        barrier, $|R(\omega)|$. Low frequencies are reflected and high
+        frequencies cross into the black hole, and the change happens close
+        to the quasinormal frequencies. Where the scattered signal is more
+        than about a hundred times weaker than the pulse, the ratio also
+        picks up details of the numerical set-up, such as the smooth cut-off
+        of the potential near the horizon.
+      </p>
+</section>
+<div class="ex" data-float>
+<p class="rw-refs">
+        More in
+        <a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances.html" rel="noopener">Shaping black hole resonances I</a>
+        (<a href="https://arxiv.org/abs/2605.24704" rel="noopener">arXiv:2605.24704</a>)
+        and
+        <a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances-ii.html" rel="noopener">II</a>
+        (<a href="https://arxiv.org/abs/2611.13075" rel="noopener">arXiv:2611.13075</a>).
+        See also the <a href="sasaki-nakamura.html">Sasaki–Nakamura simulator</a>,
+        with a body falling into a Kerr black hole, and the
+        <a href="wormhole.html">wormhole simulator</a>, where the same kind of
+        pulse crosses into another universe.
+      </p>
+</div>
+</article>
+    <p class="credit">Part of the Black Hole Lab of the <a href="https://uib-perturbation-theory.github.io/" rel="noopener">Strong Gravity Group</a> at the UIB. <a href="https://uib-perturbation-theory.github.io/lab/regge-wheeler.html" rel="noopener">Original page</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -2,160 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      background-color: #0b0b0b;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-    }
-
-    nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 2rem;
-      margin-bottom: 40px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: #f39c12;
-    }
-
-    .intro {
-      margin-top: 15px;
-      margin-bottom: 25px;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #ccc;
-    }
-
-    .interests-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #888;
-      margin-bottom: 8px;
-    }
-
-    .interests {
-      font-style: italic;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
-
-    .timeline {
-      border-left: 2px solid #444;
-      padding-left: 20px;
-    }
-
-    .event {
-      margin-bottom: 25px;
-    }
-
-    .event-title {
-      font-weight: 700;
-    }
-
-    .event-date {
-      font-size: 0.9rem;
-      color: #888;
-    }
-
-    .event-desc {
-      font-size: 0.95rem;
-      color: #ccc;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        justify-content: center;
-        font-size: 1rem;
-      }
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="About Alejandro Svyatkovskyy Kholyavka, PhD student in the Strong Gravity Group at IAC3, University of the Balearic Islands.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="About · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="About Alejandro Svyatkovskyy Kholyavka, PhD student in the Strong Gravity Group at IAC3, University of the Balearic Islands.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/about.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/about.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
 </head>
+<body class="" data-sky="lattice">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-<body>
-
-<div class="container">
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="research.html">Research</a>
-    <a href="cv.html">CV</a>
-    <a href="gallery.html">Gallery</a>
-  </nav>
-
-  <div class="intro">
-    Hi, I'm Alejandro — a physicist trying to understand how compact objects like black holes behave when they are perturbed. I'm a PhD student in the Gravity Group at the IAC3 (Institute of Applied Computing & Community Code) at the University of the Balearic Islands. I work on numerical simulations in General Relativity, exploring quasi-normal modes and gravitational waves.
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html" aria-current="page">About</a><a href="research.html">Research</a><a href="lab.html">Lab</a><a href="cv.html">CV</a><a href="gallery.html">Gallery</a></nav>
   </div>
+</header>
 
-  <div class="interests-title">My interests are:</div>
+<main id="main">
+  <div class="wrap">
+    <div class="head"><div><h1 data-float>About</h1></div></div>
 
-  <div class="interests">
-    Black Holes · Numerical Relativity · Quasi-Normal Modes · Gravitational Waves · Nonlinear Effects
+    <section class="row">
+      <h2 class="label">Hello</h2>
+      <div class="body">
+        <p class="intro" data-float>Hi, I'm Alejandro, a physicist trying to understand how compact objects like black holes behave when they are perturbed. I'm a PhD student in the <a href="https://uib-perturbation-theory.github.io/" rel="noopener">Strong Gravity Group</a> at the IAC3 (Institute of Applied Computing &amp; Community Code) of the University of the Balearic Islands. I work on numerical simulations in General Relativity, exploring quasinormal modes and gravitational waves.</p>
+      </div>
+    </section>
+
+    <section class="row">
+      <h2 class="label">Interests</h2>
+      <ul class="body tags"><li data-float>Black holes</li><li data-float>Numerical relativity</li><li data-float>Quasinormal modes</li><li data-float>Gravitational waves</li><li data-float>Nonlinear effects</li></ul>
+    </section>
+
+    <section class="row">
+      <h2 class="label">Path</h2>
+      <ol class="body path">
+        <li class="stop"><div data-float><h3>PhD in Theoretical Physics, UIB, Palma (Spain)</h3><p class="meta">2025 – present</p><p>Conducting research under the supervision of Xisco Jiménez Forteza on numerical perturbation theory.</p></div></li>
+        <li class="stop"><div data-float><h3>MSc in Advanced Physics and Applied Mathematics, UIB, Palma (Spain)</h3><p class="meta">2024 – 2025</p><p>Focused on black hole perturbation theory and numerical relativity.</p></div></li>
+        <li class="stop"><div data-float><h3>MSc in Theoretical Physics, UAM, Madrid (Spain)</h3><p class="meta">2023 – 2024</p><p>Specialized in astrophysics and particle acceleration around black holes.</p></div></li>
+        <li class="stop"><div data-float><h3>BSc in Physics, UEM, Madrid (Spain)</h3><p class="meta">2019 – 2023</p><p>Studied materials and their applications in energy storage and transformation, as well as the impact of galactic diffuse emission on the CMB.</p></div></li>
+      </ol>
+    </section>
   </div>
+</main>
 
-  <div class="timeline">
-
-    <div class="event">
-      <div class="event-title">PhD in Theoretical Physics, UIB, Palma (Spain)</div>
-      <div class="event-date">2025 – present</div>
-      <div class="event-desc">
-        Conducting research under the supervision of Xisco Jiménez Forteza on numerical perturbation theory.
-      </div>
-    </div>
-
-    <div class="event">
-      <div class="event-title">MSc in Advanced Physics and Applied Mathematics, UIB, Palma (Spain)</div>
-      <div class="event-date">2024 – 2025</div>
-      <div class="event-desc">
-        Focused on black hole perturbation theory and numerical relativity.
-      </div>
-    </div>
-
-    <div class="event">
-      <div class="event-title">MSc in Theoretical Physics, UAM, Madrid (Spain)</div>
-      <div class="event-date">2023 – 2024</div>
-      <div class="event-desc">
-        Specialized in astrophysics and particle acceleration around black holes.
-      </div>
-    </div>
-
-    <div class="event">
-      <div class="event-title">BSc in Physics, UEM, Madrid (Spain)</div>
-      <div class="event-date">2019 – 2023</div>
-      <div class="event-desc">
-        Studied materials and their applications in energy storage and transformation, as well as the impact of galactic diffuse emission on the CMB.
-      </div>
-    </div>
-
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
   </div>
-
-</div>
-
+</footer>
 </body>
 </html>

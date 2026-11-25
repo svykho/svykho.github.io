@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Black Hole Lab · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Interactive simulators of black holes and wormholes that run in the browser: Regge–Wheeler, Sasaki–Nakamura and a thin-shell wormhole.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Black Hole Lab · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Interactive simulators of black holes and wormholes that run in the browser: Regge–Wheeler, Sasaki–Nakamura and a thin-shell wormhole.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/lab.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/lab.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
+  <link rel="stylesheet" href="assets/css/lab.css">
+  <script src="assets/js/lab-previews.js" defer></script>
+</head>
+<body class="" data-sky="lattice">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html">About</a><a href="research.html">Research</a><a href="lab.html" aria-current="page">Lab</a><a href="cv.html">CV</a><a href="gallery.html">Gallery</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h1 data-float>Black Hole Lab</h1>
+        <p class="lede" data-float>Three simulators that run in your browser. Hit a black hole and see what it does.</p>
+      </div>
+    </div>
+    <ol class="sims">
+      <li data-float><a href="lab/regge-wheeler.html"><span class="num">01</span><div class="txt"><h2>Regge–Wheeler</h2><p>Send a Gaussian pulse at a Schwarzschild black hole and watch it scatter. The equation is solved live, and you can compare the ringing with the quasinormal-mode prediction.</p><span class="go">Open simulator →</span></div><canvas data-preview="rw" aria-hidden="true"></canvas></a></li>
+      <li data-float><a href="lab/sasaki-nakamura.html"><span class="num">02</span><div class="txt"><h2>Sasaki–Nakamura</h2><p>Drop a small body into a Kerr black hole, down the axis or spiralling in from the innermost stable orbit, and see the waves and the ringdown it leaves behind.</p><span class="go">Open simulator →</span></div><canvas data-preview="sn" aria-hidden="true"></canvas></a></li>
+      <li data-float><a href="lab/wormhole.html"><span class="num">03</span><div class="txt"><h2>Wormhole</h2><p>Send a wave packet through a thin-shell wormhole between two universes. Part bounces back, part is trapped and leaks out as echoes, and part comes out on the other side.</p><span class="go">Open simulator →</span></div><canvas data-preview="wh" aria-hidden="true"></canvas></a></li>
+    </ol>
+    <p class="lab-note" data-float>Built for the <a href="https://uib-perturbation-theory.github.io/lab.html" rel="noopener">Black Hole Lab</a> of the Strong Gravity Group at the UIB.</p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
+</body>
+</html>

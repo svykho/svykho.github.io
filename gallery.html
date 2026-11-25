@@ -2,137 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      background-color: #0b0b0b;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-    }
-
-    /* NAV IGUAL QUE EL RESTO */
-    nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 2rem;
-      margin-bottom: 40px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f39c12;
-    }
-
-    /* TITULOS */
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .gallery div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    .gallery p {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: #aaa;
-      font-style: italic;
-      text-align: center;
-    }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav {
-        justify-content: center;
-        font-size: 1rem;
-      }
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="A few photographs of Mallorca.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Gallery · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="A few photographs of Mallorca.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/gallery.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/gallery.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
 </head>
+<body class="" data-sky="lattice">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html">About</a><a href="research.html">Research</a><a href="lab.html">Lab</a><a href="cv.html">CV</a><a href="gallery.html" aria-current="page">Gallery</a></nav>
+  </div>
+</header>
 
-  <div class="container">
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="research.html">Research</a>
-      <a href="cv.html">CV</a>
-      <a href="gallery.html">Gallery</a>
-    </nav>
-
-    <h1>Gallery</h1>
-    <p>Just to show you how beautiful Mallorca is :)</p>
-
-    <div class="gallery">
+<main id="main">
+  <div class="wrap">
+    <div class="head">
       <div>
-        <img src="images/mallorca.jpeg" alt="Mallorca">
-        <p>Mallorca</p>
-      </div>
-      <div>
-        <img src="images/calamajor.jpeg" alt="Cala Major">
-        <p>Cala Major</p>
-      </div>
-      <div>
-        <img src="images/formentor.jpeg" alt="Cap de Formentor">
-        <p>Cap de Formentor</p>
-      </div>
-      <div>
-        <img src="images/portsoller.jpg" alt="Port de Sóller">
-        <p>Port de Sóller</p>
+        <h1 data-float>Gallery</h1>
+        <p class="lede" data-float>Just to show you how beautiful Mallorca is :)</p>
       </div>
     </div>
-
+    <div class="photos">
+      <figure class="photo" data-float><button type="button" data-full="assets/img/mallorca-full.webp" data-caption="Mallorca" aria-label="Enlarge: Mallorca"><img src="assets/img/mallorca.webp" width="760" height="1013" alt="Mallorca seen from a plane window, deep blue sea around its rocky coast"></button><figcaption>Mallorca</figcaption></figure>
+      <figure class="photo" data-float><button type="button" data-full="assets/img/calamajor-full.webp" data-caption="Cala Major" aria-label="Enlarge: Cala Major"><img src="assets/img/calamajor.webp" width="760" height="1013" alt="Sunset over the waves at Cala Major"></button><figcaption>Cala Major</figcaption></figure>
+      <figure class="photo" data-float><button type="button" data-full="assets/img/formentor-full.webp" data-caption="Cap de Formentor" aria-label="Enlarge: Cap de Formentor"><img src="assets/img/formentor.webp" width="760" height="1013" alt="Cliffs and rough sea at Cap de Formentor under a cloudy sky" loading="lazy"></button><figcaption>Cap de Formentor</figcaption></figure>
+      <figure class="photo" data-float><button type="button" data-full="assets/img/portsoller-full.webp" data-caption="Port de Sóller" aria-label="Enlarge: Port de Sóller"><img src="assets/img/portsoller.webp" width="760" height="1013" alt="Red sunset over a calm sea at Port de Sóller" loading="lazy"></button><figcaption>Port de Sóller</figcaption></figure>
+    </div>
   </div>
+  <dialog class="view" aria-label="Photo">
+    <button class="close" type="button">Close</button>
+    <img alt="">
+    <p></p>
+  </dialog>
+</main>
 
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
 </body>
 </html>

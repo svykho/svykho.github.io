@@ -2,170 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curriculum Vitae</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background-color: #0b0b0b;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      line-height: 1.6;
-      text-align: justify;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-    }
-
-    nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 2rem;
-      margin-bottom: 40px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      color: #f39c12;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      text-align: left;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      margin-top: 25px;
-      margin-bottom: 10px;
-      color: #ccc;
-      text-align: left;
-    }
-
-    h3 {
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    p {
-      margin-bottom: 18px;
-    }
-
-    ul {
-      margin-bottom: 20px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: #f39c12;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .cv-image {
-      width: 50%;
-      border-radius: 8px;
-      margin-top: 30px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .caption {
-      text-align: center;
-      font-style: italic;
-      color: #ccc;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        justify-content: center;
-        font-size: 1rem;
-      }
-
-      .cv-image {
-        width: 100%;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV · Alejandro Svyatkovskyy Kholyavka</title>
+  <meta name="description" content="Curriculum vitae of Alejandro Svyatkovskyy Kholyavka: physics, numerical relativity, and waving flags at the Jarama Circuit.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="CV · Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Curriculum vitae of Alejandro Svyatkovskyy Kholyavka: physics, numerical relativity, and waving flags at the Jarama Circuit.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/cv.html">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/cv.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
 </head>
+<body class="" data-sky="lattice">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html">About</a><a href="research.html">Research</a><a href="lab.html">Lab</a><a href="cv.html" aria-current="page">CV</a><a href="gallery.html">Gallery</a></nav>
+  </div>
+</header>
 
-<div class="container">
+<main id="main">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h1 data-float>CV</h1>
+        <p class="lede" data-float>The long version. There is a <a href="files/CV%20Alejandro%20Svyatkovskyy%20Kholyavka.pdf" download style="text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px">shorter one</a> if this bores you.</p>
+      </div>
+    </div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="research.html">Research</a>
-    <a href="cv.html">CV</a>
-    <a href="gallery.html">Gallery</a>
-  </nav>
+    <section class="row">
+      <h2 class="label">Studies</h2>
+      <div class="body t">
+        <p data-float>My academic journey began with a Bachelor's degree in Physics, specializing in Materials (strange, right?), at the Universidad Europea de Madrid (2019–2023). Since I realized materials weren't my thing, for my thesis I worked on simulating the diffuse emission of the Galaxy within the context of the LiteBIRD space mission, supervised by Dr. Marcos López-Caniego Alcarria. Later, I pursued a Master's in Theoretical Physics at the Universidad Autónoma de Madrid (2023–2024), where I developed my thesis on multimessenger signatures of particle acceleration by black holes, under the supervision of Dr. Rafael Alves Batista.</p>
+        <p data-float>In October 2024 I continued with the Master's in Advanced Physics and Applied Mathematics at the Universitat de les Illes Balears. My thesis there explored the rich numerical phenomenology of the binary black hole ringdown, under the direction of Dr. Xisco Jiménez Forteza, in a project that is part of the AECT-2025-1-0011 allocation at the Barcelona Supercomputing Center (MareNostrum 5).</p>
+        <p data-float>Since 2025 I have been doing a <strong>PhD in Theoretical Physics</strong> at the UIB, working on numerical perturbation theory with Xisco Jiménez Forteza.</p>
+      </div>
+    </section>
 
-  <h1>Curriculum Vitae</h1>
+    <section class="row">
+      <h2 class="label">Tools</h2>
+      <div class="body t">
+        <p data-float>Throughout my studies I have learned and worked with various tools, such as Teuk-Fortran-2020, which I use to solve (or at least try to) the Teukolsky equations, and I have taken specialized courses in general relativity, gravitational waves, dynamical systems and quantum field theory. My studies in applied mathematics have also let me explore areas such as mathematical models in neuroscience and image restoration.</p>
+        <p data-float>I'm proficient in Python, C++, MATLAB and Mathematica, and I have experience with astronomy software including Aladin, SASDABA (Star Analyser Spectroscopic Data Base), TOPCAT (Tool for Operations on Catalogues and Tables) and VOSA (VO Sed Analyzer).</p>
+      </div>
+    </section>
 
-  <p>
-    My academic journey began with a Bachelor's degree in Physics, specializing in Materials (strange, right?), at the Universidad Europea de Madrid (2019-2023). Since I realized materials weren’t my thing, during my thesis, I worked on simulating the diffuse emission of the galaxy within the context of the LiteBIRD space mission, supervised by Dr. Marcos López–Caniego Alcarria. Later, I pursued a Master's in Theoretical Physics at the Universidad Autónoma de Madrid (2023-2024), where I developed my thesis on multimessenger signatures of particle acceleration by black holes, under the supervision of Dr. Rafael Alves Batista.
-  </p>
+    <section class="row">
+      <h2 class="label">Beyond the desk</h2>
+      <div class="body t">
+        <p data-float>I've been a futsal assistant referee with the Royal Spanish Football Federation (I reached 2nd Division "B", the third-highest tier in Spain) and an intern at the Blas Cabrera Institute of Physical Chemistry at the CSIC, where I spent four months learning what a real laboratory is like in the Surface Analysis and Mössbauer Spectroscopy Group, under the supervision of Dr. José Francisco Marco Sanz. I've also worked (and sometimes still do) at the Madrid Jarama Circuit as a track marshal (those people waving the colored flags) and as a timekeeper at FIA rallies.</p>
+        <figure class="band" data-float="1.3">
+          <img src="assets/img/jarama.webp" width="1024" height="682" loading="lazy" alt="Alejandro waving a checkered flag at the Jarama Circuit as a yellow race car passes">
+          <figcaption>Yes, that's me waving the flag!</figcaption>
+        </figure>
+      </div>
+    </section>
 
-  <p>
-    Since October 2024, I have continued my academic path in the Master's program in Advanced Physics and Applied Mathematics at the Universitat de les Illes Balears. Currently, my thesis focuses on exploring the rich numerical phenomenology of the binary black hole ringdown, under the direction of Dr. Xisco Jiménez Forteza, in a project that is part of the AECT-2025-1-0011 allocation at the Barcelona Supercomputing Center (MareNostrum 5).
-  </p>
+    <section class="row">
+      <h2 class="label">Observing</h2>
+      <div class="body t">
+        <p data-float>My passion for science goes beyond the classroom. I've also taken part in projects such as estimating the age of star clusters in the Heart Nebula, during a research stay at the Calar Alto Astronomical Observatory in February 2024.</p>
+      </div>
+    </section>
 
-  <p>
-    Throughout my studies, I have had the opportunity to learn and work with various tools, such as Teuk-Fortran-2020, which I use to solve (or at least try to) the Teukolsky equations, and I have taken specialized courses in general relativity, gravitational waves, dynamical systems, and quantum field theory. Additionally, my studies in applied mathematics have allowed me to explore new areas, such as mathematical models in neuroscience and image restoration.
-  </p>
+    <section class="row">
+      <h2 class="label">Languages</h2>
+      <div class="body t">
+        <p data-float>Native in Spanish and Ukrainian, professional in English. During my time in Mallorca I also picked up a "miqueta" of Catalan.</p>
+      </div>
+    </section>
 
-  <p>
-    In my professional career, I have gained diverse work experience, including my time as a futsal assistant referee with the Royal Spanish Football Federation (I reached 2nd Division “B,” the third-highest tier in Spain) and as an intern at the Blas Cabrera Institute of Physical Chemistry at the CSIC, where I spent four months learning what a real laboratory is like in the Surface Analysis and Mössbauer Spectroscopy Group, under the supervision of Dr. José Francisco Marco Sanz. I’ve also worked (and sometimes still do) at the Madrid Jarama Circuit as a track marshal (those people waving the colored flags) and as a timekeeper at FIA rallies.
-  </p>
+    <section class="row">
+      <h2 class="label">Short version</h2>
+      <div class="body t">
+        <p data-float>If reading all of this bored you, here's a much shorter version. But anyway, you've already read it all. :)</p>
+        <a class="dl" data-float href="files/CV%20Alejandro%20Svyatkovskyy%20Kholyavka.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+  </div>
+</main>
 
-  <p>
-    My language skills include native proficiency in Spanish and Ukrainian, and professional proficiency in English. Additionally, during my time in Mallorca, I picked up a "miqueta" of Catalan. As for my technical skills, I’m proficient in several programming languages such as Python, C++, MATLAB, and Mathematica. I also have experience with software related directly to astronomy, including Aladin, SASDABA (Star Analyser Spectroscopic Data Base), TOPCAT (Tool for Operations on Catalogues and Tables), and VOSA (VO Sed Analyzer).
-  </p>
-
-  <p>
-    My passion for science and research goes beyond the classroom. I’ve also had the opportunity to participate in various projects, such as estimating the age of star clusters in the Heart Nebula, which I conducted during a research stay at the Calar Alto Astronomical Observatory in February 2024.
-  </p>
-
-  <p>
-    <strong>Note:</strong> If reading all of this bores you, here’s a much shorter version of my CV for
-    <a href="files/CV Alejandro Svyatkovskyy Kholyavka.pdf" download>download</a>.
-    But anyway, you’ve already read it all. :)
-  </p>
-
-  <img src="images/jarama.JPG" class="cv-image" alt="Alejandro waving a flag at Jarama Circuit">
-
-  <p class="caption">
-    Yes, that’s me waving the flag!
-  </p>
-
-</div>
-
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
 </body>
 </html>

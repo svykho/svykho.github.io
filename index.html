@@ -1,176 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alejandro Svyatkovskyy Kholyavka</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      overflow: hidden; /* ✅ bloquea scroll */
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      color: white;
-      background: url("images/wormhole.jpg") no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      height: 100dvh; /* ✅ mejor para móvil */
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    /* HEADER */
-    header {
-      padding: 30px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .branding {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .branding .name {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .branding .subtitle {
-      font-style: italic;
-      font-size: 1rem;
-      font-weight: 400;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f39c12;
-    }
-
-    /* CENTER */
-    .center {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* SOCIALS */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      padding-bottom: 20px;
-    }
-
-    .socials a {
-      color: white;
-      font-size: 1.8rem;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .socials a:hover {
-      color: #f39c12;
-    }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-
-      header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .branding {
-        align-items: center;
-        text-align: center;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        font-size: 1rem;
-      }
-
-      .socials {
-        gap: 1rem;
-      }
-
-      .socials a {
-        font-size: 1.5rem;
-      }
-    }
-
-  </style>
+  <meta name="description" content="Physicist and PhD student at the University of the Balearic Islands, working on black hole perturbation theory, quasinormal modes and gravitational waves.">
+  <meta name="theme-color" content="#07090e">
+  <meta property="og:title" content="Alejandro Svyatkovskyy Kholyavka">
+  <meta property="og:description" content="Physicist and PhD student at the University of the Balearic Islands, working on black hole perturbation theory, quasinormal modes and gravitational waves.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svykho.github.io/">
+  <meta property="og:image" content="https://svykho.github.io/images/wormhole.jpg">
+  <link rel="canonical" href="https://svykho.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/wormhole.js" defer></script>
 </head>
+<body class="home" data-sky="wormhole">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas><div class="scrim" aria-hidden="true"></div>
 
-<body>
-
-  <div class="container">
-
-    <header>
-      <div class="branding">
-        <div class="name">Alejandro Svyatkovskyy Kholyavka</div>
-        <div class="subtitle">PhD student @ UIB</div>
-      </div>
-
-      <nav>
-        <a href="about.html">About</a>
-        <a href="research.html">Research</a>
-        <a href="cv.html">CV</a>
-        <a href="gallery.html">Gallery</a>
-      </nav>
-    </header>
-
-    <div class="center">
-      <!-- Puedes meter aquí texto si quieres -->
-    </div>
-
-    <div class="socials">
-      <a href="https://github.com/svykho" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/asvyatkovskyyk" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="mailto:alejandro.svyatkovskyy@uib.cat"><i class="fas fa-envelope"></i></a>
-      <a href="https://orcid.org/0009-0004-1688-6018" target="_blank"><i class="fab fa-orcid"></i></a>
-      <a href="https://inspirehep.net/authors/3081611" target="_blank"><i class="fas fa-book"></i></a>
-      <a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" target="_blank"><i class="fas fa-university"></i></a>
-    </div>
-
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Alejandro Svyatkovskyy Kholyavka, home"><svg viewBox="0 0 26 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><ellipse cx="13" cy="8" rx="12" ry="7"/><ellipse cx="13" cy="8.6" rx="6.6" ry="3.5"/><ellipse cx="13" cy="9.2" rx="2.4" ry="1.1"/></svg><span>ASK</span></a>
+    <nav class="nav" aria-label="Main"><a href="about.html">About</a><a href="research.html">Research</a><a href="lab.html">Lab</a><a href="cv.html">CV</a><a href="gallery.html">Gallery</a></nav>
   </div>
+</header>
 
+<main id="main">
+  <section class="hero wrap">
+    <h1 data-float aria-label="Alejandro Svyatkovskyy Kholyavka"><span>Alejandro</span><span>Svyatkovskyy</span><span>Kholyavka</span></h1>
+    <p class="say" data-float>A physicist trying to understand how black holes behave when they are perturbed.</p>
+    <p class="where meta" data-float>PhD student · <a href="https://uib-perturbation-theory.github.io/" rel="noopener">Strong Gravity Group</a> · IAC3, UIB</p>
+  </section>
+
+  <section class="latest wrap" aria-labelledby="latest">
+    <h2 class="label" id="latest">Latest work</h2>
+    <ol>
+      <li data-float><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances-ii.html" rel="noopener"><span class="meta">arXiv 2026</span><span class="ttl">Shaping black hole resonances II. Spectroscopic landscapes and interference</span></a></li>
+      <li data-float><a href="https://uib-perturbation-theory.github.io/papers/spectral-suppression-tails.html" rel="noopener"><span class="meta">arXiv 2026</span><span class="ttl">Spectral suppression of black hole ringdown tails</span></a></li>
+      <li data-float><a href="https://uib-perturbation-theory.github.io/papers/shaping-black-hole-resonances.html" rel="noopener"><span class="meta">Phys. Rev. D 2026</span><span class="ttl">Shaping black hole resonances I. Ringdown as a spectral filtering process</span></a></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="copy">© 2026 Alejandro Svyatkovskyy Kholyavka</span>
+    <nav aria-label="Elsewhere"><a href="https://github.com/svykho" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/asvyatkovskyyk" rel="noopener">LinkedIn</a><a href="mailto:alejandro.svyatkovskyy@uib.cat">Email</a><a href="https://orcid.org/0009-0004-1688-6018" rel="noopener">ORCID</a><a href="https://inspirehep.net/authors/3081611" rel="noopener">INSPIRE</a><a href="https://portalinvestigacio.uib.cat/investigadores/2237820/detalle" rel="noopener">UIB</a></nav>
+  </div>
+</footer>
 </body>
 </html>
