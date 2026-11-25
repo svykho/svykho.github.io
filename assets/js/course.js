@@ -2946,91 +2946,382 @@
     };
   }
 
+  /* rotations as unit quaternions [w, x, y, z] */
+  function qmul(a, b) {
+    return [
+      a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
+      a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
+      a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1],
+      a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0],
+    ];
+  }
+  function qaxis(x, y, z, ang) {
+    var sn = Math.sin(ang / 2);
+    return [Math.cos(ang / 2), x * sn, y * sn, z * sn];
+  }
+  function qnorm(q) {
+    var n = Math.hypot(q[0], q[1], q[2], q[3]);
+    return [q[0] / n, q[1] / n, q[2] / n, q[3] / n];
+  }
+  function qslerp(a, b, t) {
+    var d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+    if (d < 0) { b = [-b[0], -b[1], -b[2], -b[3]]; d = -d; }
+    if (d > 0.9995) return qnorm([a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1]), a[2] + t * (b[2] - a[2]), a[3] + t * (b[3] - a[3])]);
+    var th = Math.acos(d);
+    var sn = Math.sin(th);
+    var wa = Math.sin((1 - t) * th) / sn;
+    var wb = Math.sin(t * th) / sn;
+    return [wa * a[0] + wb * b[0], wa * a[1] + wb * b[1], wa * a[2] + wb * b[2], wa * a[3] + wb * b[3]];
+  }
+  function qmat(q) {
+    var w = q[0], x = q[1], y = q[2], z = q[3];
+    return [
+      1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y),
+      2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x),
+      2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y),
+    ];
+  }
+
+  /* A spinning black hole in three dimensions, in Boyer–Lindquist coordinates
+     drawn as if they were spherical ones, in orthographic projection. Everything
+     drawn lies outside the horizon, so splitting it by the sign of its depth and
+     painting the far half, the horizon, then the near half hides exactly what the
+     horizon hides. */
   W.kerrgeo = function (fig) {
     var u = layout(fig);
-    var view = panel(u.stage, "w-h-lg", "A slice through a spinning black hole along its axis: horizon, ergoregion, light rings and innermost stable orbits");
-    var s = { chi: 0.7 };
-    slider(u.ctrl, { label: "Spin  χ = a/M", min: 0, max: 0.998, step: 0.001, value: s.chi, fmt: f3, on: function (v) { s.chi = v; draw(); } });
+    var view = panel(u.stage, "w-h-3d", "A spinning black hole in three dimensions: horizon, ergoregion, light rings and innermost stable orbits. Drag to turn it.");
+    view.c.style.cursor = "grab";
+    var ACC = "140, 188, 255", PUL = "255, 178, 122", INK = "237, 239, 243";
+    var TILT = { side: 0, tilt: 0.36, top: Math.PI / 2 };
+    function preset(e) { return qaxis(1, 0, 0, e - Math.PI / 2); }
+    var ZOOM = { far: 9.7, near: 4.4 };
+    var s = { chi: 0.7, q: preset(TILT.tilt), t: 0, anim: null, fit: ZOOM.far, fitTo: ZOOM.far };
+    var seen = visibility(fig);
+    var NT = 18, NP = 36;
+    var mesh = null, meshChi = -1;
+    var off = document.createElement("canvas");
+    var octx = off.getContext("2d");
+
+    slider(u.ctrl, { label: "Spin  χ = a/M", min: 0, max: 0.998, step: 0.001, value: s.chi, fmt: f3, on: function (v) { s.chi = v; info(); if (still || !seen.on) draw(); } });
+    var viewSeg = seg(u.ctrl, {
+      label: "View",
+      options: [["side", "Side"], ["tilt", "Tilted"], ["top", "From above"]],
+      value: "tilt",
+      on: function (v) {
+        var q1 = preset(TILT[v]);
+        if (still) { s.q = q1; draw(); } else s.anim = { q0: s.q, q1: q1, p: 0 };
+      },
+    });
+    seg(u.ctrl, {
+      label: "Zoom",
+      options: [["far", "Whole"], ["near", "Close-up"]],
+      value: "far",
+      on: function (v) { s.fitTo = ZOOM[v]; if (still) { s.fit = s.fitTo; draw(); } },
+    });
     var read = readout(u.ctrl);
 
-    function draw() {
-      var c = s.chi;
-      var g = kerrGeo(c);
+    function info() {
+      var g = kerrGeo(s.chi);
       read.textContent =
         "Horizon  r₊ = " + g.rp.toFixed(3) + "M\n  inner  r₋ = " + g.rm.toFixed(3) + "M\nErgoregion out to 2M at the equator\nLight ring\n  co-rotating     " + g.phPro.toFixed(3) + "M\n  counter-rotating " + g.phRet.toFixed(3) +
         "M\nInnermost stable orbit\n  co-rotating     " + g.iscoPro.toFixed(3) + "M\n  counter-rotating " + g.iscoRet.toFixed(3) + "M\nHorizon spin  MΩ_H = " + g.OmH.toFixed(4);
+    }
+
+    function buildMesh(c) {
+      var pts = [];
+      for (var i = 0; i <= NT; i += 1) {
+        var th = (Math.PI * i) / NT;
+        var ct = Math.cos(th), st = Math.sin(th);
+        var r = 1 + Math.sqrt(1 - c * c * ct * ct);
+        for (var j = 0; j <= NP; j += 1) {
+          var ph = (TAU * j) / NP;
+          pts.push([r * st * Math.cos(ph), r * st * Math.sin(ph), r * ct]);
+        }
+      }
+      return pts;
+    }
+
+    function draw() {
       if (!view.fit()) return;
       var ctx = view.ctx;
-      var sc = Math.min(view.w / 21.5, (view.h - 50) / 9.5);
-      var cx = view.w / 2;
-      var cy = (view.h - 26) / 2 + 4;
-      ctx.save();
-      // equator and axis
-      ctx.strokeStyle = "rgba(237, 239, 243, 0.12)";
-      ctx.beginPath();
-      ctx.moveTo(cx - 10.5 * sc, Math.round(cy) + 0.5);
-      ctx.lineTo(cx + 10.5 * sc, Math.round(cy) + 0.5);
-      ctx.stroke();
-      ctx.setLineDash([2, 4]);
-      ctx.beginPath();
-      ctx.moveTo(Math.round(cx) + 0.5, cy - 4.4 * sc);
-      ctx.lineTo(Math.round(cx) + 0.5, cy + 4.4 * sc);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      // ergoregion
-      ctx.beginPath();
-      for (var i = 0; i <= 240; i += 1) {
-        var th = (TAU * i) / 240;
-        var rE = 1 + Math.sqrt(1 - c * c * Math.cos(th) * Math.cos(th));
-        var px = cx + rE * Math.sin(th) * sc;
-        var py = cy - rE * Math.cos(th) * sc;
-        if (i) ctx.lineTo(px, py);
-        else ctx.moveTo(px, py);
+      var w = view.w, h = view.h;
+      var c = s.chi;
+      var g = kerrGeo(c);
+      var M = qmat(s.q);
+      var sc = Math.min(w, h - 50) / 2 / s.fit;
+      var cx = w / 2, cy = (h - 24) / 2 + 8;
+      var tau = s.t * 6; // M per second of real time
+
+      function project(pts) {
+        var n = pts.length;
+        var P = { x: new Float32Array(n), y: new Float32Array(n), z: new Float32Array(n), n: n };
+        for (var i = 0; i < n; i += 1) {
+          var p = pts[i];
+          P.x[i] = cx + (M[0] * p[0] + M[1] * p[1] + M[2] * p[2]) * sc;
+          P.y[i] = cy - (M[3] * p[0] + M[4] * p[1] + M[5] * p[2]) * sc;
+          P.z[i] = M[6] * p[0] + M[7] * p[1] + M[8] * p[2];
+        }
+        return P;
       }
-      ctx.closePath();
-      ctx.fillStyle = "rgba(140, 188, 255, 0.13)";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(140, 188, 255, 0.6)";
-      ctx.stroke();
-      // horizons
-      ctx.beginPath();
-      ctx.arc(cx, cy, g.rp * sc, 0, TAU);
-      ctx.fillStyle = "#000";
-      ctx.fill();
-      ctx.strokeStyle = COL.axis;
-      ctx.stroke();
-      if (g.rm > 0.02) {
+      // polyline split by depth: only the segments of one layer (0 far, 1 near),
+      // dimmer the farther they are; dash = segments per dash (geometric dashes)
+      function strokeDepth(P, idx, rgb, width, amax, layer, zr, closed, dash) {
+        var n = idx ? idx.length : P.n;
+        var bins = [];
+        var last = [];
+        var segs = closed ? n : n - 1;
+        for (var i = 0; i < segs; i += 1) {
+          if (dash && Math.floor(i / dash) % 2 === 1) continue;
+          var a = idx ? idx[i] : i;
+          var b = idx ? idx[(i + 1) % n] : (i + 1) % n;
+          var zm = 0.5 * (P.z[a] + P.z[b]);
+          if ((zm > 0) !== (layer === 1)) continue;
+          var k = Math.round(6 * (0.3 + 0.7 * Math.max(0, Math.min(1, 0.5 + (0.5 * zm) / zr))));
+          if (!bins[k]) bins[k] = new Path2D();
+          if (last[k] !== a) bins[k].moveTo(P.x[a], P.y[a]);
+          bins[k].lineTo(P.x[b], P.y[b]);
+          last[k] = b;
+        }
+        ctx.save();
+        ctx.lineWidth = width;
+        ctx.lineJoin = "round";
+        for (var q = 0; q < bins.length; q += 1) {
+          if (!bins[q]) continue;
+          ctx.strokeStyle = "rgba(" + rgb + ", " + ((amax * q) / 6).toFixed(3) + ")";
+          ctx.stroke(bins[q]);
+        }
+        ctx.restore();
+      }
+      function circle(r, z0, n, ph0, ph1) {
+        var pts = [];
+        for (var i = 0; i < n; i += 1) {
+          var ph = ph0 == null ? (TAU * i) / n : ph0 + ((ph1 - ph0) * i) / (n - 1);
+          pts.push([r * Math.cos(ph), r * Math.sin(ph), z0]);
+        }
+        return pts;
+      }
+
+      // the ergosurface, filled through an offscreen canvas so that overlaps do not darken
+      if (meshChi !== c) { mesh = buildMesh(c); meshChi = c; }
+      var E = project(mesh);
+      var ergA = Math.min(1, c / 0.2);
+      var dpr = view.c.width / w;
+      if (off.width !== view.c.width || off.height !== view.c.height) { off.width = view.c.width; off.height = view.c.height; }
+      function ergoFill(layer, alpha) {
+        if (ergA <= 0) return;
+        octx.setTransform(1, 0, 0, 1, 0, 0);
+        octx.clearRect(0, 0, off.width, off.height);
+        octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        octx.fillStyle = "rgb(" + ACC + ")";
+        octx.strokeStyle = "rgb(" + ACC + ")";
+        octx.lineWidth = 0.6;
+        for (var i = 0; i < NT; i += 1) {
+          for (var j = 0; j < NP; j += 1) {
+            var a = i * (NP + 1) + j, b = a + 1, d = a + NP + 1, e = d + 1;
+            var zc = E.z[a] + E.z[b] + E.z[d] + E.z[e];
+            if ((zc > 0) !== (layer === 1)) continue;
+            octx.beginPath();
+            octx.moveTo(E.x[a], E.y[a]);
+            octx.lineTo(E.x[b], E.y[b]);
+            octx.lineTo(E.x[e], E.y[e]);
+            octx.lineTo(E.x[d], E.y[d]);
+            octx.closePath();
+            octx.fill();
+            octx.stroke();
+          }
+        }
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.globalAlpha = alpha * ergA;
+        ctx.drawImage(off, 0, 0);
+        ctx.restore();
+      }
+      function ergoWire(layer) {
+        if (ergA <= 0) return;
+        var idx, i, j;
+        for (i = 3; i < NT; i += 3) {
+          idx = [];
+          for (j = 0; j <= NP; j += 1) idx.push(i * (NP + 1) + j);
+          strokeDepth(E, idx, ACC, 1, 0.38 * ergA, layer, 2, false);
+        }
+        for (j = 0; j < NP; j += 3) {
+          idx = [];
+          for (i = 0; i <= NT; i += 1) idx.push(i * (NP + 1) + j);
+          strokeDepth(E, idx, ACC, 1, 0.38 * ergA, layer, 2, false);
+        }
+      }
+
+      // equatorial plane: a faint annulus from the horizon out to 10M
+      var A = Math.hypot(M[6], M[7]);
+      var phc = Math.atan2(M[7], M[6]);
+      function planeFill(layer) {
+        var ph0, ph1;
+        if (A < 1e-4) { if (layer === 1) return; ph0 = 0; ph1 = TAU; } else if (layer === 1) { ph0 = phc - Math.PI / 2; ph1 = phc + Math.PI / 2; } else { ph0 = phc + Math.PI / 2; ph1 = phc + 1.5 * Math.PI; }
+        var outer = project(circle(9.6, 0, 64, ph0, ph1));
+        var inner = project(circle(g.rp, 0, 32, ph1, ph0));
         ctx.beginPath();
-        ctx.arc(cx, cy, g.rm * sc, 0, TAU);
-        ctx.setLineDash([2, 3]);
-        ctx.strokeStyle = "rgba(237, 239, 243, 0.3)";
-        ctx.stroke();
-        ctx.setLineDash([]);
+        for (var i = 0; i < outer.n; i += 1) ctx.lineTo(outer.x[i], outer.y[i]);
+        for (i = 0; i < inner.n; i += 1) ctx.lineTo(inner.x[i], inner.y[i]);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(" + INK + ", 0.035)";
+        ctx.fill();
       }
-      // spin arrow
-      ctx.strokeStyle = COL.ink3;
+      var rim = project(circle(9.6, 0, 160));
+
+      // orbits on the equator, each with a particle moving at its angular velocity
+      var orbits = [
+        { r: g.phPro, rgb: ACC, col: COL.acc, om: 1 / (Math.pow(g.phPro, 1.5) + c), ph: 0 },
+        { r: g.phRet, rgb: ACC, col: COL.acc, om: -1 / (Math.pow(g.phRet, 1.5) - c), ph: Math.PI, dash: 3 },
+        { r: g.iscoPro, rgb: PUL, col: COL.pulse, om: 1 / (Math.pow(g.iscoPro, 1.5) + c), ph: Math.PI / 2 },
+        { r: g.iscoRet, rgb: PUL, col: COL.pulse, om: -1 / (Math.pow(g.iscoRet, 1.5) - c), ph: 1.5 * Math.PI, dash: 3 },
+      ];
+      orbits.forEach(function (o) {
+        o.P = project(circle(o.r, 0, 180));
+        var ph = o.ph + o.om * tau;
+        o.D = project([[o.r * Math.cos(ph), o.r * Math.sin(ph), 0]]);
+      });
+      function drawOrbits(layer) {
+        orbits.forEach(function (o) { strokeDepth(o.P, null, o.rgb, 1.6, 1, layer, o.r, true, o.dash); });
+        orbits.forEach(function (o) {
+          var z = o.D.z[0];
+          if ((z > 0) !== (layer === 1)) return;
+          dot(ctx, o.D.x[0], o.D.y[0], 3.2 + 0.9 * (z / o.r), o.col, true);
+        });
+      }
+
+      // spin axis with an arrow, and a curl showing the sense of rotation
+      var axTop = Math.min(5.6, 0.86 * s.fit);
+      var axUp = project([[0, 0, g.rp], [0, 0, axTop]]);
+      var axDn = project([[0, 0, -g.rp], [0, 0, -axTop]]);
+      var curl = project(circle(0.85, axTop - 0.9, 40, 0.5, TAU - 0.35));
+      function drawAxis(layer) {
+        [axUp, axDn].forEach(function (P) {
+          if ((P.z[1] > 0) !== (layer === 1)) return;
+          ctx.save();
+          ctx.strokeStyle = "rgba(" + INK + ", " + (layer ? 0.45 : 0.22) + ")";
+          ctx.setLineDash([3, 4]);
+          ctx.beginPath();
+          ctx.moveTo(P.x[0], P.y[0]);
+          ctx.lineTo(P.x[1], P.y[1]);
+          ctx.stroke();
+          ctx.restore();
+        });
+        strokeDepth(curl, null, INK, 1.3, 0.75, layer, 4.8, false);
+        var n = curl.n - 1;
+        if ((curl.z[n] > 0) === (layer === 1)) {
+          var dx = curl.x[n] - curl.x[n - 2], dy = curl.y[n] - curl.y[n - 2];
+          var L = Math.hypot(dx, dy);
+          if (L > 0.5) {
+            dx /= L; dy /= L;
+            ctx.save();
+            ctx.fillStyle = "rgba(" + INK + ", 0.75)";
+            ctx.beginPath();
+            ctx.moveTo(curl.x[n] + dx * 5, curl.y[n] + dy * 5);
+            ctx.lineTo(curl.x[n] - dy * 3.5 - dx * 2, curl.y[n] + dx * 3.5 - dy * 2);
+            ctx.lineTo(curl.x[n] + dy * 3.5 - dx * 2, curl.y[n] - dx * 3.5 - dy * 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+      }
+
+      // ---- far half ----
+      planeFill(0);
+      strokeDepth(rim, null, INK, 1, 0.16, 0, 10, true);
+      ergoFill(0, 0.1);
+      ergoWire(0);
+      drawOrbits(0);
+      drawAxis(0);
+
+      // ---- the horizon ----
+      var R = g.rp * sc;
+      ctx.save();
       ctx.beginPath();
-      ctx.ellipse(cx, cy - 4.1 * sc, 0.9 * sc, 0.22 * sc, 0, 0.3, TAU - 0.6);
+      ctx.arc(cx, cy, R, 0, TAU);
+      var grd = ctx.createRadialGradient(cx - 0.35 * R, cy - 0.35 * R, 0.1 * R, cx, cy, R);
+      grd.addColorStop(0, "#14171e");
+      grd.addColorStop(1, "#000");
+      ctx.fillStyle = grd;
+      ctx.fill();
+      ctx.strokeStyle = "rgba(" + INK + ", 0.32)";
+      ctx.lineWidth = 1.1;
       ctx.stroke();
       ctx.restore();
-      label(ctx, "spin", cx + 1.1 * sc, cy - 4.1 * sc, "left", "middle");
-      // orbits on the equator
-      var marks = [
-        { r: g.phPro, side: 1, col: COL.acc, name: "light ring" },
-        { r: g.iscoPro, side: 1, col: COL.pulse, name: "ISCO" },
-        { r: g.phRet, side: -1, col: COL.acc, name: "light ring" },
-        { r: g.iscoRet, side: -1, col: COL.pulse, name: "ISCO" },
-      ];
-      marks.forEach(function (m) { dot(ctx, cx + m.side * m.r * sc, cy, 3.6, m.col, true); });
-      marks.forEach(function (m, k) {
-        var x = cx + m.side * m.r * sc;
-        var up = k % 2 === 0;
-        tag(ctx, m.name, x + m.side * 2, up ? cy - 14 : cy + 14, m.side > 0 ? "left" : "right", m.col);
-      });
-      label(ctx, "co-rotating →", view.w - 8, view.h - 8, "right", "bottom");
-      label(ctx, "← counter-rotating", 8, view.h - 8, "left", "bottom");
-      label(ctx, "ergoregion", cx - 0.3 * sc, cy + 2.3 * sc + 10, "center", "top", COL.acc);
+      // the horizon turns with angular velocity Omega_H: meridians on its near side
+      var rot = g.OmH * tau;
+      for (var k = 0; k < 8; k += 1) {
+        var phk = rot + (k * Math.PI) / 4;
+        var mer = [];
+        for (var i = 0; i <= 36; i += 1) {
+          var th = (Math.PI * i) / 36;
+          mer.push([g.rp * Math.sin(th) * Math.cos(phk), g.rp * Math.sin(th) * Math.sin(phk), g.rp * Math.cos(th)]);
+        }
+        strokeDepth(project(mer), null, INK, 1, 0.2, 1, g.rp, false);
+      }
+      strokeDepth(project(circle(g.rp, 0, 72)), null, INK, 1, 0.2, 1, g.rp, true);
+      if (g.rm > 0.03) {
+        ctx.save();
+        ctx.setLineDash([2, 3]);
+        ctx.strokeStyle = "rgba(" + INK + ", 0.3)";
+        ctx.beginPath();
+        ctx.arc(cx, cy, g.rm * sc, 0, TAU);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // ---- near half ----
+      planeFill(1);
+      strokeDepth(rim, null, INK, 1, 0.16, 1, 10, true);
+      ergoFill(1, 0.1);
+      ergoWire(1);
+      drawOrbits(1);
+      drawAxis(1);
+
+      // ---- labels ----
+      tag(ctx, "spin", axUp.x[1] + 8, axUp.y[1], "left", COL.ink2);
+      legend(ctx, { x0: 0, y0: 0, x1: w }, [
+        { name: "light rings", c: COL.acc },
+        { name: "ISCOs", c: COL.pulse },
+        { name: "ergoregion", c: "rgba(" + ACC + ", 0.55)" },
+      ]);
+      label(ctx, "solid: with the spin · dashed: against it", 8, h - 8, "left", "bottom");
+      if (w >= 560) label(ctx, "drag to turn", w - 8, h - 8, "right", "bottom");
     }
+
+    var drag = null;
+    view.c.addEventListener("pointerdown", function (e) {
+      drag = { x: e.clientX, y: e.clientY };
+      s.anim = null;
+      view.c.setPointerCapture(e.pointerId);
+      view.c.style.cursor = "grabbing";
+    });
+    view.c.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var k = 0.009;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+      s.q = qnorm(qmul(qmul(qaxis(0, 1, 0, dx * k), qaxis(1, 0, 0, dy * k)), s.q));
+      viewSeg.set(null);
+      if (still) draw();
+    });
+    function release() { drag = null; view.c.style.cursor = "grab"; }
+    view.c.addEventListener("pointerup", release);
+    view.c.addEventListener("pointercancel", release);
+
+    loop(seen, function (dt) {
+      s.t += dt;
+      s.fit += (s.fitTo - s.fit) * Math.min(1, dt * 7);
+      if (s.anim) {
+        s.anim.p = Math.min(1, s.anim.p + dt / 0.7);
+        var e = s.anim.p * s.anim.p * (3 - 2 * s.anim.p);
+        s.q = qslerp(s.anim.q0, s.anim.q1, e);
+        if (s.anim.p >= 1) s.anim = null;
+      }
+      draw();
+    });
+    info();
     redraw(draw);
   };
 

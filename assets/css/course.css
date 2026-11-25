@@ -184,6 +184,7 @@ details.sol > div { padding: 2px 0 6px 1.1em; border-left: 1px solid rgba(140, 1
 .w-h-md { height: 250px; }
 .w-h-lg { height: 340px; }
 .w-h-xl { height: 420px; }
+.w-h-3d { height: 520px; }
 
 .w-controls { min-width: 0; padding-left: 22px; border-left: 1px solid var(--line); }
 .w-controls .rw-field + .rw-field, .w-controls .rw-field + .w-buttons, .w-controls .w-buttons + .rw-field { margin-top: 14px; }
@@ -253,6 +254,7 @@ table.cmp td.best { color: var(--ink); }
   .w-pair { grid-template-columns: minmax(0, 1fr); }
   .w-h-lg { height: 300px; }
   .w-h-xl { height: 380px; }
+  .w-h-3d { height: 400px; }
   .lessons a, .lessons .soon { grid-template-columns: 2.4rem minmax(0, 1fr); }
   .lessons .tag { grid-column: 2; grid-row: auto; margin-top: 6px; }
   .lesson-nav { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
